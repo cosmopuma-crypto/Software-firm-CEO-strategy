@@ -21,10 +21,10 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Logo priority className="h-11 shrink-0 sm:h-12" />
+      <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Logo priority className="h-14 shrink-0 sm:h-16" />
 
-        <nav className="hidden items-center gap-5 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -36,7 +36,7 @@ export function Nav() {
           ))}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <a
             href={SITE.phoneHref}
             className="flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-brand"
@@ -52,7 +52,7 @@ export function Nav() {
         </div>
 
         <button
-          className="lg:hidden"
+          className="xl:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Menü"
         >
@@ -62,7 +62,7 @@ export function Nav() {
 
       <div
         className={cn(
-          "overflow-hidden border-t border-border/70 transition-[max-height] duration-300 lg:hidden",
+          "overflow-hidden border-t border-border/70 transition-[max-height] duration-300 xl:hidden",
           open ? "max-h-96" : "max-h-0",
         )}
       >

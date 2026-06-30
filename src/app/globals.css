@@ -13,10 +13,12 @@
   --brand-soft: oklch(0.95 0.03 256); /* helles Blau für Flächen */
   --brand-deep: #101f49; /* dunkleres Navy für dunkle Sektionen */
 
-  /* warmer Akzent (Bernstein/Messing) für Highlights – tunebar */
-  --gold: #e0a150;
-  --gold-foreground: #2a1c08;
-  --gold-ink: #8a5a12; /* dunkler Goldton für Text auf hell (AA-Kontrast) */
+  /* Akzent in der Blau-Welt (heller als Navy) – einzige Akzentquelle, tunebar.
+     (Tokennamen bleiben aus Kompatibilitätsgründen "gold".) */
+  --gold: #2456c4; /* Akzent-Blau für Flächen/CTAs */
+  --gold-foreground: #ffffff;
+  --gold-ink: #1c4a9e; /* Akzent-Blau für Text auf hell (AA-Kontrast) */
+  --gold-soft: #9bb8ec; /* helles Akzent-Blau für dunkle Flächen */
 
   --sand: oklch(0.975 0.013 78); /* warmer Sand für abwechselnde Sektionen */
 
@@ -82,6 +84,7 @@
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
   --color-sand: var(--sand);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);

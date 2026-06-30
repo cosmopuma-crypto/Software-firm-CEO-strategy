@@ -36,7 +36,7 @@ export function Footer() {
           <ul className="flex flex-col gap-2 text-sm">
             {NAV.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="transition-colors hover:text-gold">
+                <a href={l.href} className="transition-colors hover:text-white">
                   {l.label}
                 </a>
               </li>
@@ -50,7 +50,7 @@ export function Footer() {
           </h3>
           <ul className="flex flex-col gap-2.5 text-sm">
             <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-gold" />
+              <MapPin className="mt-0.5 size-4 shrink-0 text-gold-soft" />
               <span>
                 {SITE.legalName}
                 <br />
@@ -58,13 +58,13 @@ export function Footer() {
               </span>
             </li>
             <li>
-              <a href={SITE.phoneHref} className="flex items-center gap-2 hover:text-gold">
-                <Phone className="size-4 text-gold" /> {SITE.phone}
+              <a href={SITE.phoneHref} className="flex items-center gap-2 hover:text-white">
+                <Phone className="size-4 text-gold-soft" /> {SITE.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-gold">
-                <Mail className="size-4 text-gold" /> {SITE.email}
+              <a href={`mailto:${SITE.email}`} className="flex items-center gap-2 hover:text-white">
+                <Mail className="size-4 text-gold-soft" /> {SITE.email}
               </a>
             </li>
           </ul>
@@ -76,7 +76,7 @@ export function Footer() {
           <p>© {SITE.legalName} · Alle Rechte vorbehalten.</p>
           <nav className="flex flex-wrap gap-x-5 gap-y-1">
             {LEGAL.map((l) => (
-              <Link key={l.href} href={l.href} className="transition-colors hover:text-gold">
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-white">
                 {l.label}
               </Link>
             ))}

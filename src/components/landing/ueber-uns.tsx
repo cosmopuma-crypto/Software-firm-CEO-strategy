@@ -21,13 +21,13 @@ export function UeberUns() {
     <Section id="ueber-uns" tone="sand">
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <Reveal className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-xl ring-1 ring-black/5">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-xl ring-1 ring-black/5">
             <Image
               src="/brand/photos/foto-17.jpg"
-              alt="ST-Haustechnik Firmenfahrzeug"
+              alt="ST-Haustechnik Firmenfahrzeug mit Logo"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
           </div>
           <div className="absolute -bottom-7 -right-3 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-right-7 sm:w-72">

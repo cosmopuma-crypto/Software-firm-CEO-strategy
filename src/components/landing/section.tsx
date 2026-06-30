@@ -21,7 +21,7 @@ export function Section({ id, className, children, tone = "default" }: SectionPr
   return (
     <section
       id={id}
-      className={cn("scroll-mt-20 py-16 sm:py-24", TONE[tone], className)}
+      className={cn("scroll-mt-28 py-16 sm:py-24", TONE[tone], className)}
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>
     </section>
