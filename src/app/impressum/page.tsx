@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import {
-  LegalPage,
-  LegalSection,
-  TodoNote,
-} from "@/components/landing/legal-page";
+import { LegalPage, LegalSection } from "@/components/landing/legal-page";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,11 +12,6 @@ export const metadata: Metadata = {
 export default function ImpressumPage() {
   return (
     <LegalPage title="Impressum">
-      <TodoNote>
-        Eigene Impressums-Angaben der bestehenden Seite einsetzen. Keine Inhalte
-        der bisherigen Hosting-/Fremdfirma übernehmen.
-      </TodoNote>
-
       <LegalSection heading="Angaben gemäß § 5 DDG">
         <p>
           {SITE.legalName}
@@ -28,6 +19,14 @@ export default function ImpressumPage() {
           {SITE.street}
           <br />
           {SITE.zip} {SITE.city}
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="Vertreten durch">
+        <p>
+          {SITE.managingDirector}, Geschäftsführer
+          <br />
+          Sachkundig für Wärmepumpensysteme nach VDI 4645
         </p>
       </LegalSection>
 
@@ -39,36 +38,41 @@ export default function ImpressumPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="Vertreten durch">
-        <p>[Geschäftsführer/in – bitte ergänzen]</p>
-      </LegalSection>
-
       <LegalSection heading="Registereintrag">
         <p>
-          [Eintragung im Handelsregister · Registergericht: Amtsgericht … ·
-          Registernummer: HRB … – bitte ergänzen]
+          Eingetragen im Handelsregister.
+          <br />
+          Registergericht: {SITE.register}
         </p>
       </LegalSection>
 
-      <LegalSection heading="Umsatzsteuer-ID">
-        <p>[USt-IdNr. gemäß § 27 a UStG, falls vorhanden]</p>
+      <LegalSection heading="Steuernummer">
+        <p>{SITE.taxNumber}</p>
       </LegalSection>
 
-      <LegalSection heading="Berufsrechtliche Angaben">
+      <LegalSection heading="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
         <p>
-          [Handwerkskammer, Kammerzugehörigkeit, Berufsbezeichnung und
-          verleihender Staat – falls zutreffend.]
+          {SITE.managingDirector}
+          <br />
+          {SITE.street}, {SITE.zip} {SITE.city}
         </p>
       </LegalSection>
 
-      <LegalSection heading="Verantwortlich für den Inhalt">
-        <p>[Name und Anschrift der verantwortlichen Person]</p>
-      </LegalSection>
-
-      <LegalSection heading="Streitschlichtung">
+      <LegalSection heading="EU-Streitschlichtung">
         <p>
-          [Hinweis zur Verbraucherschlichtung / EU-Streitschlichtungsplattform
-          nach Bedarf.]
+          Die Europäische Kommission stellt eine Plattform zur
+          Online-Streitbeilegung (OS) bereit:{" "}
+          <a
+            href="https://ec.europa.eu/consumers/odr/"
+            className="text-brand underline underline-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://ec.europa.eu/consumers/odr/
+          </a>
+          . Wir sind nicht verpflichtet und nicht bereit, an
+          Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+          teilzunehmen.
         </p>
       </LegalSection>
     </LegalPage>
