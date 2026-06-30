@@ -9,6 +9,7 @@ import { Fachbetrieb } from "@/components/landing/fachbetrieb";
 import { KonfiguratorSection } from "@/components/landing/konfigurator-section";
 import { BadplanerSection } from "@/components/landing/badplaner-section";
 import { KundendienstSection } from "@/components/landing/kundendienst-section";
+import { Faq } from "@/components/landing/faq";
 import { Kontakt } from "@/components/landing/kontakt";
 import { CtaBand } from "@/components/landing/cta-band";
 import { Footer } from "@/components/landing/footer";
@@ -30,6 +31,7 @@ export default function Home() {
         <KonfiguratorSection />
         <BadplanerSection />
         <KundendienstSection />
+        <Faq />
         <Kontakt />
         <CtaBand />
       </main>
