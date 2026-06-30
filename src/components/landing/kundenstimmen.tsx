@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 import { SITE } from "@/lib/site";
+import { TrustindexWidget } from "./trustindex";
 
 function Stars({ count = 5 }: { count?: number }) {
   return (
@@ -20,48 +21,10 @@ function Stars({ count = 5 }: { count?: number }) {
   );
 }
 
-// Echte Plattform-Bewertungen (Stand der Inhaber-Screenshots).
+// Echte Plattform-Bewertungen (Stand der Inhaber-Angaben).
 const PLATFORMS = [
   { name: "Google", rating: "4,9", count: "23 Rezensionen", href: SITE.google },
   { name: "MyHammer", rating: "5,0", count: "14 Bewertungen", href: SITE.myhammer },
-];
-
-// Echte Kundenstimmen von Google & MyHammer (Namen datenschutzfreundlich gekürzt).
-const REVIEWS = [
-  {
-    quote:
-      "Sind sehr zufrieden mit der Beratung und der Durchführung unseres Projektes Wärmepumpe. Absprachen und Termine wurden eingehalten, die Arbeiten sauber und ordentlich durchgeführt und die Baustelle immer sauber verlassen.",
-    name: "Heiko L.",
-    source: "Google",
-  },
-  {
-    quote:
-      "Durchführung und Planung waren super, wir waren sehr zufrieden mit dem Ergebnis.",
-    name: "Ranika W.",
-    source: "Google",
-  },
-  {
-    quote:
-      "Schnelle und unkomplizierte Hilfe – absolut empfehlenswert. Bei ST Haustechnik melde ich mich künftig gerne wieder.",
-    name: "Nils Jona L.",
-    source: "Google",
-  },
-  {
-    quote:
-      "Eine äußerst kompetente Firma. Die Arbeiten wurden sehr zügig und sehr korrekt ausgeführt. Die Mitarbeiter sind sehr freundlich.",
-    name: "Thomas, Bad Segeberg",
-    source: "MyHammer",
-  },
-  {
-    quote: "Sehr höfliches und professionelles Team. Gerne wieder!",
-    name: "Igor E.",
-    source: "Google",
-  },
-  {
-    quote: "Sehr schnell, freundlich und kompetent.",
-    name: "Ritter (Duschkabine)",
-    source: "MyHammer",
-  },
 ];
 
 export function Kundenstimmen() {
@@ -94,21 +57,9 @@ export function Kundenstimmen() {
         ))}
       </Reveal>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {REVIEWS.map((r, i) => (
-          <Reveal key={i} delay={(i % 3) * 90}>
-            <figure className="flex h-full flex-col gap-4 rounded-2xl border bg-card p-6 shadow-sm">
-              <Stars />
-              <blockquote className="flex-1 text-sm leading-relaxed text-foreground/90">
-                „{r.quote}"
-              </blockquote>
-              <figcaption className="flex items-center justify-between border-t pt-3 text-sm">
-                <span className="font-medium">{r.name}</span>
-                <span className="text-xs text-muted-foreground">via {r.source}</span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        ))}
+      {/* Live-Bewertungen (Google + MyHammer) via Trustindex */}
+      <div className="mt-10">
+        <TrustindexWidget />
       </div>
     </Section>
   );

@@ -47,13 +47,25 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="4. Speicherdauer">
+      <LegalSection heading="4. Bewertungen (Trustindex)">
+        <p>
+          Zur Darstellung unserer Google- und MyHammer-Bewertungen nutzen wir das
+          Widget des Dienstes Trustindex (Trustindex.io). Dabei wird beim Aufruf
+          der Seite Inhalt von den Servern von Trustindex geladen, wodurch Ihre
+          IP-Adresse an den Anbieter übermittelt werden kann. Rechtsgrundlage ist
+          unser berechtigtes Interesse an der Darstellung von Kundenbewertungen
+          (Art. 6 Abs. 1 lit. f DSGVO). [Bei Bedarf: Hinweis/Verlinkung auf die
+          Datenschutzerklärung von Trustindex ergänzen.]
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="5. Speicherdauer">
         <p>
           [Angabe zur Speicherdauer der Anfragedaten einsetzen.]
         </p>
       </LegalSection>
 
-      <LegalSection heading="5. Ihre Rechte">
+      <LegalSection heading="6. Ihre Rechte">
         <p>
           Sie haben das Recht auf Auskunft, Berichtigung, Löschung,
           Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch
@@ -61,7 +73,7 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="6. Hosting">
+      <LegalSection heading="7. Hosting">
         <p>[Angaben zum eingesetzten Hosting-/Server-Dienstleister einsetzen.]</p>
       </LegalSection>
     </LegalPage>
