@@ -1,0 +1,27 @@
+{
+  "_hinweis": "Diese Datei speist den Newsticker. Sie kann automatisiert (z. B. n8n oder Claude) ein- bis mehrmals pro Woche überschrieben werden. Format pro Eintrag: date (YYYY-MM-DD), tag ('Betrieb' oder 'SHK-Welt'), title, text, url (optional).",
+  "updated": "2026-06-30",
+  "items": [
+    {
+      "date": "2026-06-30",
+      "tag": "SHK-Welt",
+      "title": "Förderung 2026: bis zu 70 % Zuschuss für die Wärmepumpe",
+      "text": "Die Bundesförderung für effiziente Gebäude (BEG) unterstützt den Heizungstausch weiterhin kräftig – wir übernehmen den Förderservice für Sie.",
+      "url": ""
+    },
+    {
+      "date": "2026-06-24",
+      "tag": "Betrieb",
+      "title": "Neue Referenz in Neumünster: Wärmepumpe + Fußbodenheizung übergeben",
+      "text": "Ein weiteres Projekt termingerecht und sauber fertiggestellt.",
+      "url": ""
+    },
+    {
+      "date": "2026-06-18",
+      "tag": "SHK-Welt",
+      "title": "Vor dem Winter: Heizungswartung spart Energie",
+      "text": "Eine regelmäßige Wartung hält Ihre Anlage effizient und verlängert die Lebensdauer.",
+      "url": ""
+    }
+  ]
+}

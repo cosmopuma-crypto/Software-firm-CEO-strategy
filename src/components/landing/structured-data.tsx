@@ -30,7 +30,7 @@ export function StructuredData() {
       latitude: SITE.geo.lat,
       longitude: SITE.geo.lng,
     },
-    areaServed: { "@type": "City", name: SITE.city },
+    areaServed: SITE.areaServed.map((name) => ({ "@type": "City", name })),
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
