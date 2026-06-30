@@ -10,7 +10,7 @@ export function Logo({
   onDark = false,
   priority = false,
   className,
-  href = "#top",
+  href = "/#top",
 }: {
   onDark?: boolean;
   priority?: boolean;

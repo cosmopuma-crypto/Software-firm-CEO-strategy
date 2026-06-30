@@ -7,13 +7,14 @@ import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/site";
 import { Logo } from "./logo";
 
+// Home-relative Anker, damit die Links auch auf Unterseiten (Formular-/Rechtsseiten) funktionieren.
 const LINKS = [
-  { href: "#leistungen", label: "Leistungen" },
-  { href: "#waermepumpe", label: "Wärmepumpe" },
-  { href: "#bad", label: "Bad" },
-  { href: "#kundendienst", label: "Kundendienst" },
-  { href: "#kundenstimmen", label: "Bewertungen" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#waermepumpe", label: "Wärmepumpe" },
+  { href: "/#bad", label: "Bad" },
+  { href: "/#kundendienst", label: "Kundendienst" },
+  { href: "/#kundenstimmen", label: "Bewertungen" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 export function Nav() {
@@ -28,7 +29,7 @@ export function Nav() {
   }, []);
 
   return (
-    <div className="relative z-50">
+    <>
       {/* Top-Strip: prominenter Fachbetrieb-Hinweis + Kontakt */}
       <div className="bg-brand-deep text-white">
         <div className="mx-auto flex h-11 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
@@ -50,7 +51,7 @@ export function Nav() {
       </div>
 
       {/* Hauptleiste (sticky) */}
-      <header className="sticky top-0 border-b border-border/70 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
+      <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
         <div className="mx-auto flex h-24 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Logo priority className="h-14 shrink-0 sm:h-16 xl:h-20" />
 
@@ -68,7 +69,7 @@ export function Nav() {
 
           <div className="hidden shrink-0 items-center xl:flex">
             <a
-              href="#waermepumpe"
+              href="/#waermepumpe"
               className={cn(
                 buttonVariants({ variant: "gold" }),
                 "whitespace-nowrap transition-all duration-300",
@@ -108,7 +109,7 @@ export function Nav() {
               <Phone className="size-4" /> {SITE.phone}
             </a>
             <a
-              href="#waermepumpe"
+              href="/#waermepumpe"
               onClick={() => setOpen(false)}
               className={cn(buttonVariants({ variant: "gold" }), "mt-2")}
             >
@@ -117,6 +118,6 @@ export function Nav() {
           </nav>
         </div>
       </header>
-    </div>
+    </>
   );
 }

@@ -57,7 +57,7 @@ export function Faq() {
         {FAQS.map((f, i) => (
           <Reveal key={i} delay={(i % 4) * 60}>
             <details className="group border-b border-border py-2">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-3 text-left font-semibold marker:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-3 text-left font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <ChevronDown className="size-5 shrink-0 text-brand transition-transform group-open:rotate-180" />
               </summary>

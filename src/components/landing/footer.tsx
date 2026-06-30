@@ -4,11 +4,11 @@ import { SITE } from "@/lib/site";
 import { Logo } from "./logo";
 
 const NAV = [
-  { href: "#leistungen", label: "Leistungen" },
-  { href: "#waermepumpe", label: "Wärmepumpe" },
-  { href: "#bad", label: "Bad" },
-  { href: "#referenzen", label: "Referenzen" },
-  { href: "#kundendienst", label: "Kundendienst" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#waermepumpe", label: "Wärmepumpe" },
+  { href: "/#bad", label: "Bad" },
+  { href: "/#referenzen", label: "Referenzen" },
+  { href: "/#kundendienst", label: "Kundendienst" },
 ];
 
 const LEGAL = [
@@ -22,7 +22,7 @@ export function Footer() {
     <footer className="bg-brand-deep text-white/80">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div className="flex flex-col gap-4">
-          <Logo onDark href="#top" />
+          <Logo onDark href="/#top" />
           <p className="max-w-sm text-sm text-white/70">
             Ihr Fachbetrieb für Sanitär, Heizung und Wärmepumpen in Neumünster –
             persönlich, ehrlich und aus der Region.
