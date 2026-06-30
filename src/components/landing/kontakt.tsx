@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 import { SITE } from "@/lib/site";
+import { MapEmbed } from "./map-embed";
 
 const mapQuery = encodeURIComponent(`${SITE.street}, ${SITE.zip} ${SITE.city}`);
 
@@ -59,13 +60,7 @@ export function Kontakt() {
         </div>
 
         <Reveal delay={120} className="min-h-72 overflow-hidden rounded-2xl shadow-sm ring-1 ring-black/5">
-          <iframe
-            title={`Standort ${SITE.legalName}`}
-            src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="h-full min-h-72 w-full border-0"
-          />
+          <MapEmbed query={mapQuery} title={`Standort ${SITE.legalName}`} />
         </Reveal>
       </div>
     </Section>

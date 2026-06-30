@@ -9,6 +9,29 @@ const MAX_FILES = 3;
 const MAX_FILE_BYTES = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
 
+// Einfaches In-Memory-Rate-Limit (Best-Effort pro Instanz, gegen Spam/Missbrauch).
+// Für mehrere Instanzen langfristig durch einen geteilten Store (z. B. Upstash) ersetzen.
+const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 Minuten
+const RATE_MAX = 6; // max. Anfragen pro IP/Fenster
+const rateHits = new Map<string, { start: number; count: number }>();
+
+function clientIp(request: Request): string {
+  const fwd = request.headers.get("x-forwarded-for");
+  return fwd?.split(",")[0]?.trim() || "unknown";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  if (rateHits.size > 5000) rateHits.clear(); // unbegrenztes Wachstum verhindern
+  const entry = rateHits.get(ip);
+  if (!entry || now - entry.start > RATE_WINDOW_MS) {
+    rateHits.set(ip, { start: now, count: 1 });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_MAX;
+}
+
 interface ParsedBody {
   data: Record<string, unknown>;
   files: File[];
@@ -57,6 +80,14 @@ function validateFiles(files: File[]): string | null {
 }
 
 export async function POST(request: Request) {
+  // 0) Rate-Limit gegen Spam / Missbrauch des Mailversands
+  if (isRateLimited(clientIp(request))) {
+    return NextResponse.json(
+      { ok: false, message: "Zu viele Anfragen. Bitte versuche es später erneut." },
+      { status: 429 },
+    );
+  }
+
   let parsed: ParsedBody;
   try {
     parsed = await parseBody(request);

@@ -91,7 +91,9 @@ function specificRows(p: ContactFormPayload): Row[] {
  */
 export function buildEmail(p: ContactFormPayload): BuiltEmail {
   const formLabel = FORM_LABELS[p.formType];
-  const subject = `[${formLabel}] Neue Anfrage von ${p.name}`;
+  // CR/LF aus dem Namen entfernen (Header-Injection im Betreff vorbeugen).
+  const safeName = p.name.replace(/[\r\n]+/g, " ").trim();
+  const subject = `[${formLabel}] Neue Anfrage von ${safeName}`;
 
   const allRows: Row[] = [...specificRows(p), ...contactRows(p)];
 

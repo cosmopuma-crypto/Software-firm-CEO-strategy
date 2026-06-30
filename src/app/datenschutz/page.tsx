@@ -39,11 +39,12 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="3. Keine Tracking-Cookies">
+      <LegalSection heading="3. Cookies & Tracking">
         <p>
-          Diese Website setzt keine Tracking- oder Marketing-Cookies ein. Es
-          werden keine Analyse-Dienste zur Erstellung von Nutzerprofilen
-          verwendet.
+          Diese Website setzt keine eigenen Tracking- oder Marketing-Cookies ein
+          und verwendet keine Analyse-Dienste zur Erstellung von Nutzerprofilen.
+          Eingebundene Drittinhalte sind nachfolgend beschrieben (Bewertungen,
+          Karte) – die Karte wird erst nach aktivem Klick geladen.
         </p>
       </LegalSection>
 
@@ -59,13 +60,24 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="5. Speicherdauer">
+      <LegalSection heading="5. Karte (Google Maps)">
+        <p>
+          Unseren Standort zeigen wir über Google Maps (Google Ireland Ltd.). Die
+          Karte wird aus Datenschutzgründen erst geladen, wenn Sie aktiv auf
+          „Karte laden" klicken. Erst dann werden Daten – insbesondere Ihre
+          IP-Adresse – an Google übertragen. Rechtsgrundlage ist Ihre
+          Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch den Klick
+          erteilen.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="6. Speicherdauer">
         <p>
           [Angabe zur Speicherdauer der Anfragedaten einsetzen.]
         </p>
       </LegalSection>
 
-      <LegalSection heading="6. Ihre Rechte">
+      <LegalSection heading="7. Ihre Rechte">
         <p>
           Sie haben das Recht auf Auskunft, Berichtigung, Löschung,
           Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch
@@ -73,7 +85,7 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="7. Hosting">
+      <LegalSection heading="8. Hosting">
         <p>[Angaben zum eingesetzten Hosting-/Server-Dienstleister einsetzen.]</p>
       </LegalSection>
     </LegalPage>
