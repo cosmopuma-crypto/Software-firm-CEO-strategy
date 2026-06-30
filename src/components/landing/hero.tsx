@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/lib/site";
+import { HeroSlideshow } from "./hero-slideshow";
 
 const TRUST = [
   { icon: BadgeCheck, label: "Fachbetrieb Wärmepumpe" },
@@ -64,17 +65,7 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={140} className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-2xl shadow-brand/20 ring-1 ring-black/5">
-            <Image
-              src="/brand/photos/foto-16.jpg"
-              alt="ST-Haustechnik Monteur bei der Installation einer Wärmepumpe"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-brand/55 via-brand/0 to-brand/0" />
-          </div>
+          <HeroSlideshow />
 
           {/* Gütesiegel – prominent */}
           <div className="absolute -bottom-6 -left-4 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-left-8 sm:w-72">
