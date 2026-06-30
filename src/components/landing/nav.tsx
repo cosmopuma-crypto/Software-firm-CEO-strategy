@@ -21,29 +21,32 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Logo />
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Logo priority className="h-11 shrink-0 sm:h-12" />
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-brand"
+              className="whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-brand"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <a
             href={SITE.phoneHref}
-            className="flex items-center gap-1.5 text-sm font-semibold text-brand"
+            className="flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold text-brand"
           >
             <Phone className="size-4" /> {SITE.phone}
           </a>
-          <a href="#waermepumpe" className={cn(buttonVariants({ variant: "gold" }))}>
+          <a
+            href="#waermepumpe"
+            className={cn(buttonVariants({ variant: "gold" }), "whitespace-nowrap")}
+          >
             Wärmepumpe anfragen
           </a>
         </div>

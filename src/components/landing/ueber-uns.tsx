@@ -30,7 +30,7 @@ export function UeberUns() {
               className="object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 -right-3 w-52 rounded-2xl bg-white p-3 shadow-xl ring-1 ring-black/5 sm:-right-6">
+          <div className="absolute -bottom-7 -right-3 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-right-7 sm:w-72">
             <Image
               src="/brand/fachbetrieb-waermepumpe.png"
               alt="Gütesiegel Fachbetrieb Wärmepumpe"
@@ -44,8 +44,8 @@ export function UeberUns() {
         <div>
           <SectionHeading
             eyebrow="Über uns"
-            title="ST-Haustechnik steht für echte Handwerksleistung."
-            description="Wir sind Ihr persönlicher Ansprechpartner für zuverlässige Antworten rund um Sanitär, Heizung und Wärmepumpen – bodenständig, fair und mit Blick fürs Detail."
+            title="Echte Handwerker, die anpacken und mitdenken."
+            description="Bei uns reden Sie nicht mit einer Hotline, sondern mit Menschen, die Ihr Projekt selbst in die Hand nehmen. Wir reden Klartext, halten Termine und behandeln Ihr Zuhause, als wäre es unser eigenes."
           />
           <ul className="mt-6 flex flex-col gap-3">
             {POINTS.map((p) => (

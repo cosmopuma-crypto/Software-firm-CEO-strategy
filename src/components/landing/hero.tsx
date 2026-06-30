@@ -25,20 +25,18 @@ export function Hero() {
           </span>
 
           <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-            Ihr Installateur für{" "}
-            <span className="text-brand">Heizung &amp; Bad</span> – und Profi für{" "}
+            Heizkosten runter, Wohnkomfort rauf – mit Ihrer neuen{" "}
             <span className="relative whitespace-nowrap text-brand">
-              Wärmepumpen
+              Wärmepumpe
               <span className="absolute inset-x-0 -bottom-1 h-1.5 rounded-full bg-gold/70" />
             </span>
             .
           </h1>
 
           <p className="max-w-xl text-lg text-muted-foreground">
-            Wir von ST-Haustechnik stehen für fachgerechte Sanitär-, Heizungs- und
-            Klimalösungen in Neumünster und Umgebung. Als Meisterbetrieb und
-            zertifizierter Fachbetrieb Wärmepumpe planen wir Ihr Projekt persönlich
-            – von der ersten Idee bis zur fertigen Anlage.
+            Ihr Meisterbetrieb für Sanitär, Heizung und Bad in Neumünster – und
+            zertifizierter Fachbetrieb Wärmepumpe. Wir planen, liefern und montieren
+            persönlich und termintreu. Alles aus einer Hand, ohne Wenn und Aber.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -78,8 +76,8 @@ export function Hero() {
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-brand/55 via-brand/0 to-brand/0" />
           </div>
 
-          {/* schwebendes Gütesiegel */}
-          <div className="absolute -bottom-5 -left-3 w-48 rounded-2xl bg-white p-3 shadow-xl ring-1 ring-black/5 sm:-left-6 sm:w-56">
+          {/* Gütesiegel – prominent */}
+          <div className="absolute -bottom-6 -left-4 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-left-8 sm:w-72">
             <Image
               src="/brand/fachbetrieb-waermepumpe.png"
               alt="Gütesiegel Fachbetrieb Wärmepumpe"
@@ -90,8 +88,8 @@ export function Hero() {
           </div>
 
           {/* schwebende Stat-Karte */}
-          <div className="absolute -right-3 top-6 rounded-2xl bg-white px-4 py-3 shadow-xl ring-1 ring-black/5 sm:-right-6">
-            <p className="text-2xl font-bold text-brand">100%</p>
+          <div className="absolute -right-3 top-6 rounded-2xl bg-white px-5 py-3 shadow-xl ring-1 ring-black/5 sm:-right-6">
+            <p className="text-3xl font-bold text-brand">100%</p>
             <p className="text-xs text-muted-foreground">aus einer Hand</p>
           </div>
         </Reveal>

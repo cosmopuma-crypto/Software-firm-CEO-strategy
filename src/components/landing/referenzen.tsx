@@ -7,7 +7,7 @@ const PHOTOS: { src: string; w: number; h: number; alt: string }[] = [
   { src: "/brand/photos/foto-02.jpg", w: 1600, h: 900, alt: "Modernes Bad mit Dusche und Waschtisch" },
   { src: "/brand/photos/foto-07.jpg", w: 900, h: 1600, alt: "Bodengleiche Dusche, grau gefliest" },
   { src: "/brand/photos/foto-04.jpg", w: 900, h: 1600, alt: "Installierte Wärmepumpe im Garten" },
-  { src: "/brand/photos/foto-11.jpg", w: 900, h: 1600, alt: "Heizungsanlage mit Verteiler und Speicher" },
+  { src: "/brand/photos/foto-11.jpg", w: 900, h: 1600, alt: "Wärmepumpen-Innengerät mit Speicher und Verteiler" },
   { src: "/brand/photos/foto-06.jpg", w: 1600, h: 900, alt: "Wärmepumpe an der Hauswand" },
   { src: "/brand/photos/foto-15.jpg", w: 900, h: 1600, alt: "Bad mit Waschtisch und LED-Spiegel" },
   { src: "/brand/photos/foto-03.jpg", w: 1600, h: 900, alt: "Heizungsraum mit Rohrleitungen" },

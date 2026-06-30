@@ -7,42 +7,42 @@ const SERVICES = [
   {
     icon: Leaf,
     title: "Wärmepumpen",
-    text: "Als zertifizierter Fachbetrieb planen und installieren wir Ihre Wärmepumpe – effizient, förderfähig und herstellerunabhängig.",
+    text: "Zukunftssicher heizen und kräftig Heizkosten sparen: Als zertifizierter Fachbetrieb planen wir Ihre Wärmepumpe, sichern die Förderung und montieren herstellerunabhängig.",
     img: "/brand/photos/foto-20.jpg",
     href: "#waermepumpe",
   },
   {
     icon: Flame,
     title: "Heizung",
-    text: "Moderne Heiztechnik vom Austausch bis zur Wartung – inklusive Heizungscheck und hydraulischem Abgleich.",
-    img: "/brand/photos/foto-11.jpg",
+    text: "Verlässliche Wärme, Winter für Winter: ob neue Brennwerttechnik, Austausch oder Wartung – inklusive Heizungscheck und hydraulischem Abgleich.",
+    img: "/brand/photos/foto-05.jpg",
     href: "#leistungen",
   },
   {
     icon: Bath,
     title: "Bad & Sanierung",
-    text: "Ihr neues Bad aus einer Hand – von der Planung über barrierefreie Lösungen bis zur schlüsselfertigen Umsetzung.",
+    text: "Vom ersten Entwurf bis zur letzten Fuge: Wir machen aus Ihrem Bad einen Ort zum Wohlfühlen – schlüsselfertig und auf Wunsch barrierefrei.",
     img: "/brand/photos/foto-07.jpg",
     href: "#bad",
   },
   {
     icon: Droplets,
     title: "Sanitär",
-    text: "Sauber installiert: Bäder, Armaturen, Wasser- und Abwasserleitungen – zuverlässig und fachgerecht.",
+    text: "Tropfender Hahn oder komplette Installation? Wir kümmern uns sauber und zuverlässig um Wasser, Abwasser und Armaturen.",
     img: "/brand/photos/foto-14.jpg",
     href: "#leistungen",
   },
   {
     icon: Waves,
     title: "Fußbodenheizung",
-    text: "Behagliche, gleichmäßige Wärme – ideal in Kombination mit einer Wärmepumpe für niedrige Vorlauftemperaturen.",
+    text: "Behagliche Wärme von unten – und mit ihren niedrigen Vorlauftemperaturen der ideale Partner Ihrer Wärmepumpe.",
     img: "/brand/photos/foto-09.jpg",
     href: "#leistungen",
   },
   {
     icon: Wrench,
     title: "Kundendienst",
-    text: "Schnelle Hilfe bei Störungen und Ausfällen – mit eigenem Serviceteam direkt aus der Region.",
+    text: "Heizung streikt? Wir lassen Sie nicht im Kalten stehen – schnelle Hilfe vom eigenen Serviceteam aus der Region.",
     img: "/brand/photos/foto-01.jpg",
     href: "#kundendienst",
   },
@@ -53,8 +53,8 @@ export function Leistungen() {
     <Section id="leistungen">
       <SectionHeading
         eyebrow="Unsere Leistungen"
-        title="Alles rund um Haustechnik – aus einer Hand"
-        description="Ob neue Wärmepumpe, moderne Heizung oder das Traumbad: Wir begleiten Sie persönlich von der ersten Idee bis zur fertigen Umsetzung."
+        title="Ein Ansprechpartner. Alle Gewerke."
+        description="Von der Wärmepumpe über die Heizung bis zum Traumbad: Wir koordinieren alles selbst, halten Termine und liefern Qualität, auf die Sie sich verlassen können."
       />
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map((s, i) => (
