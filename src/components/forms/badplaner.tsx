@@ -33,6 +33,8 @@ interface State {
   style?: BathStyle;
   budget?: BathBudget;
   timeframe?: Timeframe;
+  addressZip: string;
+  addressCity: string;
   name: string;
   email: string;
   phone: string;
@@ -44,6 +46,8 @@ interface State {
 const INITIAL: State = {
   roomSizeM2: "",
   elements: [],
+  addressZip: "",
+  addressCity: "",
   name: "",
   email: "",
   phone: "",
@@ -109,6 +113,8 @@ export function Badplaner() {
       style: s.style,
       budget: s.budget,
       timeframe: s.timeframe,
+      addressZip: s.addressZip.trim(),
+      addressCity: s.addressCity.trim(),
       name: s.name.trim(),
       email: s.email.trim(),
       phone: s.phone.trim(),
@@ -221,6 +227,14 @@ export function Badplaner() {
             <Field label="E-Mail" htmlFor="bp-email" required error={errors.email}>
               <Input id="bp-email" type="email" value={s.email} onChange={(e) => set("email", e.target.value)} />
             </Field>
+            <div className="grid gap-4 sm:grid-cols-[160px_1fr]">
+              <Field label="PLZ" htmlFor="bp-zip" required error={errors.addressZip}>
+                <Input id="bp-zip" inputMode="numeric" value={s.addressZip} onChange={(e) => set("addressZip", e.target.value)} />
+              </Field>
+              <Field label="Ort" htmlFor="bp-city" required error={errors.addressCity}>
+                <Input id="bp-city" value={s.addressCity} onChange={(e) => set("addressCity", e.target.value)} />
+              </Field>
+            </div>
             <Field label="Nachricht (optional)" htmlFor="bp-msg" error={errors.message}>
               <Textarea
                 id="bp-msg"

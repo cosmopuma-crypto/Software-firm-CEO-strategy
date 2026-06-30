@@ -6,6 +6,7 @@ import {
   YEAR_BANDS,
   HEATING_SYSTEMS,
   HEATPUMP_GOALS,
+  RADIATOR_TYPES,
   BATH_CONDITIONS,
   BATH_ELEMENTS,
   BATH_STYLES,
@@ -56,8 +57,10 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Baujahr", labelOf(YEAR_BANDS, p.yearBand)],
         ["Wohnfläche", `${p.livingAreaM2} m²`],
         ["Aktuelle Heizung", labelOf(HEATING_SYSTEMS, p.currentHeating)],
+        ["Wärmeverteilung", labelOf(RADIATOR_TYPES, p.radiatorType)],
         ["Personen im Haushalt", String(p.occupants)],
         ["Ziele", labelsOf(HEATPUMP_GOALS, p.goals)],
+        ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
     case "badplaner":
       return [
@@ -67,6 +70,7 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Stil", labelOf(BATH_STYLES, p.style)],
         ["Budget", labelOf(BATH_BUDGETS, p.budget)],
         ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
+        ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
     case "kundendienst": {
       const rows: Row[] = [

@@ -67,6 +67,14 @@ export const HEATPUMP_GOALS = [
 ] as const;
 export type HeatpumpGoal = (typeof HEATPUMP_GOALS)[number]["value"];
 
+export const RADIATOR_TYPES = [
+  { value: "heizkoerper", label: "Heizkörper" },
+  { value: "fussboden", label: "Fußbodenheizung" },
+  { value: "gemischt", label: "Beides (gemischt)" },
+  { value: "unbekannt", label: "Weiß ich nicht" },
+] as const;
+export type RadiatorType = (typeof RADIATOR_TYPES)[number]["value"];
+
 /* ---------------- Badplaner ---------------- */
 
 export const BATH_CONDITIONS = [
@@ -138,6 +146,7 @@ export const buildingTypeValues = values(BUILDING_TYPES);
 export const yearBandValues = values(YEAR_BANDS);
 export const heatingSystemValues = values(HEATING_SYSTEMS);
 export const heatpumpGoalValues = values(HEATPUMP_GOALS);
+export const radiatorTypeValues = values(RADIATOR_TYPES);
 export const bathConditionValues = values(BATH_CONDITIONS);
 export const bathElementValues = values(BATH_ELEMENTS);
 export const bathStyleValues = values(BATH_STYLES);

@@ -19,8 +19,11 @@ const validWaermepumpe = {
   yearBand: "1979_1994",
   livingAreaM2: 140,
   currentHeating: "oel",
+  radiatorType: "heizkoerper",
   occupants: 4,
   goals: ["heizung_ersetzen", "foerderung_nutzen"],
+  addressZip: "24536",
+  addressCity: "Neumünster",
   ...validContact,
 };
 
@@ -32,6 +35,8 @@ const validBadplaner = {
   style: "modern",
   budget: "10k_20k",
   timeframe: "6_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
   ...validContact,
 };
 
@@ -71,6 +76,18 @@ describe("waermepumpeSchema", () => {
       occupants: "4",
     });
     expect(r.success).toBe(true);
+  });
+
+  it("verlangt Wärmeverteilung und Ort (PLZ/Stadt)", () => {
+    const { radiatorType: _r, ...ohneVerteilung } = validWaermepumpe;
+    void _r;
+    expect(waermepumpeSchema.safeParse(ohneVerteilung).success).toBe(false);
+
+    const r = waermepumpeSchema.safeParse({ ...validWaermepumpe, addressZip: "24" });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).addressZip).toMatch(/Postleitzahl/);
+    }
   });
 });
 

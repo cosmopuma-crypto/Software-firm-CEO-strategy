@@ -16,10 +16,12 @@ import {
   YEAR_BANDS,
   HEATING_SYSTEMS,
   HEATPUMP_GOALS,
+  RADIATOR_TYPES,
   type BuildingType,
   type YearBand,
   type HeatingSystem,
   type HeatpumpGoal,
+  type RadiatorType,
 } from "@/domain/forms";
 
 const STEPS = ["Gebäude", "Baujahr", "Fläche", "Heizung", "Ziele", "Kontakt"];
@@ -30,7 +32,10 @@ interface State {
   livingAreaM2: string;
   occupants: string;
   currentHeating?: HeatingSystem;
+  radiatorType?: RadiatorType;
   goals: HeatpumpGoal[];
+  addressZip: string;
+  addressCity: string;
   name: string;
   email: string;
   phone: string;
@@ -43,6 +48,8 @@ const INITIAL: State = {
   livingAreaM2: "",
   occupants: "",
   goals: [],
+  addressZip: "",
+  addressCity: "",
   name: "",
   email: "",
   phone: "",
@@ -79,6 +86,7 @@ export function WaermepumpeKonfigurator() {
         break;
       case 3:
         if (!s.currentHeating) return fail("Bitte wähle deine aktuelle Heizung.");
+        if (!s.radiatorType) return fail("Bitte wähle, wie die Wärme verteilt wird.");
         break;
       case 4:
         if (s.goals.length === 0) return fail("Bitte wähle mindestens ein Ziel.");
@@ -110,7 +118,10 @@ export function WaermepumpeKonfigurator() {
       livingAreaM2: Number(s.livingAreaM2),
       occupants: Number(s.occupants),
       currentHeating: s.currentHeating,
+      radiatorType: s.radiatorType,
       goals: s.goals,
+      addressZip: s.addressZip.trim(),
+      addressCity: s.addressCity.trim(),
       name: s.name.trim(),
       email: s.email.trim(),
       phone: s.phone.trim(),
@@ -204,14 +215,27 @@ export function WaermepumpeKonfigurator() {
         )}
 
         {step === 3 && (
-          <Field label="Womit heizt du aktuell?" required error={stepError ?? undefined}>
-            <OptionCards
-              options={HEATING_SYSTEMS}
-              value={s.currentHeating}
-              onChange={(v) => set("currentHeating", v)}
-              columns={3}
-            />
-          </Field>
+          <div className="flex flex-col gap-5">
+            <Field label="Womit heizt du aktuell?" required error={stepError ?? undefined}>
+              <OptionCards
+                options={HEATING_SYSTEMS}
+                value={s.currentHeating}
+                onChange={(v) => set("currentHeating", v)}
+                columns={3}
+              />
+            </Field>
+            <Field
+              label="Wie wird die Wärme verteilt?"
+              hint="Wichtig für die Auslegung der Wärmepumpe."
+              required
+            >
+              <OptionCards
+                options={RADIATOR_TYPES}
+                value={s.radiatorType}
+                onChange={(v) => set("radiatorType", v)}
+              />
+            </Field>
+          </div>
         )}
 
         {step === 4 && (
@@ -245,6 +269,14 @@ export function WaermepumpeKonfigurator() {
             <Field label="E-Mail" htmlFor="wp-email" required error={errors.email}>
               <Input id="wp-email" type="email" value={s.email} onChange={(e) => set("email", e.target.value)} />
             </Field>
+            <div className="grid gap-4 sm:grid-cols-[160px_1fr]">
+              <Field label="PLZ" htmlFor="wp-zip" required error={errors.addressZip}>
+                <Input id="wp-zip" inputMode="numeric" value={s.addressZip} onChange={(e) => set("addressZip", e.target.value)} />
+              </Field>
+              <Field label="Ort" htmlFor="wp-city" required error={errors.addressCity}>
+                <Input id="wp-city" value={s.addressCity} onChange={(e) => set("addressCity", e.target.value)} />
+              </Field>
+            </div>
             <Field label="Nachricht (optional)" htmlFor="wp-msg" error={errors.message}>
               <Textarea
                 id="wp-msg"

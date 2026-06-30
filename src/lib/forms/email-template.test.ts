@@ -11,8 +11,11 @@ const waermepumpe: WaermepumpePayload = {
   yearBand: "1979_1994",
   livingAreaM2: 140,
   currentHeating: "oel",
+  radiatorType: "heizkoerper",
   occupants: 4,
   goals: ["heizung_ersetzen", "foerderung_nutzen"],
+  addressZip: "24536",
+  addressCity: "Neumünster",
   name: "Max Mustermann",
   email: "max@example.de",
   phone: "04321 123456",
@@ -27,6 +30,8 @@ const badplaner: BadplanerPayload = {
   style: "modern",
   budget: "10k_20k",
   timeframe: "6_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
   name: "Erika Beispiel",
   email: "erika@example.de",
   phone: "04321 555",
@@ -63,8 +68,10 @@ describe("buildEmail", () => {
     const text = buildEmail(waermepumpe).text;
     expect(text).toContain("Einfamilienhaus");
     expect(text).toContain("Ölheizung");
+    expect(text).toContain("Heizkörper");
     expect(text).toContain("Alte Heizung ersetzen, Förderung nutzen");
     expect(text).toContain("140 m²");
+    expect(text).toContain("24536 Neumünster");
   });
 
   it("enthält alle Kontaktfelder im Text", () => {

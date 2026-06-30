@@ -4,6 +4,7 @@ import {
   yearBandValues,
   heatingSystemValues,
   heatpumpGoalValues,
+  radiatorTypeValues,
   bathConditionValues,
   bathElementValues,
   bathStyleValues,
@@ -15,6 +16,7 @@ import {
   type YearBand,
   type HeatingSystem,
   type HeatpumpGoal,
+  type RadiatorType,
   type BathCondition,
   type BathElement,
   type BathStyle,
@@ -28,6 +30,13 @@ import {
 function enumOf<T extends string>(vals: readonly T[]) {
   return z.enum(vals as unknown as [T, ...T[]]);
 }
+
+// Geteilte Adressfelder (von mehreren Formularen genutzt).
+const zipField = z
+  .string()
+  .trim()
+  .regex(/^\d{5}$/, "Bitte gib eine gültige Postleitzahl (5 Ziffern) an.");
+const cityField = z.string().trim().min(2, "Bitte gib den Ort an.").max(120);
 
 // Gemeinsame Kontakt-/Anti-Spam-Felder für alle Formulare.
 const contactShape = {
@@ -67,6 +76,7 @@ export const waermepumpeSchema = z.object({
     .min(20, "Mindestens 20 m².")
     .max(2000, "Bitte prüfe die Wohnfläche."),
   currentHeating: enumOf<HeatingSystem>(heatingSystemValues),
+  radiatorType: enumOf<RadiatorType>(radiatorTypeValues),
   occupants: z.coerce
     .number({ error: "Bitte gib die Personenzahl an." })
     .int("Bitte eine ganze Zahl angeben.")
@@ -75,6 +85,8 @@ export const waermepumpeSchema = z.object({
   goals: z
     .array(enumOf<HeatpumpGoal>(heatpumpGoalValues))
     .min(1, "Bitte wähle mindestens ein Ziel."),
+  addressZip: zipField,
+  addressCity: cityField,
   ...contactShape,
 });
 
@@ -92,6 +104,8 @@ export const badplanerSchema = z.object({
   style: enumOf<BathStyle>(bathStyleValues),
   budget: enumOf<BathBudget>(bathBudgetValues),
   timeframe: enumOf<Timeframe>(timeframeValues),
+  addressZip: zipField,
+  addressCity: cityField,
   ...contactShape,
 });
 
@@ -103,11 +117,8 @@ export const kundendienstSchema = z.object({
     .trim()
     .min(3, "Bitte gib Straße und Hausnummer an.")
     .max(160),
-  addressZip: z
-    .string()
-    .trim()
-    .regex(/^\d{5}$/, "Bitte gib eine gültige Postleitzahl (5 Ziffern) an."),
-  addressCity: z.string().trim().min(2, "Bitte gib den Ort an.").max(120),
+  addressZip: zipField,
+  addressCity: cityField,
   deviceType: enumOf<DeviceType>(deviceTypeValues),
   manufacturer: z.string().trim().max(120).optional(),
   problem: z
