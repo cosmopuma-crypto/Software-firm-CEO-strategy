@@ -4,6 +4,7 @@ import {
   LegalSection,
   TodoNote,
 } from "@/components/landing/legal-page";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Impressum · ST-Haustechnik",
@@ -22,24 +23,30 @@ export default function ImpressumPage() {
 
       <LegalSection heading="Angaben gemäß § 5 DDG">
         <p>
-          ST-Haustechnik
+          {SITE.legalName}
           <br />
-          {/* TODO: Inhaber / Rechtsform */}
-          [Inhaber / Firmenname]
+          {SITE.street}
           <br />
-          {/* TODO: Straße, Hausnummer */}
-          [Straße Nr.]
-          <br />
-          {/* TODO: PLZ Ort */}
-          [PLZ] Neumünster
+          {SITE.zip} {SITE.city}
         </p>
       </LegalSection>
 
       <LegalSection heading="Kontakt">
         <p>
-          Telefon: [Telefonnummer]
+          Telefon: {SITE.phone}
           <br />
-          E-Mail: info@st-haustechnik.de
+          E-Mail: {SITE.email}
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="Vertreten durch">
+        <p>[Geschäftsführer/in – bitte ergänzen]</p>
+      </LegalSection>
+
+      <LegalSection heading="Registereintrag">
+        <p>
+          [Eintragung im Handelsregister · Registergericht: Amtsgericht … ·
+          Registernummer: HRB … – bitte ergänzen]
         </p>
       </LegalSection>
 

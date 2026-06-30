@@ -117,7 +117,7 @@ export function buildEmail(p: ContactFormPayload): BuiltEmail {
 
   const html =
     `<div style="font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">` +
-    `<h2 style="color:#0A5BA6;margin:0 0 12px;">Neue Anfrage · ${escapeHtml(
+    `<h2 style="color:#173074;margin:0 0 12px;">Neue Anfrage · ${escapeHtml(
       formLabel,
     )}</h2>` +
     `<table style="border-collapse:collapse;border:1px solid #e5e7eb;">${htmlRows}</table>` +

@@ -4,29 +4,35 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.65rem;
+  --radius: 0.85rem;
 
-  /* ---- Markenfarbe: EINZIGE Quelle der Wahrheit ----
-     Marken-Blau ST-Haustechnik (Platzhalter ~ #0A5BA6).
-     TODO: exaktes Marken-Blau von der Live-Seite einsetzen. */
-  --brand: oklch(0.49 0.13 250);
-  --brand-foreground: oklch(0.985 0 0);
-  --brand-soft: oklch(0.96 0.02 250); /* dezenter Blauschleier für Flächen */
+  /* ---- Markenfarben: EINZIGE Quelle der Wahrheit ----
+     Echtes Marken-Navy ST-Haustechnik = #173074 (rgb 23,48,116). */
+  --brand: #173074;
+  --brand-foreground: #ffffff;
+  --brand-soft: oklch(0.95 0.03 256); /* helles Blau für Flächen */
+  --brand-deep: #101f49; /* dunkleres Navy für dunkle Sektionen */
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  /* warmer Akzent (Bernstein/Messing) für Highlights – tunebar */
+  --gold: #e0a150;
+  --gold-foreground: #2a1c08;
+
+  --sand: oklch(0.975 0.013 78); /* warmer Sand für abwechselnde Sektionen */
+
+  --background: oklch(0.995 0.004 95); /* warmes Off-White */
+  --foreground: oklch(0.2 0.03 264);
+  --card: #ffffff;
+  --card-foreground: oklch(0.2 0.03 264);
   --primary: var(--brand);
   --primary-foreground: var(--brand-foreground);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: var(--brand-soft);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
+  --secondary: oklch(0.96 0.008 256);
+  --secondary-foreground: var(--brand);
+  --muted: oklch(0.96 0.008 256);
+  --muted-foreground: oklch(0.48 0.025 262);
+  --accent: var(--brand-soft); /* dezente Hover-Fläche (von UI-Primitives genutzt) */
+  --accent-foreground: var(--brand);
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
   --ring: var(--brand);
 }
 
@@ -71,6 +77,10 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
+  --color-brand-deep: var(--brand-deep);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-sand: var(--sand);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

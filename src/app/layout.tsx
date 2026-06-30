@@ -6,14 +6,15 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ST-Haustechnik · Sanitär, Heizung & Wärmepumpen in Neumünster",
+  title: "ST-Haustechnik · Fachbetrieb für Wärmepumpen, Heizung & Bad in Neumünster",
   description:
-    "ST-Haustechnik aus Neumünster: Sanitär, Heizung, Wärmepumpen, Bad und Kundendienst. " +
-    "Wärmepumpe konfigurieren, Bad planen oder Kundendienst anfragen – direkt online.",
+    "ST-Haustechnik GmbH aus Neumünster – zertifizierter Fachbetrieb Wärmepumpe sowie " +
+    "Meisterbetrieb für Sanitär, Heizung und Bad. Wärmepumpe anfragen, Bad planen oder " +
+    "Kundendienst rufen – direkt online.",
 };
 
 export const viewport = {
-  themeColor: "#0A5BA6",
+  themeColor: "#173074",
 };
 
 export default function RootLayout({

@@ -5,7 +5,7 @@ import { KundendienstForm } from "@/components/forms/kundendienst-form";
 
 export function KundendienstSection() {
   return (
-    <Section id="kundendienst">
+    <Section id="kundendienst" tone="sand">
       <SectionHeading
         eyebrow="Kundendienst"
         title="Störung melden – schnelle Hilfe anfragen"

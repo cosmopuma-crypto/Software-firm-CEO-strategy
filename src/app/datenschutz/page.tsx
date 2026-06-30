@@ -4,6 +4,7 @@ import {
   LegalSection,
   TodoNote,
 } from "@/components/landing/legal-page";
+import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Datenschutz · ST-Haustechnik",
@@ -22,7 +23,7 @@ export default function DatenschutzPage() {
         <p>
           Verantwortlich für die Datenverarbeitung auf dieser Website ist:
           <br />
-          ST-Haustechnik, [Anschrift], info@st-haustechnik.de
+          {SITE.legalName}, {SITE.street}, {SITE.zip} {SITE.city}, {SITE.email}
         </p>
       </LegalSection>
 

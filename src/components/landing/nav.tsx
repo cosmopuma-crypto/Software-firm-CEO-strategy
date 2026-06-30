@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Phone, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/lib/site";
+import { Logo } from "./logo";
 
 const LINKS = [
   { href: "#leistungen", label: "Leistungen" },
-  { href: "#konfigurator", label: "Wärmepumpe" },
-  { href: "#badplaner", label: "Bad" },
+  { href: "#waermepumpe", label: "Wärmepumpe" },
+  { href: "#bad", label: "Bad" },
+  { href: "#ueber-uns", label: "Über uns" },
   { href: "#kundendienst", label: "Kundendienst" },
   { href: "#kontakt", label: "Kontakt" },
 ];
@@ -18,18 +20,11 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="#top" className="flex items-center gap-2 font-bold tracking-tight">
-          <span className="flex size-8 items-center justify-center rounded-md bg-brand text-brand-foreground">
-            ST
-          </span>
-          <span className="text-lg">
-            ST-<span className="text-brand">Haustechnik</span>
-          </span>
-        </Link>
+        <Logo />
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -41,20 +36,20 @@ export function Nav() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="tel:+4943210000000"
-            className="flex items-center gap-1.5 text-sm font-medium text-brand"
+            href={SITE.phoneHref}
+            className="flex items-center gap-1.5 text-sm font-semibold text-brand"
           >
-            <Phone className="size-4" /> 04321 000000
+            <Phone className="size-4" /> {SITE.phone}
           </a>
-          <a href="#konfigurator" className={cn(buttonVariants())}>
-            Wärmepumpe konfigurieren
+          <a href="#waermepumpe" className={cn(buttonVariants({ variant: "gold" }))}>
+            Wärmepumpe anfragen
           </a>
         </div>
 
         <button
-          className="md:hidden"
+          className="lg:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-label="Menü"
         >
@@ -64,7 +59,7 @@ export function Nav() {
 
       <div
         className={cn(
-          "overflow-hidden border-t transition-[max-height] duration-300 md:hidden",
+          "overflow-hidden border-t border-border/70 transition-[max-height] duration-300 lg:hidden",
           open ? "max-h-96" : "max-h-0",
         )}
       >
@@ -80,11 +75,17 @@ export function Nav() {
             </a>
           ))}
           <a
-            href="#konfigurator"
-            onClick={() => setOpen(false)}
-            className={cn(buttonVariants(), "mt-2")}
+            href={SITE.phoneHref}
+            className="flex items-center gap-1.5 px-2 py-2 text-sm font-semibold text-brand"
           >
-            Wärmepumpe konfigurieren
+            <Phone className="size-4" /> {SITE.phone}
+          </a>
+          <a
+            href="#waermepumpe"
+            onClick={() => setOpen(false)}
+            className={cn(buttonVariants({ variant: "gold" }), "mt-2")}
+          >
+            Wärmepumpe anfragen
           </a>
         </nav>
       </div>

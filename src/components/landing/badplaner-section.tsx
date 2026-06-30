@@ -5,7 +5,7 @@ import { Badplaner } from "@/components/forms/badplaner";
 
 export function BadplanerSection() {
   return (
-    <Section id="badplaner" tinted>
+    <Section id="bad">
       <SectionHeading
         eyebrow="Badplaner"
         title="Planen Sie Ihr neues Bad"

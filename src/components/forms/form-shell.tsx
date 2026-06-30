@@ -2,6 +2,7 @@
 
 import { CheckCircle2, AlertCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SITE } from "@/lib/site";
 
 /** Erfolgsmeldung nach erfolgreichem Absenden. */
 export function SuccessPanel({
@@ -23,8 +24,8 @@ export function SuccessPanel({
       <p className="flex items-center gap-2 text-sm text-muted-foreground">
         <Phone className="size-4 text-brand" />
         Dringend? Ruf uns an:{" "}
-        <a href="tel:+4943210000000" className="font-medium text-brand">
-          04321 000000
+        <a href={SITE.phoneHref} className="font-medium text-brand">
+          {SITE.phone}
         </a>
       </p>
       {onReset && (
