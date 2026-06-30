@@ -27,8 +27,8 @@ export const SITE = {
     "Nortorf",
     "Boostedt",
   ],
-  // Bewertungsprofile. TODO: exakte Profil-URLs vom Inhaber eintragen.
-  google: "https://www.google.com/maps/search/?api=1&query=ST+Haustechnik+GmbH+Neum%C3%BCnster",
-  myhammer: "https://www.my-hammer.de/",
+  // Bewertungsprofile (echte Links vom Inhaber).
+  google: "https://maps.app.goo.gl/QTS2g2YLB2BCMh366",
+  myhammer: "https://www.my-hammer.de/auftragnehmer/st-haustechnik-gmbh",
   rating: { value: 4.9, count: 37 }, // Google 4,9/23 + MyHammer 5,0/14
 } as const;
