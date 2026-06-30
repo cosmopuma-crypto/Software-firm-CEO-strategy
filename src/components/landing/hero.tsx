@@ -44,7 +44,7 @@ export function Hero() {
               href="#waermepumpe"
               className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
             >
-              Wärmepumpe anfragen <ArrowRight className="size-4" />
+              Wärmepumpe konfigurieren <ArrowRight className="size-4" />
             </a>
             <a
               href={SITE.phoneHref}

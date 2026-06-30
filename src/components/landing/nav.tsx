@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,15 @@ const LINKS = [
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  // CTA erst einblenden, wenn der Hero weggescrollt ist (keine Dopplung oben).
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 560);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -45,9 +54,15 @@ export function Nav() {
           </a>
           <a
             href="#waermepumpe"
-            className={cn(buttonVariants({ variant: "gold" }), "whitespace-nowrap")}
+            className={cn(
+              buttonVariants({ variant: "gold" }),
+              "whitespace-nowrap transition-all duration-300",
+              scrolled
+                ? "opacity-100"
+                : "pointer-events-none -translate-x-2 opacity-0",
+            )}
           >
-            Wärmepumpe anfragen
+            Wärmepumpe konfigurieren
           </a>
         </div>
 
@@ -88,7 +103,7 @@ export function Nav() {
             onClick={() => setOpen(false)}
             className={cn(buttonVariants({ variant: "gold" }), "mt-2")}
           >
-            Wärmepumpe anfragen
+            Wärmepumpe konfigurieren
           </a>
         </nav>
       </div>

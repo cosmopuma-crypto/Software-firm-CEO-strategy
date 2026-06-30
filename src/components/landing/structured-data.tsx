@@ -48,6 +48,28 @@ export function StructuredData() {
       "Kundendienst",
       "VDI 4645",
     ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: SITE.rating.value,
+      reviewCount: SITE.rating.count,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: [
+      {
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
+        author: { "@type": "Person", name: "Heiko L." },
+        reviewBody:
+          "Sind sehr zufrieden mit der Beratung und der Durchführung unseres Projektes Wärmepumpe. Absprachen und Termine wurden eingehalten, die Arbeiten sauber und ordentlich durchgeführt.",
+      },
+      {
+        "@type": "Review",
+        reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 },
+        author: { "@type": "Person", name: "Igor E." },
+        reviewBody: "Sehr höfliches und professionelles Team. Gerne wieder!",
+      },
+    ],
     ...(sameAs.length ? { sameAs } : {}),
   };
 

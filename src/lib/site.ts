@@ -15,7 +15,8 @@ export const SITE = {
   // TODO: finale Domain bestätigen (Platzhalter = bestehende Domain)
   url: "https://www.st-haustechnik.de",
   geo: { lat: 54.0743, lng: 9.9819 }, // Neumünster (ungefähr) – TODO: exakt
-  // TODO: echte Profil-Links für sameAs/Bewertungen eintragen
-  google: "",
-  myhammer: "",
+  // Bewertungsprofile. TODO: exakte Profil-URLs vom Inhaber eintragen.
+  google: "https://www.google.com/maps/search/?api=1&query=ST+Haustechnik+GmbH+Neum%C3%BCnster",
+  myhammer: "https://www.my-hammer.de/",
+  rating: { value: 4.9, count: 37 }, // Google 4,9/23 + MyHammer 5,0/14
 } as const;
