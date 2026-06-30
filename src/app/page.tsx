@@ -1,26 +1,27 @@
-import { catalogRepository } from "@/data/catalog";
-import { CatalogView } from "@/components/catalog/catalog-view";
+import { Nav } from "@/components/landing/nav";
+import { Hero } from "@/components/landing/hero";
+import { Leistungen } from "@/components/landing/leistungen";
+import { Trust } from "@/components/landing/trust";
+import { KonfiguratorSection } from "@/components/landing/konfigurator-section";
+import { BadplanerSection } from "@/components/landing/badplaner-section";
+import { KundendienstSection } from "@/components/landing/kundendienst-section";
+import { Kontakt } from "@/components/landing/kontakt";
+import { Footer } from "@/components/landing/footer";
 
-// Server Component: loads data via the repository abstraction,
-// then hands plain data to the client view.
-export default async function Home() {
-  const items = await catalogRepository.getAll();
-
+export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <header className="mb-8 flex flex-col gap-2">
-        <span className="text-sm font-medium text-muted-foreground">
-          KI-Mitgründer · Katalog
-        </span>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Repositories &amp; Skills
-        </h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Durchsuche alle Repositories und Skills des Unternehmens. Filtere nach
-          Typ und Tags, um schnell das Richtige zu finden.
-        </p>
-      </header>
-      <CatalogView items={items} />
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Leistungen />
+        <Trust />
+        <KonfiguratorSection />
+        <BadplanerSection />
+        <KundendienstSection />
+        <Kontakt />
+      </main>
+      <Footer />
+    </>
   );
 }
