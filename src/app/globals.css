@@ -16,6 +16,7 @@
   /* warmer Akzent (Bernstein/Messing) für Highlights – tunebar */
   --gold: #e0a150;
   --gold-foreground: #2a1c08;
+  --gold-ink: #8a5a12; /* dunkler Goldton für Text auf hell (AA-Kontrast) */
 
   --sand: oklch(0.975 0.013 78); /* warmer Sand für abwechselnde Sektionen */
 
@@ -80,9 +81,11 @@
   --color-brand-deep: var(--brand-deep);
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
+  --color-gold-ink: var(--gold-ink);
   --color-sand: var(--sand);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * {
@@ -97,6 +100,14 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1.0625rem; /* 17px – angenehm lesbar */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 /* ---- Scroll-Reveal (via use-reveal Hook gesteuert) ---- */

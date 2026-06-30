@@ -61,7 +61,7 @@ export function UeberUns() {
       </div>
 
       <div className="mt-16">
-        <h3 className="text-center text-sm font-semibold uppercase tracking-wide text-gold">
+        <h3 className="text-center text-sm font-semibold uppercase tracking-wide text-gold-ink">
           So läuft&apos;s ab
         </h3>
         <div className="mt-6 grid gap-5 md:grid-cols-3">
