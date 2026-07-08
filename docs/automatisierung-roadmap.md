@@ -281,7 +281,7 @@ Vor Umsetzung im eingeloggten GraphQL-Schema klären:
 ## Umsetzungsreihenfolge
 
 1. Diese Roadmap ist committet (lebendes Dokument).
-2. **🔒 Sicherheits-Fundament zuerst (Gate):** VPS/n8n härten. **Ohne diesen Schritt keine Keys eintragen.**
+2. **🔒 Sicherheits-Fundament zuerst (Gate):** VPS/n8n härten gemäß [`docs/vps-n8n-haertung.md`](./vps-n8n-haertung.md). **Ohne diesen Schritt keine Keys eintragen.**
 3. **Vorab-Check:** HERO-Keys besorgen; GraphQL-Schema klären; 360dialog-Onboarding (Testnummer zuerst); sipgate.io aktivieren; AVV abschließen.
 4. **Credentials gemäß Checkliste (Punkt 1) in n8n anlegen** (jeder Webhook mit Signatur/Secret).
 5. **Punkt 1 bauen:** A) Website → B) Sipgate → C) WhatsApp, je mit Test/Abnahme + Risiko-Abhaken (R1–R10).
