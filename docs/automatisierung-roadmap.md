@@ -214,14 +214,54 @@ Vor Umsetzung im eingeloggten GraphQL-Schema klären:
 
 ---
 
-## Weitere Punkte (Überblick, später zu detaillieren)
+## ★ Detailplan Punkte 7–12
 
-**7. WP-Förder-Lead an externen Partner weiterleiten** — KI/HERO erkennt WP-/Heizungstausch-Lead → strukturierte Übergabe an Partner + Status „an Partner". *Nutzen mittel · Aufwand niedrig.*
-**8. Automatische Kunden-Status-Updates** — bei HERO-Statuswechsel passende Update-Mail. *Nutzen hoch · Aufwand niedrig–mittel.*
-**9. Rechnungs- & Zahlungs-Nachverfolgung** — überfällige Rechnungen → Zahlungserinnerung → Aufgabe „Mahnung". *Nutzen mittel–hoch.*
-**10. Materialbestellung** — primär in HERO nativ (IDS Connect/UGL) aktivieren. *Aufwand niedrig (Konfiguration).*
-**11. Baustellendoku** — Fotos/Notizen vom Monteur → HERO-Projekt-Dokument. *Nutzen mittel.*
-**12. Tägliches Mini-Dashboard** — offene Angebote, Termine, Mahnungen, Wartungsfälligkeiten. *Aufwand niedrig.*
+### Punkt 7 — WP-Förder-Lead an externen Partner weiterleiten
+**Ziel:** Qualifizierte WP-/Heizungstausch-Leads ohne Mehraufwand an den Förderservice-Partner übergeben (ihr bietet die Leistung nur mit an).
+- **Flow:** Triage (aus P1) / HERO-Projekt erkennt Kategorie „Wärmepumpe/Heizungstausch" → strukturierte Übergabe an Partner (E-Mail/WhatsApp: Kundendaten, Objekt, Anliegen) + HERO-Status „an Förderservice übergeben" + optional Kundeninfo.
+- **10-%-Logik:** nur bei eindeutiger Kategorie + Mindestdatensatz automatisch; sonst manuell.
+- **Rechtliches:** Datenweitergabe an Dritten → **Einwilligung/AVV** klären.
+- **Credentials:** HERO API, Gmail/WhatsApp, Partner-Endpunkt. **Aufwand:** niedrig · **Nutzen:** mittel. **Abhängigkeit:** P1.
+
+### Punkt 8 — Automatische Kunden-Status-Updates (Zeitfresser #2)
+**Ziel:** proaktive Statusinfos reduzieren „Wie ist der Stand?"-Rückfragen.
+- **Flow (Polling):** HERO-Status je Projekt pollen, letzten gesendeten Status merken → bei Wechsel (bestätigt/Termin steht/Material da/in Arbeit/abgeschlossen) → Vorlagen-Mail (WhatsApp optional). Status→Textbaustein-Mapping.
+- **10-%-Logik:** nur eindeutige, gemappte Wechsel; Dedup; nur relevante Meilensteine; ohne Kontaktkanal überspringen.
+- **Credentials:** HERO API, Gmail/WhatsApp. **Aufwand:** niedrig–mittel · **Nutzen:** hoch. **Abhängigkeit:** HERO-Status lesbar.
+
+### Punkt 9 — Rechnungs- & Zahlungs-Nachverfolgung
+**Ziel:** überfällige Rechnungen automatisch nachhalten → Liquidität.
+- **Flow (Polling):** HERO-Rechnungen mit überschrittener Fälligkeit → gestaffelte Zahlungserinnerung → dann Aufgabe „Mahnung/telefonisch". Buchhaltung bleibt HERO↔DATEV/Lexware nativ.
+- **10-%-Logik (kritisch):** **nur mahnen, wenn Zahlungseingang zuverlässig erkennbar** — sonst bezahlte Rechnungen gemahnt. Falls Zahlstatus nicht sauber lesbar → nur „Erinnerung", **Mahnung immer Mensch**.
+- **Credentials:** HERO API (Rechnungen + **Zahlstatus**), Gmail. **Aufwand:** niedrig–mittel · **Nutzen:** mittel–hoch. **Abhängigkeit:** Zahlstatus lesbar (Knackpunkt).
+
+### Punkt 10 — Materialbestellung (HERO-nativ)
+**Ziel:** kein Doppelerfassen; Material direkt aus dem Projekt.
+- **Ansatz:** HERO-native Großhandels-Schnittstellen (**IDS Connect / UGL**) aktivieren — Konfiguration in HERO/mit Großhändler. **Datanorm raus.**
+- **n8n-Rolle:** minimal (höchstens Erinnerung „Material bestellen").
+- **10-%-Logik:** Bestellungen sind bindend → **kein Auto-Bestellen**, Mensch löst aus.
+- **Credentials:** HERO/Großhändler-Zugang; keine neuen n8n-Keys. **Aufwand:** niedrig (Konfig) · **Nutzen:** mittel–hoch. Jederzeit unabhängig.
+
+### Punkt 11 — Baustellendoku
+**Ziel:** Fotos/Notizen vom Monteur landen automatisch im richtigen HERO-Projekt.
+- **Flow:** WhatsApp (via Coexistence) oder geteilter Drive-Ordner → n8n ordnet per Projekt-/Auftragskennung zu (sonst Rückfrage) → Anhang ins HERO-Projekt-Dokument + optional Sprachnotiz-Transkript.
+- **10-%-Logik:** Knackpunkt Projekt-Zuordnung → bei Unklarheit Aufgabe „bitte zuordnen", nie falsch ablegen.
+- **Credentials:** WhatsApp/Drive, HERO API, Whisper optional. **Aufwand:** mittel · **Nutzen:** mittel. **Abhängigkeit:** WhatsApp aus P1.
+
+### Punkt 12 — Tägliches Mini-Dashboard
+**Ziel:** morgendlicher Überblick statt Klicken in HERO.
+- **Flow:** n8n Schedule (früh) → HERO-Queries (offene/überfällige Angebote, heutige Termine, überfällige Rechnungen, fällige Wartungen, offene Leads) → Google Sheet + Zusammenfassungs-Mail an Inhaber.
+- **10-%-Logik:** read-only Reporting → geringes Risiko; nur Query-Korrektheit.
+- **Credentials:** HERO API, Google Sheets, Gmail. **Aufwand:** niedrig · **Nutzen:** mittel. **Abhängigkeit:** nutzt 2/6/9 → danach.
+
+### Zusätzliche Credentials (Punkte 7–12)
+| Credential | Für Punkt(e) | Status |
+|---|---|---|
+| Partner-Endpunkt (Förderservice) | 7 | ☐ |
+| HERO API — Zahlstatus lesbar | 9 | ☐ |
+| HERO IDS-Connect/Großhändler-Zugang | 10 | ☐ |
+| Google Sheets OAuth | 12 | ☐ |
+| Drive-Ordner + OAuth (Baustellendoku) | 11 | ☐ |
 
 ---
 
@@ -278,14 +318,26 @@ Vor Umsetzung im eingeloggten GraphQL-Schema klären:
 
 ---
 
-## Umsetzungsreihenfolge
+## Gewählte Umsetzungsreihenfolge (nach Abhängigkeiten)
 
-1. Diese Roadmap ist committet (lebendes Dokument).
-2. **🔒 Sicherheits-Fundament zuerst (Gate):** VPS/n8n härten gemäß [`docs/vps-n8n-haertung.md`](./vps-n8n-haertung.md). **Ohne diesen Schritt keine Keys eintragen.**
-3. **Vorab-Check:** HERO-Keys besorgen; GraphQL-Schema klären; 360dialog-Onboarding (Testnummer zuerst); sipgate.io aktivieren; AVV abschließen.
-4. **Credentials gemäß Checkliste (Punkt 1) in n8n anlegen** (jeder Webhook mit Signatur/Secret).
-5. **Punkt 1 bauen:** A) Website → B) Sipgate → C) WhatsApp, je mit Test/Abnahme + Risiko-Abhaken (R1–R10).
-6. Danach Punkt für Punkt: detaillieren → Credentials → bauen → messen. Folge: **2 → 5 → 6 → 3/4**.
+Bauen hängt an zwei Voraussetzungen mit Vorlaufzeit: **(a) gehärtetes VPS/n8n** und **(b) HERO-API-Klarheit + Keys**. Daher zwei parallele Spuren.
+
+**Spur A — Vorlauf (Betrieb/Partner, sofort startbar, parallel):**
+- HERO-Support: **GraphQL-API-Key + Lead-API-Key** anfordern; Webhook-Frage.
+- **360dialog**-Coexistence-Onboarding (Testnummer zuerst).
+- **sipgate.io** aktivieren (Paket S).
+- HERO-API-**Doku** bereitstellen.
+- **AVV** mit Verarbeitern.
+
+**Spur B — Planung:** ✅ abgeschlossen (Strategie + Punkte 1–12 im Detail, Risiko-/Sicherheitsanalyse, Härtungs-Runbook).
+
+**Danach sequenziell (jeweils Gate → nächster Schritt):**
+1. **VPS/n8n-Härtung** gemäß [`docs/vps-n8n-haertung.md`](./vps-n8n-haertung.md) (**Gate — ohne diesen Schritt keine Keys**).
+2. **HERO-API-Verifikation** am Schema (Angebot/Status/Termin/Wartung/Zahlstatus) → offene Punkte in 2/3/5/6/8/9 schließen.
+3. **Credentials (Punkt 1) in n8n** anlegen, jeder Webhook mit Signatur/Secret.
+4. **Punkt 1 bauen:** A) Website → B) Sipgate → C) WhatsApp, je mit Test/Abnahme + R1–R10-Abhaken.
+5. **Weitere Punkte:** **2 Nachfassen → 5 Angebots-Beschleunigung → 6 Wartung → 3 Termine → 4 Bewertungen → 8 Status-Updates → 9 Rechnungen → 7 Förder-Weiterleitung → 11 Baustellendoku → 12 Dashboard**. **10 Materialbestellung** = HERO-Konfiguration, jederzeit unabhängig.
+6. Pro Punkt: final detaillieren → Credentials → bauen → 4–6 Wochen messen → nächster.
 
 ## Verifikation / Erfolgsmessung
 
