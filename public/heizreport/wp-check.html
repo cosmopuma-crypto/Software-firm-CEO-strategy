@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Links/Formulare im Widget im übergeordneten Fenster öffnen. -->
+    <base target="_parent" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: #1b1b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Wärmepumpen-Check (Heizreport). Script nach dem Container, damit die
+         Initialisierung den Container in jedem Fall findet. -->
+    <div
+      id="wp_check_script"
+      class="heizreport"
+      data-heizreport-ansprache="du"
+      data-primary-color="#173074"
+      data-heizreport-user="info@st-haustechnik.de"
+    ></div>
+    <script src="https://heizreport.de/js/heizreport_3.js"></script>
+  </body>
+</html>

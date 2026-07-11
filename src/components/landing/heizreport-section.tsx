@@ -1,19 +1,15 @@
 import { Card } from "@/components/ui/card";
 import { Section, SectionHeading } from "./section";
-
-/** Farbe der Heizreport-Widgets – identisch zur Markenfarbe (--brand) der Website. */
-const HEIZREPORT_COLOR = "#173074";
-/** E-Mail-Adresse, an die die Widgets die Anfragen zustellen. */
-const HEIZREPORT_USER = "info@st-haustechnik.de";
+import { HeizreportFrame } from "./heizreport-frame";
 
 /**
  * Eingebettete Drittanbieter-Tools von heizreport.de:
  * - Wärmepumpen-Check (schnelle Eignungsprüfung)
  * - Förderrechner (mögliche Zuschüsse ermitteln)
  *
- * Die Skripte suchen ihre Mount-Container per id und rendern das Widget hinein.
- * Deshalb liegen die <div>-Container fest im Markup und die Skripte werden mit
- * `afterInteractive` erst nach der Hydration geladen.
+ * Die Widgets werden per iFrame aus statischen HTML-Seiten (public/heizreport/)
+ * geladen. So läuft der Fremd-Code in einem normalen Dokument – ohne die
+ * SPA-/Hydration-Eigenheiten, die sonst die Interaktivität blockieren.
  */
 export function HeizreportSection() {
   return (
@@ -30,12 +26,9 @@ export function HeizreportSection() {
           <h3 className="mb-4 text-lg font-semibold tracking-tight">
             Wärmepumpen-Check
           </h3>
-          <div
-            id="wp_check_script"
-            className="heizreport"
-            data-heizreport-ansprache="du"
-            data-primary-color={HEIZREPORT_COLOR}
-            data-heizreport-user={HEIZREPORT_USER}
+          <HeizreportFrame
+            src="/heizreport/wp-check.html"
+            title="Wärmepumpen-Check"
           />
         </Card>
 
@@ -43,12 +36,9 @@ export function HeizreportSection() {
           <h3 className="mb-4 text-lg font-semibold tracking-tight">
             Förderrechner
           </h3>
-          <div
-            id="heizreport-foerderrechner"
-            data-foerder-farbe={HEIZREPORT_COLOR}
-            data-foerder-user={HEIZREPORT_USER}
-            data-foerder-agb="/agb"
-            data-foerder-datenschutz="/datenschutz"
+          <HeizreportFrame
+            src="/heizreport/foerderrechner.html"
+            title="Förderrechner"
           />
         </Card>
       </div>
