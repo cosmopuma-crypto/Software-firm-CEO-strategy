@@ -24,13 +24,13 @@ export default function Home() {
       <main>
         <NewsTicker />
         <Hero />
+        <HeizreportSection />
         <Leistungen />
         <FoerderBanner />
         <UeberUns />
         <Referenzen />
         <Kundenstimmen />
         <Fachbetrieb />
-        <HeizreportSection />
         <BadplanerSection />
         <KundendienstSection />
         <Faq />

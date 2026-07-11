@@ -21,11 +21,19 @@ export function NewsTicker() {
             <span className="rounded-full bg-gold/15 px-2 py-0.5 text-xs font-semibold text-gold-ink">
               {it.tag}
             </span>
-            <span className="font-medium text-foreground/90">{it.title}</span>
+            <span className="font-medium text-foreground/90 group-hover/item:text-brand group-hover/item:underline">
+              {it.title}
+            </span>
           </span>
         );
         return it.url ? (
-          <a key={i} href={it.url} className="hover:text-brand">
+          <a
+            key={i}
+            href={it.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/item cursor-pointer"
+          >
             {inner}
           </a>
         ) : (
