@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import {
-  LegalPage,
-  LegalSection,
-  TodoNote,
-} from "@/components/landing/legal-page";
+import { LegalPage, LegalSection } from "@/components/landing/legal-page";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,14 +10,6 @@ export const metadata: Metadata = {
 export default function AgbPage() {
   return (
     <LegalPage title="Allgemeine Geschäftsbedingungen">
-      <TodoNote>
-        Vor der Veröffentlichung bitte prüfen (lassen): die
-        Muster-Widerrufsbelehrung (§ 10, formell nach EGBGB), geschäfts­spezifische
-        Klauseln (z. B. 60 %-Anzahlung, Gewährleistungsverkürzung gegenüber
-        Unternehmern) sowie die Firmenanschrift – diese wird aus den zentralen
-        Stammdaten übernommen und muss mit dem Impressum übereinstimmen.
-      </TodoNote>
-
       <LegalSection heading="§ 1 Geltungsbereich und Allgemeines">
         <p>
           (1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB“) gelten
@@ -212,11 +200,6 @@ export default function AgbPage() {
           seine Kenntnis vom Erlöschen des Widerrufsrechts bei vollständiger
           Erfüllung bestätigt hat.
         </p>
-        <TodoNote>
-          Formell korrekte Muster-Widerrufsbelehrung und
-          Muster-Widerrufsformular gemäß EGBGB ergänzen (z. B. per
-          Widerrufs-Generator).
-        </TodoNote>
       </LegalSection>
 
       <LegalSection heading="§ 11 Verbraucherstreitbeilegung (Pflichtangabe nach § 36 VSBG)">

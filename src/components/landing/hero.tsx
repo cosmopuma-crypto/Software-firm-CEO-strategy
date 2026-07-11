@@ -19,13 +19,26 @@ export function Hero() {
       <div aria-hidden className="absolute -right-40 -top-40 -z-10 size-[36rem] rounded-full bg-brand/10 blur-3xl" />
       <div aria-hidden className="absolute -bottom-40 -left-40 -z-10 size-[32rem] rounded-full bg-gold/10 blur-3xl" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:py-24 lg:px-8">
-        <Reveal className="flex flex-col gap-6">
+      {/* Gütesiegel oben – prominent, direkt unter dem Logo/Header */}
+      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 pt-6 sm:px-6 lg:px-8">
+        <span className="inline-flex items-center rounded-2xl bg-white p-2.5 shadow-md ring-1 ring-black/5">
+          <Image
+            src="/brand/fachbetrieb-waermepumpe.png"
+            alt="Gütesiegel Fachbetrieb Wärmepumpe"
+            width={856}
+            height={234}
+            className="h-10 w-auto sm:h-12"
+          />
+        </span>
+      </div>
+
+      <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-16 lg:px-8">
+        <Reveal className="order-2 flex flex-col gap-6 lg:order-1">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-ink">
             <BadgeCheck className="size-4" /> Zertifizierter Fachbetrieb Wärmepumpe
           </span>
 
-          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             Heizkosten runter, Wohnkomfort rauf – mit Ihrer neuen{" "}
             <span className="relative whitespace-nowrap text-brand">
               Wärmepumpe
@@ -64,19 +77,8 @@ export function Hero() {
           </ul>
         </Reveal>
 
-        <Reveal delay={140} className="relative">
+        <Reveal delay={140} className="relative order-1 lg:order-2">
           <HeroSlideshow />
-
-          {/* Gütesiegel – prominent */}
-          <div className="absolute -bottom-6 -left-4 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-left-8 sm:w-72">
-            <Image
-              src="/brand/fachbetrieb-waermepumpe.png"
-              alt="Gütesiegel Fachbetrieb Wärmepumpe"
-              width={856}
-              height={234}
-              className="h-auto w-full"
-            />
-          </div>
 
           {/* schwebende Stat-Karte */}
           <div className="absolute -right-3 top-6 rounded-2xl bg-white px-5 py-3 shadow-xl ring-1 ring-black/5 sm:-right-6">

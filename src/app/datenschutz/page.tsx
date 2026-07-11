@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import {
-  LegalPage,
-  LegalSection,
-  TodoNote,
-} from "@/components/landing/legal-page";
+import { LegalPage, LegalSection } from "@/components/landing/legal-page";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,14 +10,6 @@ export const metadata: Metadata = {
 export default function DatenschutzPage() {
   return (
     <LegalPage title="Datenschutzerklärung">
-      <TodoNote>
-        Diese Datenschutzerklärung ist eine auf die tatsächlich eingesetzten
-        Dienste zugeschnittene Standard-Vorlage. Bitte vor der Veröffentlichung
-        auf Aktualität und Vollständigkeit prüfen (lassen) – z. B. mit einem
-        Datenschutz-Generator oder anwaltlich. Angaben zur Speicherdauer und die
-        genauen Anbieter-/AV-Verträge ggf. an eure Vereinbarungen anpassen.
-      </TodoNote>
-
       <LegalSection heading="1. Verantwortlicher">
         <p>
           Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne
@@ -120,11 +108,6 @@ export default function DatenschutzPage() {
           Ihnen angeforderten Auswertung) sowie unser berechtigtes Interesse an
           einer effizienten Angebotserstellung (Art. 6 Abs. 1 lit. f DSGVO).
         </p>
-        <TodoNote>
-          Exakten Anbieter (Firmierung/Anschrift), Link zu dessen
-          Datenschutzerklärung sowie den Auftragsverarbeitungsvertrag mit
-          Heizreport ergänzen.
-        </TodoNote>
       </LegalSection>
 
       <LegalSection heading="7. Kundenbewertungen (Trustindex)">

@@ -1,6 +1,5 @@
 import Script from "next/script";
 import { Card } from "@/components/ui/card";
-import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 
 /** Farbe der Heizreport-Widgets – identisch zur Markenfarbe (--brand) der Website. */
@@ -28,35 +27,31 @@ export function HeizreportSection() {
       />
 
       <div className="mx-auto mt-10 grid max-w-5xl gap-6 lg:grid-cols-2">
-        <Reveal>
-          <Card className="h-full border-brand/20 p-6 shadow-lg shadow-brand/5 sm:p-8">
-            <h3 className="mb-4 text-lg font-semibold tracking-tight">
-              Wärmepumpen-Check
-            </h3>
-            <div
-              id="wp_check_script"
-              className="heizreport"
-              data-heizreport-ansprache="du"
-              data-primary-color={HEIZREPORT_COLOR}
-              data-heizreport-user={HEIZREPORT_USER}
-            />
-          </Card>
-        </Reveal>
+        <Card className="h-full border-brand/20 p-6 shadow-lg shadow-brand/5 sm:p-8">
+          <h3 className="mb-4 text-lg font-semibold tracking-tight">
+            Wärmepumpen-Check
+          </h3>
+          <div
+            id="wp_check_script"
+            className="heizreport"
+            data-heizreport-ansprache="du"
+            data-primary-color={HEIZREPORT_COLOR}
+            data-heizreport-user={HEIZREPORT_USER}
+          />
+        </Card>
 
-        <Reveal>
-          <Card className="h-full border-brand/20 p-6 shadow-lg shadow-brand/5 sm:p-8">
-            <h3 className="mb-4 text-lg font-semibold tracking-tight">
-              Förderrechner
-            </h3>
-            <div
-              id="heizreport-foerderrechner"
-              data-foerder-farbe={HEIZREPORT_COLOR}
-              data-foerder-user={HEIZREPORT_USER}
-              data-foerder-agb="/agb"
-              data-foerder-datenschutz="/datenschutz"
-            />
-          </Card>
-        </Reveal>
+        <Card className="h-full border-brand/20 p-6 shadow-lg shadow-brand/5 sm:p-8">
+          <h3 className="mb-4 text-lg font-semibold tracking-tight">
+            Förderrechner
+          </h3>
+          <div
+            id="heizreport-foerderrechner"
+            data-foerder-farbe={HEIZREPORT_COLOR}
+            data-foerder-user={HEIZREPORT_USER}
+            data-foerder-agb="/agb"
+            data-foerder-datenschutz="/datenschutz"
+          />
+        </Card>
       </div>
 
       <Script

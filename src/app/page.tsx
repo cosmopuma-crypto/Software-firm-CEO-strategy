@@ -23,8 +23,8 @@ export default function Home() {
       <StructuredData />
       <Nav />
       <main>
-        <Hero />
         <NewsTicker />
+        <Hero />
         <Leistungen />
         <FoerderBanner />
         <UeberUns />
