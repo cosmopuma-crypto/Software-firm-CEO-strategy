@@ -73,8 +73,8 @@ export default function DatenschutzPage() {
 
       <LegalSection heading="5. Kontaktaufnahme und Online-Formulare">
         <p>
-          Wenn Sie den Wärmepumpenkonfigurator, den Badplaner oder das
-          Kundendienstformular nutzen bzw. uns per E-Mail oder Telefon
+          Wenn Sie den Badplaner oder das Kundendienstformular nutzen bzw. uns
+          per E-Mail oder Telefon
           kontaktieren, verarbeiten wir die von Ihnen gemachten Angaben (z. B.
           Anrede, Name, Kontaktdaten, Angaben zu Gebäude bzw. Anlage sowie ggf.
           hochgeladene Dateien) ausschließlich zur Bearbeitung Ihrer Anfrage und

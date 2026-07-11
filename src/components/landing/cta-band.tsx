@@ -30,10 +30,10 @@ export function CtaBand() {
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <a
-              href="#waermepumpe"
+              href="#waermepumpen-check"
               className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
             >
-              Wärmepumpe konfigurieren <ArrowRight className="size-4" />
+              Wärmepumpen-Check starten <ArrowRight className="size-4" />
             </a>
             <a
               href={SITE.phoneHref}
