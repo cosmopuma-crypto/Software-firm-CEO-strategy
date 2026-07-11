@@ -28,13 +28,13 @@ export function FoerderBanner() {
                 </p>
               </div>
               <a
-                href="#waermepumpe"
+                href="#waermepumpen-check"
                 className={cn(
                   buttonVariants(),
                   "h-12 shrink-0 bg-white px-7 text-base text-brand hover:bg-white/90",
                 )}
               >
-                Wärmepumpe konfigurieren <ArrowRight className="size-4" />
+                Wärmepumpen-Check starten <ArrowRight className="size-4" />
               </a>
             </div>
           </div>

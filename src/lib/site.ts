@@ -12,8 +12,12 @@ export const SITE = {
   register: "Amtsgericht Neumünster, HRB 23017 KI",
   taxNumber: "20/290/11999",
   email: "info@st-haustechnik.de",
-  phone: "0157 39596636",
-  phoneHref: "tel:+4915739596636",
+  // Primäre Nummer (Festnetz) – überall als Hauptnummer verwendet.
+  phone: "04321 5399933",
+  phoneHref: "tel:+4943215399933",
+  // Mobil – sekundär (z. B. Impressum/Kontakt zusätzlich angezeigt).
+  mobile: "0157 39596636",
+  mobileHref: "tel:+4915739596636",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   // TODO: finale Domain bestätigen (Platzhalter = bestehende Domain)
   url: "https://www.st-haustechnik.de",

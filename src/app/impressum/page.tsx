@@ -24,15 +24,25 @@ export default function ImpressumPage() {
 
       <LegalSection heading="Vertreten durch">
         <p>
-          {SITE.managingDirector}, Geschäftsführer
+          {SITE.managingDirector}, Geschäftsführender Gesellschafter
           <br />
           Sachkundig für Wärmepumpensysteme nach VDI 4645
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="Fachliche Vertretung">
+        <p>
+          Jens Peter Stürck
+          <br />
+          Installations- und Heizungsbaumeister
         </p>
       </LegalSection>
 
       <LegalSection heading="Kontakt">
         <p>
           Telefon: {SITE.phone}
+          <br />
+          Mobil: {SITE.mobile}
           <br />
           E-Mail: {SITE.email}
         </p>

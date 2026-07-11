@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-// Kuratierte Hero-Bilder (Hochformat passend zum Rahmen). TODO: bei Bedarf tauschen.
+// Kuratierte Hero-Bilder – ausschließlich Wärmepumpe & Heizungsbau (Kerngeschäft).
 const IMAGES = [
+  { src: "/brand/photos/wp-daikin-grau-hochkant.jpg", alt: "Fertig installierte Daikin-Wärmepumpe an einem Wohnhaus" },
+  { src: "/brand/photos/wp-stiebel-klinker.jpg", alt: "Wärmepumpe (Stiebel Eltron) an einem Klinkerhaus in Neumünster" },
+  { src: "/brand/photos/monteur-elektro-wp.jpg", alt: "Elektrischer Anschluss der Wärmepumpe durch unseren Monteur" },
+  { src: "/brand/photos/heizungskeller-wp.jpg", alt: "Wärmepumpen-Technik mit Speicher im Heizungsraum" },
   { src: "/brand/photos/foto-16.jpg", alt: "Monteur bei der Installation einer Wärmepumpe" },
-  { src: "/brand/photos/foto-15.jpg", alt: "Modernes Bad mit Waschtisch und LED-Spiegel" },
-  { src: "/brand/photos/foto-20.jpg", alt: "Installierte Wärmepumpe am Haus" },
-  { src: "/brand/photos/foto-13.jpg", alt: "Geflieste, bodengleiche Dusche" },
 ];
 
 const INTERVAL = 4500;

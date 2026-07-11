@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Links/Formulare im Widget im übergeordneten Fenster öffnen. -->
+    <base target="_parent" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: #1b1b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Förderrechner (Heizreport). Script nach dem Container. -->
+    <div
+      id="heizreport-foerderrechner"
+      data-foerder-farbe="#173074"
+      data-foerder-user="info@st-haustechnik.de"
+      data-foerder-agb="/agb"
+      data-foerder-datenschutz="/datenschutz"
+    ></div>
+    <script src="https://heizreport.de/js/foerderreport.js" defer></script>
+  </body>
+</html>

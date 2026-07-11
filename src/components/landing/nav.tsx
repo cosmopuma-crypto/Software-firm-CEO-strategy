@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Phone, Menu, X, BadgeCheck, Clock } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,8 +11,7 @@ import { Logo } from "./logo";
 // Home-relative Anker, damit die Links auch auf Unterseiten (Formular-/Rechtsseiten) funktionieren.
 const LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
-  { href: "/#waermepumpe", label: "Wärmepumpe" },
-  { href: "/#waermepumpen-check", label: "WP-Check" },
+  { href: "/#waermepumpen-check", label: "Wärmepumpe" },
   { href: "/#bad", label: "Bad" },
   { href: "/#kundendienst", label: "Kundendienst" },
   { href: "/#kundenstimmen", label: "Bewertungen" },
@@ -69,16 +69,16 @@ export function Nav() {
           </nav>
 
           <div className="hidden shrink-0 items-center xl:flex">
-            <a
-              href="/#waermepumpe"
+            <Link
+              href="/#waermepumpen-check"
               className={cn(
                 buttonVariants({ variant: "gold" }),
                 "whitespace-nowrap transition-all duration-300",
                 scrolled ? "opacity-100" : "pointer-events-none -translate-x-2 opacity-0",
               )}
             >
-              Wärmepumpe konfigurieren
-            </a>
+              Wärmepumpen-Check starten
+            </Link>
           </div>
 
           <button className="xl:hidden" onClick={() => setOpen((o) => !o)} aria-label="Menü">
@@ -109,13 +109,13 @@ export function Nav() {
             >
               <Phone className="size-4" /> {SITE.phone}
             </a>
-            <a
-              href="/#waermepumpe"
+            <Link
+              href="/#waermepumpen-check"
               onClick={() => setOpen(false)}
               className={cn(buttonVariants({ variant: "gold" }), "mt-2")}
             >
-              Wärmepumpe konfigurieren
-            </a>
+              Wärmepumpen-Check starten
+            </Link>
           </nav>
         </div>
       </header>

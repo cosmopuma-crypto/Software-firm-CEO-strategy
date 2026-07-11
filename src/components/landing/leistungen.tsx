@@ -9,7 +9,7 @@ const SERVICES = [
     title: "Wärmepumpen",
     text: "Zukunftssicher heizen und kräftig Heizkosten sparen: Als zertifizierter Fachbetrieb planen wir Ihre Wärmepumpe, sichern die Förderung und montieren herstellerunabhängig.",
     img: "/brand/photos/foto-20.jpg",
-    href: "#waermepumpe",
+    href: "#waermepumpen-check",
   },
   {
     icon: Flame,

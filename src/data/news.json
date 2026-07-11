@@ -1,27 +1,27 @@
 {
-  "_hinweis": "Diese Datei speist den Newsticker. Sie kann automatisiert (z. B. n8n oder Claude) ein- bis mehrmals pro Woche überschrieben werden. Format pro Eintrag: date (YYYY-MM-DD), tag ('Betrieb' oder 'SHK-Welt'), title, text, url (optional).",
-  "updated": "2026-06-30",
+  "_hinweis": "Diese Datei speist den Newsticker. Sie kann automatisiert (z. B. n8n oder Claude) ein- bis mehrmals pro Woche überschrieben werden. Format pro Eintrag: date (YYYY-MM-DD), tag (kurzes Label wie 'Förderung', 'SHK-Welt' oder 'Betrieb'), title, text, url (echte Quelle zum Nachlesen).",
+  "updated": "2026-07-11",
   "items": [
     {
-      "date": "2026-06-30",
-      "tag": "SHK-Welt",
-      "title": "Förderung 2026: bis zu 70 % Zuschuss für die Wärmepumpe",
-      "text": "Die Bundesförderung für effiziente Gebäude (BEG) unterstützt den Heizungstausch weiterhin kräftig – wir übernehmen den Förderservice für Sie.",
-      "url": ""
+      "date": "2026-07-11",
+      "tag": "Förderung",
+      "title": "Neue KfW-Förderkonditionen für Wärmepumpen ab 21. Juli 2026",
+      "text": "Zum 21.07. ändern sich die Förderbedingungen (u. a. niedrigerer Geschwindigkeitsbonus und geringere Höchstkosten). Wir übernehmen den Förderservice für Sie.",
+      "url": "https://www.kfw.de/inlandsfoerderung/Heizungsf%C3%B6rderung/"
     },
     {
-      "date": "2026-06-24",
-      "tag": "Betrieb",
-      "title": "Neue Referenz in Neumünster: Wärmepumpe + Fußbodenheizung übergeben",
-      "text": "Ein weiteres Projekt termingerecht und sauber fertiggestellt.",
-      "url": ""
+      "date": "2026-07-10",
+      "tag": "Förderung",
+      "title": "Übergangsfrist: bis 20.07.2026 noch die bisherige Förderung (bis 21.000 €) sichern",
+      "text": "Mit vorliegender Bestätigung ist ein Antrag zu den alten Konditionen noch bis 20.07.2026 möglich – jetzt Beratung anfragen.",
+      "url": "https://www.energie-fachberater.de/news/aenderungen-bei-der-kfw-heizungsfoerderung-2026.php"
     },
     {
-      "date": "2026-06-18",
+      "date": "2026-07-01",
       "tag": "SHK-Welt",
-      "title": "Vor dem Winter: Heizungswartung spart Energie",
-      "text": "Eine regelmäßige Wartung hält Ihre Anlage effizient und verlängert die Lebensdauer.",
-      "url": ""
+      "title": "Wärmepumpe: bis zu 70 % Zuschuss – wer profitiert und was zu beachten ist",
+      "text": "Überblick zu Boni, Voraussetzungen und Antrag der staatlichen Heizungsförderung.",
+      "url": "https://www.finanztip.de/waermepumpe/foerderung/"
     }
   ]
 }
