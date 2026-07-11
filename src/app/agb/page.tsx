@@ -180,26 +180,85 @@ export default function AgbPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="§ 10 Widerrufsrecht für Verbraucher">
+      <LegalSection heading="§ 10 Widerrufsbelehrung für Verbraucher">
+        <p className="font-semibold text-foreground">Widerrufsrecht</p>
         <p>
-          (1) Verbrauchern steht bei Verträgen, die im Fernabsatz oder außerhalb
-          von Geschäftsräumen geschlossen werden, ein gesetzliches Widerrufsrecht
-          von 14 Tagen zu. Die Frist beginnt mit dem Vertragsschluss.
+          Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen
+          diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage
+          ab dem Tag des Vertragsabschlusses.
         </p>
         <p>
-          (2) Zur Ausübung des Widerrufs genügt eine eindeutige Erklärung (z. B.
-          per Brief oder E-Mail) an: {SITE.legalName}, {SITE.street}, {SITE.zip}{" "}
-          {SITE.city}, {SITE.email}. Zur Wahrung der Frist reicht die rechtzeitige
-          Absendung des Widerrufs.
+          Um Ihr Widerrufsrecht auszuüben, müssen Sie uns ({SITE.legalName},{" "}
+          {SITE.street}, {SITE.zip} {SITE.city}, Tel.: 04321 5399933, E-Mail:{" "}
+          {SITE.email}) mittels einer eindeutigen Erklärung (z. B. ein mit der
+          Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen
+          Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte
+          Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.
         </p>
         <p>
-          (3) Wünscht der Verbraucher, dass die Dienstleistung bereits während der
-          Widerrufsfrist beginnt, kann er hierzu ausdrücklich zustimmen. Das
-          Widerrufsrecht erlischt bei einer Dienstleistung, wenn diese vollständig
-          erbracht wurde und der Verbraucher vor Beginn ausdrücklich zugestimmt und
-          seine Kenntnis vom Erlöschen des Widerrufsrechts bei vollständiger
-          Erfüllung bestätigt hat.
+          Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung
+          über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist
+          absenden.
         </p>
+
+        <p className="mt-2 font-semibold text-foreground">Folgen des Widerrufs</p>
+        <p>
+          Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die
+          wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit
+          Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine
+          andere Art der Lieferung als die von uns angebotene, günstigste
+          Standardlieferung gewählt haben), unverzüglich und spätestens binnen
+          vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über
+          Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese
+          Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der
+          ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen
+          wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen
+          wegen dieser Rückzahlung Entgelte berechnet.
+        </p>
+        <p>
+          Haben Sie verlangt, dass die Dienstleistungen während der Widerrufsfrist
+          beginnen sollen, so haben Sie uns einen angemessenen Betrag zu zahlen,
+          der dem Anteil der bis zu dem Zeitpunkt, zu dem Sie uns von der Ausübung
+          des Widerrufsrechts hinsichtlich dieses Vertrags unterrichten, bereits
+          erbrachten Dienstleistungen im Vergleich zum Gesamtumfang der im Vertrag
+          vorgesehenen Dienstleistungen entspricht.
+        </p>
+
+        <p className="mt-2 font-semibold text-foreground">
+          Muster-Widerrufsformular
+        </p>
+        <p>
+          (Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses
+          Formular aus und senden Sie es zurück.)
+        </p>
+        <div className="rounded-md border border-border bg-muted/40 p-4 text-sm">
+          <p>
+            An
+            <br />
+            {SITE.legalName}
+            <br />
+            {SITE.street}
+            <br />
+            {SITE.zip} {SITE.city}
+            <br />
+            E-Mail: {SITE.email}
+          </p>
+          <p className="mt-3">
+            Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen
+            Vertrag über den Kauf der folgenden Waren (*)/die Erbringung der
+            folgenden Dienstleistung (*)
+          </p>
+          <p className="mt-3">— Bestellt am (*)/erhalten am (*)</p>
+          <p>— Name des/der Verbraucher(s)</p>
+          <p>— Anschrift des/der Verbraucher(s)</p>
+          <p>
+            — Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)
+          </p>
+          <p>— Datum</p>
+          <p className="mt-3 text-muted-foreground">
+            (*) Unzutreffendes streichen.
+          </p>
+        </div>
       </LegalSection>
 
       <LegalSection heading="§ 11 Verbraucherstreitbeilegung (Pflichtangabe nach § 36 VSBG)">
