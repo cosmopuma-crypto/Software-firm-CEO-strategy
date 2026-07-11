@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Lexend, Source_Sans_3 } from "next/font/google";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -75,6 +76,22 @@ export default function RootLayout({
     <html lang="de" suppressHydrationWarning>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
         {children}
+
+        {/*
+          Heizreport-Embeds (Wärmepumpen-Check & Förderrechner).
+          beforeInteractive: Die Skripte registrieren ihre DOMContentLoaded-
+          Initialisierung, bevor der DOM fertig geladen ist – sonst würden die
+          Widgets zwar angezeigt, aber nicht interaktiv (Klicks würden nicht
+          gebunden). Die Mount-Container liegen auf der Startseite.
+        */}
+        <Script
+          src="https://heizreport.de/js/heizreport_3.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="https://heizreport.de/js/foerderreport.js"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );

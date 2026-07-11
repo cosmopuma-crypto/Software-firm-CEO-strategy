@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { Card } from "@/components/ui/card";
 import { Section, SectionHeading } from "./section";
 
@@ -53,15 +52,6 @@ export function HeizreportSection() {
           />
         </Card>
       </div>
-
-      <Script
-        src="https://heizreport.de/js/heizreport_3.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        src="https://heizreport.de/js/foerderreport.js"
-        strategy="afterInteractive"
-      />
     </Section>
   );
 }
