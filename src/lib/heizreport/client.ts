@@ -2,6 +2,7 @@
 //
 // Auth über Bearer-Token im HTTP-Header. Nur aus Server-Code (API-Routes)
 // verwenden – der API-Key darf niemals in den Browser gelangen.
+// Doku: https://heiz.report/api/v2/docs.html
 
 import {
   HEIZREPORT_PATHS,
@@ -10,16 +11,17 @@ import {
 } from "./config";
 import type {
   CreateProjectResult,
+  HeizreportDocumentType,
   HeizreportProjektData,
+  HeizreportProjektHeader,
   PdfResult,
 } from "./types";
 
 const TIMEOUT_MS = 15_000;
 
 interface RequestOptions {
-  readonly method: "GET" | "POST" | "PATCH";
-  readonly path: string;
-  readonly projektKey?: string;
+  readonly method: "GET" | "POST" | "PATCH" | "PUT";
+  readonly url: string;
   readonly body?: unknown;
 }
 
@@ -33,7 +35,7 @@ async function request(opts: RequestOptions): Promise<Record<string, unknown>> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const response = await fetch(heizreportUrl(opts.path, opts.projektKey), {
+    const response = await fetch(opts.url, {
       method: opts.method,
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -45,12 +47,17 @@ async function request(opts: RequestOptions): Promise<Record<string, unknown>> {
       cache: "no-store",
     });
 
-    if (!response.ok) {
-      throw new Error(`Heizreport-API antwortete mit HTTP ${response.status}.`);
-    }
-    // Manche Endpunkte antworten mit leerem Body (z. B. 204).
+    // Fehler kommen laut Doku als JSON mit { status, error, details }.
     const text = await response.text();
-    return text ? (JSON.parse(text) as Record<string, unknown>) : {};
+    const json = text ? (JSON.parse(text) as Record<string, unknown>) : {};
+    if (!response.ok) {
+      const message =
+        typeof json.error === "string"
+          ? json.error
+          : `Heizreport-API antwortete mit HTTP ${response.status}.`;
+      throw new Error(message);
+    }
+    return json;
   } finally {
     clearTimeout(timeout);
   }
@@ -63,35 +70,43 @@ function errorMessage(err: unknown): string {
   return err instanceof Error ? err.message : "Unbekannter Fehler.";
 }
 
-/** Extrahiert einen projektKey aus verschiedenen möglichen Antwortfeldern. */
-function readProjektKey(res: Record<string, unknown>): string | undefined {
-  const candidate = res.projektKey ?? res.projectKey ?? res.key ?? res.id;
-  return candidate != null && `${candidate}`.length > 0
-    ? `${candidate}`
-    : undefined;
+/** Liest den projektHeader aus einer Antwort. */
+function readHeader(res: Record<string, unknown>): HeizreportProjektHeader {
+  const header = res.projektHeader;
+  return header && typeof header === "object"
+    ? (header as HeizreportProjektHeader)
+    : {};
 }
 
-/** Legt ein neues Heizreport-Projekt an und liefert den projektKey zurück. */
+/**
+ * Legt ein neues Heizreport-Projekt an und liefert projektKey + Report-Link.
+ * Sind bereits Daten vorhanden, wird direkt /reports/with-data genutzt.
+ */
 export async function createProject(
   data?: HeizreportProjektData,
 ): Promise<CreateProjectResult> {
+  const hasData = data != null && Object.keys(data).length > 0;
   try {
     const res = await request({
       method: "POST",
-      path: HEIZREPORT_PATHS.createProject,
-      body: data && Object.keys(data).length > 0 ? data : {},
+      url: heizreportUrl(
+        hasData
+          ? HEIZREPORT_PATHS.createReportWithData
+          : HEIZREPORT_PATHS.createReport,
+      ),
+      body: hasData ? { projektData: data } : undefined,
     });
-    const projektKey = readProjektKey(res);
-    if (!projektKey) {
-      return { ok: false, error: "Antwort ohne projektKey." };
+    const header = readHeader(res);
+    if (!header.key) {
+      return { ok: false, error: "Antwort ohne projektHeader.key." };
     }
-    return { ok: true, projektKey };
+    return { ok: true, projektKey: header.key, link: header.link };
   } catch (err) {
     return { ok: false, error: errorMessage(err) };
   }
 }
 
-/** Setzt bzw. füllt Projektdaten eines bestehenden Projektes voraus. */
+/** Aktualisiert bzw. füllt Projektdaten eines bestehenden Projektes. */
 export async function prefillProject(
   projektKey: string,
   data: HeizreportProjektData,
@@ -99,9 +114,8 @@ export async function prefillProject(
   try {
     await request({
       method: "PATCH",
-      path: HEIZREPORT_PATHS.editProject,
-      projektKey,
-      body: data,
+      url: heizreportUrl(HEIZREPORT_PATHS.editReport, projektKey),
+      body: { projektData: data },
     });
     return { ok: true };
   } catch (err) {
@@ -109,9 +123,11 @@ export async function prefillProject(
   }
 }
 
-/** Liest die Dokument-URL (linkToDocument) aus einer PDF-Antwort. */
+/** Liest die Dokument-URL aus einer PDF-Antwort (defensiv über mehrere Felder). */
 function readDocumentLink(res: Record<string, unknown>): string | undefined {
-  const candidate = res.linkToDocument ?? res.link ?? res.url ?? res.pdfUrl;
+  const header = readHeader(res);
+  const candidate =
+    res.linkToDocument ?? res.link ?? res.url ?? res.pdf ?? header.link;
   return typeof candidate === "string" && candidate.length > 0
     ? candidate
     : undefined;
@@ -119,20 +135,24 @@ function readDocumentLink(res: Record<string, unknown>): string | undefined {
 
 /** Erzeugt/holt das wärmepumpenCHECK-PDF zu einem Projekt. */
 export async function getCheckPdf(projektKey: string): Promise<PdfResult> {
-  return getPdf(HEIZREPORT_PATHS.checkPdf, projektKey);
+  return getPdf(projektKey, "check");
 }
 
 /** Erzeugt/holt das heizreportKOMPLETT-PDF zu einem Projekt. */
 export async function getHeizreportPdf(projektKey: string): Promise<PdfResult> {
-  return getPdf(HEIZREPORT_PATHS.reportPdf, projektKey);
+  return getPdf(projektKey, "heizreport");
 }
 
-async function getPdf(path: string, projektKey: string): Promise<PdfResult> {
+async function getPdf(
+  projektKey: string,
+  type: HeizreportDocumentType,
+): Promise<PdfResult> {
   try {
-    const res = await request({ method: "GET", path, projektKey });
+    const url = `${heizreportUrl(HEIZREPORT_PATHS.pdf, projektKey)}?type=${type}`;
+    const res = await request({ method: "GET", url });
     const linkToDocument = readDocumentLink(res);
     if (!linkToDocument) {
-      return { ok: false, error: "Antwort ohne linkToDocument." };
+      return { ok: false, error: "Antwort ohne PDF-Link." };
     }
     return { ok: true, linkToDocument };
   } catch (err) {

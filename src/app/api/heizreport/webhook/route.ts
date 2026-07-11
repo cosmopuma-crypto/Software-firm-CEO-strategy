@@ -46,6 +46,7 @@ function asString(value: unknown): string | undefined {
 function readProjektKey(payload: HeizreportWebhookPayload): string | undefined {
   return (
     asString(payload.projektKey) ??
+    asString(payload.projektHeader?.key) ??
     asString((payload as Record<string, unknown>).projectKey) ??
     asString((payload as Record<string, unknown>).key)
   );
@@ -112,11 +113,16 @@ export async function POST(request: Request) {
   const pdfLink = await resolvePdfLink(payload, projektKey);
   const mail = buildNotification(payload, projektKey, pdfLink);
 
+  // Kunden-E-Mail steht top-level oder (v2) unter projektData.email.
+  const projektData = payload.projektData as Record<string, unknown> | undefined;
+  const customerEmail =
+    asString(payload.email) ?? asString(projektData?.email);
+
   const sent = await sendContactEmail({
     subject: mail.subject,
     text: mail.text,
     html: mail.html,
-    replyTo: asString(payload.email as unknown),
+    replyTo: customerEmail,
   });
 
   // Webhook-Sender erwarten i. d. R. 2xx, sonst wird erneut zugestellt.

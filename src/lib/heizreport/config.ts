@@ -1,35 +1,31 @@
-// Zentrale Konfiguration für die Heizreport-API-Anbindung (REST API v2).
+// Zentrale Konfiguration für die Heizreport REST API v2.
 //
 // Base URL: https://heizreport.net/api/v2
 // Auth:     Authorization: Bearer <API-Key>   (+ Accept: application/json)
 // Format:   JSON
 // Limit:    5 Requests / Sekunde / Token
+// Doku:     https://heiz.report/api/v2/docs.html
 //
 // Alle Secrets kommen aus Umgebungsvariablen – ohne sie bleibt die Anbindung
 // inaktiv (die eingebetteten Widgets funktionieren unabhängig davon weiter).
-// Quelle: API-Anleitung im Heizreport-Account (heiz.report, /api/v2).
 
 /** Basis-URL der Heizreport REST API v2 (ohne abschließenden Slash). */
 export const HEIZREPORT_BASE_URL = (
   process.env.HEIZREPORT_API_URL?.trim() || "https://heizreport.net/api/v2"
 ).replace(/\/+$/, "");
 
-/**
- * REST-Pfade der v2-API, relativ zur Base URL, an einer Stelle gebündelt.
- *
- * Hinweis: Die exakten Ressourcenpfade sind hier zentral anpassbar, falls die
- * API-Anleitung abweichende Namen verwendet. `{key}` wird durch den projektKey
- * ersetzt.
- */
+/** REST-Pfade der v2-API, relativ zur Base URL. `{key}` = 9-stelliger projektKey. */
 export const HEIZREPORT_PATHS = {
-  /** Neues Projekt anlegen (POST) – Response enthält den projektKey. */
-  createProject: "/projects",
-  /** Projektdaten setzen / vorausfüllen (PATCH /projects/{key}). */
-  editProject: "/projects/{key}",
-  /** wärmepumpenCHECK-PDF (GET /projects/{key}/check-pdf). */
-  checkPdf: "/projects/{key}/check-pdf",
-  /** heizreportKOMPLETT-PDF (GET /projects/{key}/report-pdf). */
-  reportPdf: "/projects/{key}/report-pdf",
+  /** Healthcheck (ohne Auth). */
+  health: "/health",
+  /** Leeres Projekt anlegen (POST). */
+  createReport: "/reports",
+  /** Projekt anlegen und direkt Daten schreiben (POST, Body: { projektData }). */
+  createReportWithData: "/reports/with-data",
+  /** Projektdaten aktualisieren (PATCH, Body: { projektData }). */
+  editReport: "/reports/{key}",
+  /** PDF-Link erzeugen (GET, Query ?type=heizreport|check). */
+  pdf: "/reports/{key}/pdf",
 } as const;
 
 /** Baut eine absolute URL aus Base URL, Pfad-Template und projektKey. */

@@ -1,39 +1,30 @@
-// Legt serverseitig ein Heizreport-Projekt an und füllt es optional voraus.
+// Legt serverseitig ein Heizreport-Projekt an (inkl. optionaler Vorbefüllung).
 //
-// Aufruf vom Frontend, wenn der Wärmepumpen-Check über ein per projektKey
-// gesteuertes iFrame eingebunden werden soll (statt des Widget-Skripts).
-// Der API-Key bleibt serverseitig – der Client erhält nur den projektKey.
+// Aufruf vom Frontend, wenn der Wärmepumpen-Check über den zurückgegebenen
+// Report-Link / projektKey eingebunden werden soll. Der API-Key bleibt
+// serverseitig – der Client erhält nur projektKey und Report-Link.
 
 import { NextResponse } from "next/server";
-import { createProject, prefillProject } from "@/lib/heizreport/client";
+import { createProject } from "@/lib/heizreport/client";
 import { isHeizreportConfigured } from "@/lib/heizreport/config";
-import type { HeizreportProjektData } from "@/lib/heizreport/types";
+import {
+  ALLOWED_PROJEKT_FIELDS,
+  type HeizreportProjektData,
+} from "@/lib/heizreport/types";
 
 export const runtime = "nodejs";
 
-// Nur bekannte, unkritische Felder aus dem Request übernehmen (Whitelist),
-// damit keine beliebigen API-Felder von außen gesetzt werden können.
-const ALLOWED_FIELDS: readonly (keyof HeizreportProjektData)[] = [
-  "vorname",
-  "name",
-  "email",
-  "telefon",
-  "projektName",
-  "projektStrasse",
-  "projektPostleitzahl",
-  "projektOrt",
-  "projektBaujahr",
-  "projektBewohner",
-];
+const ALLOWED = new Set<string>(ALLOWED_PROJEKT_FIELDS);
 
+/** Übernimmt nur die laut Doku erlaubten Projektfelder (Whitelist). */
 function sanitize(input: unknown): HeizreportProjektData {
   const data: Record<string, string> = {};
   if (input && typeof input === "object") {
     const record = input as Record<string, unknown>;
-    for (const field of ALLOWED_FIELDS) {
-      const value = record[field as string];
+    for (const [key, value] of Object.entries(record)) {
+      if (!ALLOWED.has(key)) continue;
       if (value != null && `${value}`.trim().length > 0) {
-        data[field as string] = `${value}`.trim().slice(0, 200);
+        data[key] = `${value}`.trim().slice(0, 500);
       }
     }
   }
@@ -61,22 +52,23 @@ export async function POST(request: Request) {
   }
 
   const data = sanitize(body);
+  const created = await createProject(
+    Object.keys(data).length > 0 ? data : undefined,
+  );
 
-  const created = await createProject(data);
   if (!created.ok || !created.projektKey) {
     return NextResponse.json(
-      { ok: false, message: created.error ?? "Projekt konnte nicht angelegt werden." },
+      {
+        ok: false,
+        message: created.error ?? "Projekt konnte nicht angelegt werden.",
+      },
       { status: 502 },
     );
   }
 
-  // Falls bereits Daten vorliegen, das Projekt direkt vorausfüllen.
-  if (Object.keys(data).length > 0) {
-    const filled = await prefillProject(created.projektKey, data);
-    if (!filled.ok) {
-      console.error("[heizreport-project] Vorausfüllen fehlgeschlagen:", filled.error);
-    }
-  }
-
-  return NextResponse.json({ ok: true, projektKey: created.projektKey });
+  return NextResponse.json({
+    ok: true,
+    projektKey: created.projektKey,
+    link: created.link ?? null,
+  });
 }
