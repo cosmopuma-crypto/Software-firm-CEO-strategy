@@ -4,22 +4,39 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
+  --radius: 0.85rem;
+
+  /* ---- Markenfarben: EINZIGE Quelle der Wahrheit ----
+     Echtes Marken-Navy ST-Haustechnik = #173074 (rgb 23,48,116). */
+  --brand: #173074;
+  --brand-foreground: #ffffff;
+  --brand-soft: oklch(0.95 0.03 256); /* helles Blau für Flächen */
+  --brand-deep: #101f49; /* dunkleres Navy für dunkle Sektionen */
+
+  /* Akzent in der Blau-Welt (heller als Navy) – einzige Akzentquelle, tunebar.
+     (Tokennamen bleiben aus Kompatibilitätsgründen "gold".) */
+  --gold: #2456c4; /* Akzent-Blau für Flächen/CTAs */
+  --gold-foreground: #ffffff;
+  --gold-ink: #1c4a9e; /* Akzent-Blau für Text auf hell (AA-Kontrast) */
+  --gold-soft: #9bb8ec; /* helles Akzent-Blau für dunkle Flächen */
+
+  --sand: oklch(0.975 0.013 78); /* warmer Sand für abwechselnde Sektionen */
+
+  --background: oklch(0.995 0.004 95); /* warmes Off-White */
+  --foreground: oklch(0.2 0.03 264);
+  --card: #ffffff;
+  --card-foreground: oklch(0.2 0.03 264);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --secondary: oklch(0.96 0.008 256);
+  --secondary-foreground: var(--brand);
+  --muted: oklch(0.96 0.008 256);
+  --muted-foreground: oklch(0.48 0.025 262);
+  --accent: var(--brand-soft); /* dezente Hover-Fläche (von UI-Primitives genutzt) */
+  --accent-foreground: var(--brand);
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
+  --ring: var(--brand);
 }
 
 .dark {
@@ -60,16 +77,83 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-deep: var(--brand-deep);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
+  --color-sand: var(--sand);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * {
   border-color: var(--border);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1.0625rem; /* 17px – angenehm lesbar */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Scroll-Reveal (via use-reveal Hook gesteuert) ---- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Newsticker ---- */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-ticker {
+  animation: ticker 45s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
 }

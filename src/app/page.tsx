@@ -1,26 +1,45 @@
-import { catalogRepository } from "@/data/catalog";
-import { CatalogView } from "@/components/catalog/catalog-view";
+import { Nav } from "@/components/landing/nav";
+import { Hero } from "@/components/landing/hero";
+import { NewsTicker } from "@/components/landing/news-ticker";
+import { Leistungen } from "@/components/landing/leistungen";
+import { FoerderBanner } from "@/components/landing/foerder-banner";
+import { UeberUns } from "@/components/landing/ueber-uns";
+import { Referenzen } from "@/components/landing/referenzen";
+import { Kundenstimmen } from "@/components/landing/kundenstimmen";
+import { Fachbetrieb } from "@/components/landing/fachbetrieb";
+import { KonfiguratorSection } from "@/components/landing/konfigurator-section";
+import { HeizreportSection } from "@/components/landing/heizreport-section";
+import { BadplanerSection } from "@/components/landing/badplaner-section";
+import { KundendienstSection } from "@/components/landing/kundendienst-section";
+import { Faq } from "@/components/landing/faq";
+import { Kontakt } from "@/components/landing/kontakt";
+import { CtaBand } from "@/components/landing/cta-band";
+import { Footer } from "@/components/landing/footer";
+import { StructuredData } from "@/components/landing/structured-data";
 
-// Server Component: loads data via the repository abstraction,
-// then hands plain data to the client view.
-export default async function Home() {
-  const items = await catalogRepository.getAll();
-
+export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <header className="mb-8 flex flex-col gap-2">
-        <span className="text-sm font-medium text-muted-foreground">
-          KI-Mitgründer · Katalog
-        </span>
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Repositories &amp; Skills
-        </h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Durchsuche alle Repositories und Skills des Unternehmens. Filtere nach
-          Typ und Tags, um schnell das Richtige zu finden.
-        </p>
-      </header>
-      <CatalogView items={items} />
-    </main>
+    <>
+      <StructuredData />
+      <Nav />
+      <main>
+        <Hero />
+        <NewsTicker />
+        <Leistungen />
+        <FoerderBanner />
+        <UeberUns />
+        <Referenzen />
+        <Kundenstimmen />
+        <Fachbetrieb />
+        <KonfiguratorSection />
+        <HeizreportSection />
+        <BadplanerSection />
+        <KundendienstSection />
+        <Faq />
+        <Kontakt />
+        <CtaBand />
+      </main>
+      <Footer />
+    </>
   );
 }
