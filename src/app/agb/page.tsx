@@ -189,7 +189,7 @@ export default function AgbPage() {
         </p>
         <p>
           Um Ihr Widerrufsrecht auszuüben, müssen Sie uns ({SITE.legalName},{" "}
-          {SITE.street}, {SITE.zip} {SITE.city}, Tel.: 04321 5399933, E-Mail:{" "}
+          {SITE.street}, {SITE.zip} {SITE.city}, Tel.: {SITE.phone}, E-Mail:{" "}
           {SITE.email}) mittels einer eindeutigen Erklärung (z. B. ein mit der
           Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen
           Vertrag zu widerrufen, informieren. Sie können dafür das beigefügte

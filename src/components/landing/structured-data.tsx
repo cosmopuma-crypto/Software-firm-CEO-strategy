@@ -14,7 +14,7 @@ export function StructuredData() {
     description:
       "Zertifizierter Fachbetrieb Wärmepumpe (VDI 4645) und Meisterbetrieb für Sanitär, Heizung und Bad in Neumünster.",
     url: SITE.url,
-    telephone: "+4915739596636",
+    telephone: "+4943215399933",
     email: SITE.email,
     image: `${SITE.url}/brand/photos/foto-16.jpg`,
     address: {
