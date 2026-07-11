@@ -3,8 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 
-/** Farbe der Heizreport-Widgets (Account-Farbe von ST-Haustechnik). */
-const HEIZREPORT_COLOR = "#3371b7";
+/** Farbe der Heizreport-Widgets – identisch zur Markenfarbe (--brand) der Website. */
+const HEIZREPORT_COLOR = "#173074";
 /** E-Mail-Adresse, an die die Widgets die Anfragen zustellen. */
 const HEIZREPORT_USER = "info@st-haustechnik.de";
 
