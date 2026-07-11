@@ -8,6 +8,7 @@ import { Referenzen } from "@/components/landing/referenzen";
 import { Kundenstimmen } from "@/components/landing/kundenstimmen";
 import { Fachbetrieb } from "@/components/landing/fachbetrieb";
 import { KonfiguratorSection } from "@/components/landing/konfigurator-section";
+import { HeizreportSection } from "@/components/landing/heizreport-section";
 import { BadplanerSection } from "@/components/landing/badplaner-section";
 import { KundendienstSection } from "@/components/landing/kundendienst-section";
 import { Faq } from "@/components/landing/faq";
@@ -31,6 +32,7 @@ export default function Home() {
         <Kundenstimmen />
         <Fachbetrieb />
         <KonfiguratorSection />
+        <HeizreportSection />
         <BadplanerSection />
         <KundendienstSection />
         <Faq />

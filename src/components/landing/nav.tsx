@@ -11,6 +11,7 @@ import { Logo } from "./logo";
 const LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
   { href: "/#waermepumpe", label: "Wärmepumpe" },
+  { href: "/#waermepumpen-check", label: "WP-Check" },
   { href: "/#bad", label: "Bad" },
   { href: "/#kundendienst", label: "Kundendienst" },
   { href: "/#kundenstimmen", label: "Bewertungen" },
