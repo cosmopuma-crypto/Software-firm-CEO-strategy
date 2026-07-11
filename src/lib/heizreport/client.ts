@@ -1,14 +1,12 @@
-// Server-seitiger Client für die Heizreport-API.
+// Server-seitiger Client für die Heizreport REST API v2.
 //
-// Alle Requests sind POST mit JSON-Body an HEIZREPORT_ENDPOINT. Jeder Body
-// enthält mindestens `version`, `apikey` und `action`. Nur aus Server-Code
-// (API-Routes) verwenden – der API-Key darf niemals in den Browser gelangen.
+// Auth über Bearer-Token im HTTP-Header. Nur aus Server-Code (API-Routes)
+// verwenden – der API-Key darf niemals in den Browser gelangen.
 
 import {
-  HEIZREPORT_ACTIONS,
-  HEIZREPORT_ENDPOINT,
-  HEIZREPORT_VERSION,
+  HEIZREPORT_PATHS,
   heizreportApiKey,
+  heizreportUrl,
 } from "./config";
 import type {
   CreateProjectResult,
@@ -18,28 +16,31 @@ import type {
 
 const TIMEOUT_MS = 15_000;
 
-/** Sendet einen JSON-Request an die Heizreport-API und parst die Antwort. */
-async function post(
-  action: string,
-  body: Record<string, unknown>,
-): Promise<Record<string, unknown>> {
-  const apikey = heizreportApiKey();
-  if (!apikey) {
+interface RequestOptions {
+  readonly method: "GET" | "POST" | "PATCH";
+  readonly path: string;
+  readonly projektKey?: string;
+  readonly body?: unknown;
+}
+
+/** Führt einen authentifizierten JSON-Request gegen die v2-API aus. */
+async function request(opts: RequestOptions): Promise<Record<string, unknown>> {
+  const apiKey = heizreportApiKey();
+  if (!apiKey) {
     throw new Error("HEIZREPORT_API_KEY ist nicht gesetzt.");
   }
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const response = await fetch(HEIZREPORT_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        version: HEIZREPORT_VERSION,
-        apikey,
-        action,
-        ...body,
-      }),
+    const response = await fetch(heizreportUrl(opts.path, opts.projektKey), {
+      method: opts.method,
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        Accept: "application/json",
+        ...(opts.body != null ? { "Content-Type": "application/json" } : {}),
+      },
+      body: opts.body != null ? JSON.stringify(opts.body) : undefined,
       signal: controller.signal,
       cache: "no-store",
     });
@@ -47,7 +48,9 @@ async function post(
     if (!response.ok) {
       throw new Error(`Heizreport-API antwortete mit HTTP ${response.status}.`);
     }
-    return (await response.json()) as Record<string, unknown>;
+    // Manche Endpunkte antworten mit leerem Body (z. B. 204).
+    const text = await response.text();
+    return text ? (JSON.parse(text) as Record<string, unknown>) : {};
   } finally {
     clearTimeout(timeout);
   }
@@ -62,9 +65,9 @@ function errorMessage(err: unknown): string {
 
 /** Extrahiert einen projektKey aus verschiedenen möglichen Antwortfeldern. */
 function readProjektKey(res: Record<string, unknown>): string | undefined {
-  const candidate = res.projektKey ?? res.projectKey ?? res.key;
-  return typeof candidate === "string" && candidate.length > 0
-    ? candidate
+  const candidate = res.projektKey ?? res.projectKey ?? res.key ?? res.id;
+  return candidate != null && `${candidate}`.length > 0
+    ? `${candidate}`
     : undefined;
 }
 
@@ -73,8 +76,10 @@ export async function createProject(
   data?: HeizreportProjektData,
 ): Promise<CreateProjectResult> {
   try {
-    const res = await post(HEIZREPORT_ACTIONS.createProject, {
-      projektData: data ?? {},
+    const res = await request({
+      method: "POST",
+      path: HEIZREPORT_PATHS.createProject,
+      body: data && Object.keys(data).length > 0 ? data : {},
     });
     const projektKey = readProjektKey(res);
     if (!projektKey) {
@@ -92,9 +97,11 @@ export async function prefillProject(
   data: HeizreportProjektData,
 ): Promise<{ ok: boolean; error?: string }> {
   try {
-    await post(HEIZREPORT_ACTIONS.editReportData, {
+    await request({
+      method: "PATCH",
+      path: HEIZREPORT_PATHS.editProject,
       projektKey,
-      projektData: data,
+      body: data,
     });
     return { ok: true };
   } catch (err) {
@@ -102,9 +109,9 @@ export async function prefillProject(
   }
 }
 
-/** Ruft die URL zum linkToDocument aus einer PDF-Antwort ab. */
+/** Liest die Dokument-URL (linkToDocument) aus einer PDF-Antwort. */
 function readDocumentLink(res: Record<string, unknown>): string | undefined {
-  const candidate = res.linkToDocument ?? res.link ?? res.url;
+  const candidate = res.linkToDocument ?? res.link ?? res.url ?? res.pdfUrl;
   return typeof candidate === "string" && candidate.length > 0
     ? candidate
     : undefined;
@@ -112,17 +119,17 @@ function readDocumentLink(res: Record<string, unknown>): string | undefined {
 
 /** Erzeugt/holt das wärmepumpenCHECK-PDF zu einem Projekt. */
 export async function getCheckPdf(projektKey: string): Promise<PdfResult> {
-  return getPdf(HEIZREPORT_ACTIONS.getCheckPdf, projektKey);
+  return getPdf(HEIZREPORT_PATHS.checkPdf, projektKey);
 }
 
 /** Erzeugt/holt das heizreportKOMPLETT-PDF zu einem Projekt. */
 export async function getHeizreportPdf(projektKey: string): Promise<PdfResult> {
-  return getPdf(HEIZREPORT_ACTIONS.getHeizreportPdf, projektKey);
+  return getPdf(HEIZREPORT_PATHS.reportPdf, projektKey);
 }
 
-async function getPdf(action: string, projektKey: string): Promise<PdfResult> {
+async function getPdf(path: string, projektKey: string): Promise<PdfResult> {
   try {
-    const res = await post(action, { projektKey });
+    const res = await request({ method: "GET", path, projektKey });
     const linkToDocument = readDocumentLink(res);
     if (!linkToDocument) {
       return { ok: false, error: "Antwort ohne linkToDocument." };

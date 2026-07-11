@@ -5,8 +5,10 @@
 // Secret, holen bei Bedarf die PDF-URL nach und benachrichtigen das Team per
 // E-Mail (info@st-haustechnik.de über den bestehenden Mailer).
 //
-// Webhook-URL im Heizreport-Account hinterlegen, z. B.:
-//   https://<domain>/api/heizreport/webhook?secret=<HEIZREPORT_WEBHOOK_SECRET>
+// Heizreport signiert ausgehende Webhooks mit einem Bearer-Token
+// (Einstellungen → Webhook Auth). Im Heizreport-Account hinterlegen:
+//   Webhook-Adresse: https://<domain>/api/heizreport/webhook
+//   Webhook Auth:    Bearer <HEIZREPORT_WEBHOOK_SECRET>
 
 import { NextResponse } from "next/server";
 import { sendContactEmail } from "@/lib/forms/mailer";
@@ -19,14 +21,22 @@ import type { HeizreportWebhookPayload } from "@/lib/heizreport/types";
 
 export const runtime = "nodejs";
 
-/** Prüft das gemeinsame Secret aus Header oder Query-Parameter. */
+/**
+ * Verifiziert den von Heizreport gesendeten Bearer-Token.
+ * Zusätzlich werden ein `x-heizreport-secret`-Header und ein `?secret=`-Query
+ * akzeptiert (praktisch für manuelle Tests), primär ist aber der Bearer-Token.
+ */
 function isAuthorized(request: Request): boolean {
   const expected = heizreportWebhookSecret();
   // Ohne konfiguriertes Secret akzeptieren wir keine Webhooks (fail closed).
   if (!expected) return false;
+  const bearer = request.headers
+    .get("authorization")
+    ?.replace(/^Bearer\s+/i, "")
+    .trim();
   const header = request.headers.get("x-heizreport-secret")?.trim();
   const query = new URL(request.url).searchParams.get("secret")?.trim();
-  return header === expected || query === expected;
+  return bearer === expected || header === expected || query === expected;
 }
 
 function asString(value: unknown): string | undefined {
