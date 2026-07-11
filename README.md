@@ -54,6 +54,13 @@ src/
 - **Testbarkeit:** Die Suchlogik (`lib/search.ts`) ist eine reine Funktion ohne
   React-Abhängigkeit und vollständig unit-getestet.
 
+## Integrationen
+
+- **Heizreport** (Wärmepumpen-Check, Förderrechner, REST API v2 + Webhook):
+  siehe [`docs/heizreport-integration.md`](docs/heizreport-integration.md)
+  für die Zuordnung Account-Felder ↔ Env-Vars ↔ Webhook-URL und die
+  Go-live-Checkliste.
+
 ## Nächste sinnvolle Schritte
 
 1. `ApiCatalogRepository` gegen ein echtes Backend (z. B. Supabase) implementieren.
