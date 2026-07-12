@@ -91,12 +91,12 @@ Logo-Chip, Spalten, Rechtslinks). Hintergrund-Rhythmus: hell / sand / dunkel abw
   Datenschutzerklärung pflegen. Trustindex-Schema ggf. abschalten, um doppeltes AggregateRating zu vermeiden.
 - **Bilder web-optimieren** (max ~1600px, q≈82) bevor sie ins Repo wandern.
 - **zod v4** Enum-Cast (s. o.); JSON-Import braucht `resolveJsonModule` (Next-Default ok).
-- **Breakpoint-Konsistenz in der Nav**: Elemente des Top-Strips (Telefon/Öffnungszeiten) am
-  **selben** Breakpoint ein-/ausblenden wie das Desktop-Menü (z. B. beide `xl`), nicht früher (`md`).
-  Sonst wirkt Tablet-Breite „halb-desktop" – tritt real in In-App-Browsern auf, die breit rendern.
-- **Hero-Bild responsiv im Seitenverhältnis staffeln**: ein durchgehendes Hochformat
-  (`aspect-[4/5]`) wird auf schmalen Viewports riesig. Staffeln: mobil `aspect-[4/3]`,
-  ab `sm` `3/2`, erst ab `lg` (schmale Spalte neben Text) wieder `4/5`.
+- **„Mobile-Skalierungsfehler" zuerst am echten Viewport verifizieren**, bevor Breakpoints
+  oder Seitenverhältnisse umgebaut werden: Ein aktivierter **„Desktop-Website"-Modus im
+  Handy-Browser** rendert breit und sieht aus wie ein Layout-Bug (real passiert: zwei
+  „Fixes" gebaut und wieder zurückgenommen, PR #5/#7/#10 → revertiert in #11). Erst den
+  User bitten, `window.innerWidth` bzw. den Browser-Modus zu prüfen / einen zweiten
+  Browser zu testen – dann erst Code ändern.
 - **Automatik als Pull, nicht als Push**: Auto-Inhalte (News-Ticker) zur Laufzeit aus einer
   Quelle ziehen (RSS, revalidiert) mit kuratiertem JSON-Fallback – NICHT als geplante
   KI-Routine, die Commits nach `main` pusht (unzuverlässig, zweimal real fehlgeschlagen).
