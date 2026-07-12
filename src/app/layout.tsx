@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lexend, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -75,6 +76,7 @@ export default function RootLayout({
     <html lang="de" suppressHydrationWarning>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

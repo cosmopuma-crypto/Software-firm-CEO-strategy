@@ -132,7 +132,21 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="9. Cookies">
+      <LegalSection heading="9. Reichweitenmessung (Vercel Web Analytics)">
+        <p>
+          Zur Verbesserung unserer Website nutzen wir Vercel Web Analytics, ein
+          datenschutzfreundliches Analysewerkzeug des Hosting-Anbieters Vercel
+          Inc. Es werden keine Cookies gesetzt und keine geräteübergreifenden
+          Profile gebildet; erfasst werden aggregierte Nutzungsdaten wie
+          aufgerufene Seiten, Herkunftsland, Browser- und Gerätetyp. Die
+          IP-Adresse wird nicht dauerhaft gespeichert, sondern nur zur
+          Erzeugung eines kurzlebigen, anonymisierten Kennzeichens verarbeitet.
+          Rechtsgrundlage ist unser berechtigtes Interesse an der Analyse und
+          Verbesserung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="10. Cookies">
         <p>
           Für den eigenen Betrieb dieser Website setzen wir keine Analyse- oder
           Marketing-Cookies ein und erstellen keine Nutzerprofile. Technisch
@@ -142,7 +156,7 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="10. Speicherdauer">
+      <LegalSection heading="11. Speicherdauer">
         <p>
           Wir verarbeiten und speichern personenbezogene Daten nur so lange, wie
           es für die Erreichung des jeweiligen Zwecks erforderlich ist.
@@ -154,7 +168,7 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="11. Aktualität und Änderung dieser Datenschutzerklärung">
+      <LegalSection heading="12. Aktualität und Änderung dieser Datenschutzerklärung">
         <p>
           Diese Datenschutzerklärung hat den Stand Juli 2026. Durch die
           Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher
