@@ -3,7 +3,7 @@ import { FormPage } from "@/components/landing/form-page";
 import { Badplaner } from "@/components/forms/badplaner";
 
 export const metadata: Metadata = {
-  title: "Badplaner · ST-Haustechnik",
+  title: "Badplaner",
   description: "Planen Sie Ihr neues Bad – passend zu Raum, Stil und Budget.",
 };
 

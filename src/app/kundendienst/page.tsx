@@ -3,7 +3,7 @@ import { FormPage } from "@/components/landing/form-page";
 import { KundendienstForm } from "@/components/forms/kundendienst-form";
 
 export const metadata: Metadata = {
-  title: "Kundendienst · ST-Haustechnik",
+  title: "Kundendienst",
   description: "Störung melden und schnelle Hilfe vom Serviceteam anfragen.",
 };
 

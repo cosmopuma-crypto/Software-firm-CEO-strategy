@@ -11,7 +11,7 @@ const TRUST = [
   { icon: BadgeCheck, label: "Fachbetrieb Wärmepumpe" },
   { icon: ShieldCheck, label: "Meisterbetrieb" },
   { icon: Wrench, label: "Eigener Kundendienst" },
-  { icon: MapPin, label: "Aus Neumünster" },
+  { icon: MapPin, label: `Aus ${SITE.city}` },
 ];
 
 export function Hero() {
@@ -36,7 +36,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-16 lg:px-8">
         <Reveal className="order-2 flex flex-col gap-6 lg:order-1">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-ink">
-            <BadgeCheck className="size-4 shrink-0" /> Zertifizierter Fachbetrieb Wärmepumpe · Neumünster &amp; Umgebung
+            <BadgeCheck className="size-4 shrink-0" /> Zertifizierter Fachbetrieb Wärmepumpe · {SITE.city} &amp; Umgebung
           </span>
 
           <h1 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
@@ -49,7 +49,7 @@ export function Hero() {
           </h1>
 
           <p className="max-w-xl text-lg text-muted-foreground">
-            Ihr Meisterbetrieb für Sanitär, Heizung und Bad in Neumünster – und
+            Ihr Meisterbetrieb für Sanitär, Heizung und Bad in {SITE.city} – und
             zertifizierter Fachbetrieb Wärmepumpe. Wir planen, liefern und montieren
             persönlich und termintreu. Alles aus einer Hand, ohne Wenn und Aber.
           </p>

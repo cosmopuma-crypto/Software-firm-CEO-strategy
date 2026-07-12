@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
+import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
 // Kuratiertes Best-of der echten Projektfotos (Bad · Heizung · Wärmepumpe).
@@ -9,7 +10,7 @@ const PHOTOS: { src: string; w: number; h: number; alt: string }[] = [
   { src: "/brand/photos/foto-04.jpg", w: 900, h: 1600, alt: "Installierte Wärmepumpe im Garten" },
   { src: "/brand/photos/foto-11.jpg", w: 900, h: 1600, alt: "Wärmepumpen-Innengerät mit Speicher und Verteiler" },
   { src: "/brand/photos/foto-06.jpg", w: 1600, h: 900, alt: "Wärmepumpe an der Hauswand" },
-  { src: "/brand/photos/wp-stiebel-klinker.jpg", w: 1600, h: 900, alt: "Wärmepumpe an einem Klinkerhaus in Neumünster" },
+  { src: "/brand/photos/wp-stiebel-klinker.jpg", w: 1600, h: 900, alt: "Wärmepumpe an einem Klinkerhaus" },
   { src: "/brand/photos/wp-daikin-aussen.jpg", w: 1600, h: 900, alt: "Installierte Daikin-Wärmepumpe im Außenbereich" },
   { src: "/brand/photos/foto-03.jpg", w: 1600, h: 900, alt: "Heizungsraum mit Rohrleitungen" },
   { src: "/brand/photos/foto-13.jpg", w: 900, h: 1600, alt: "Geflieste Dusche mit Armatur" },
@@ -22,7 +23,7 @@ export function Referenzen() {
       <SectionHeading
         eyebrow="Referenzen"
         title="Unsere Arbeit spricht für uns."
-        description="Ein Einblick in Bäder, Heizungen und Wärmepumpen, die wir für unsere Kundinnen und Kunden in und um Neumünster umgesetzt haben."
+        description={`Ein Einblick in Bäder, Heizungen und Wärmepumpen, die wir für unsere Kundinnen und Kunden in und um ${SITE.city} umgesetzt haben.`}
         centered
       />
       <div className="mt-12 gap-4 [column-fill:_balance] sm:columns-2 lg:columns-3">

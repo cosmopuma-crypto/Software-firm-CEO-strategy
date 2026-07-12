@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 // Kuratierte Hero-Bilder – ausschließlich Wärmepumpe & Heizungsbau (Kerngeschäft).
 const IMAGES = [
   { src: "/brand/photos/wp-daikin-grau-hochkant.jpg", alt: "Fertig installierte Daikin-Wärmepumpe an einem Wohnhaus" },
-  { src: "/brand/photos/wp-stiebel-klinker.jpg", alt: "Wärmepumpe (Stiebel Eltron) an einem Klinkerhaus in Neumünster" },
+  { src: "/brand/photos/wp-stiebel-klinker.jpg", alt: "Wärmepumpe (Stiebel Eltron) an einem Klinkerhaus" },
   { src: "/brand/photos/monteur-elektro-wp.jpg", alt: "Elektrischer Anschluss der Wärmepumpe durch unseren Monteur" },
   { src: "/brand/photos/heizungskeller-wp.jpg", alt: "Wärmepumpen-Technik mit Speicher im Heizungsraum" },
   { src: "/brand/photos/foto-16.jpg", alt: "Monteur bei der Installation einer Wärmepumpe" },

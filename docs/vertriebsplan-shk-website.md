@@ -219,7 +219,10 @@ neben Vertrieb und Support. Der Plan rechnet damit, statt es zu ignorieren.
 - [x] Fallstudie geschrieben — Entwurf in `docs/fallstudie-st-haustechnik.md`;
       ⏳ Besucherzahlen/Conversion + Zitat ergänzen, sobald Tracking-Daten
       vorliegen
-- [ ] Demo-Instanz „Musterbetrieb Mustermann GmbH" deployen
+- [~] Demo-Instanz „Musterbetrieb Haustechnik": Code fertig
+      (Site-Profil per `NEXT_PUBLIC_SITE_PROFILE=demo`, Banner, noindex,
+      Beispiel-Bewertungen — siehe `docs/demo-instanz.md`);
+      ⏳ Deployment = 10 Min. im Vercel-Dashboard (zweites Projekt)
 - [x] Einseitiges Angebot: `docs/angebot-einseiter.md` (Pilotpreis,
       14-Tage-Versprechen, Gebietsschutz, Einwandbehandlung);
       ⏳ Kontaktdaten/Firmierung einsetzen, als PDF gestalten

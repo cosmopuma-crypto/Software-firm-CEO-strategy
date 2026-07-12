@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Lexend, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { SITE } from "@/lib/site";
+import { IS_DEMO, SITE } from "@/lib/site";
 import { AttributionTracker } from "@/components/tracking/attribution-tracker";
+import { DemoBanner } from "@/components/landing/demo-banner";
 import "./globals.css";
 
 // Schrift-Pairing „Corporate Trust": Lexend (Headlines) + Source Sans 3 (Fließtext)
@@ -20,10 +21,9 @@ const body = Source_Sans_3({
   display: "swap",
 });
 
-const TITLE =
-  "ST-Haustechnik · Fachbetrieb für Wärmepumpen, Heizung & Bad in Neumünster";
+const TITLE = `${SITE.name} · Fachbetrieb für Wärmepumpen, Heizung & Bad in ${SITE.city}`;
 const DESCRIPTION =
-  "ST-Haustechnik GmbH aus Neumünster – zertifizierter Fachbetrieb Wärmepumpe (VDI 4645) " +
+  `${SITE.legalName} aus ${SITE.city} – zertifizierter Fachbetrieb Wärmepumpe (VDI 4645) ` +
   "und Meisterbetrieb für Sanitär, Heizung und Bad. Beratung, Planung, Förderservice und " +
   "Montage aus einer Hand. Wärmepumpe anfragen, Bad planen oder Kundendienst rufen.";
 
@@ -31,20 +31,20 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
     default: TITLE,
-    template: "%s · ST-Haustechnik",
+    template: `%s · ${SITE.name}`,
   },
   description: DESCRIPTION,
   applicationName: SITE.name,
   keywords: [
-    "Wärmepumpe Neumünster",
+    `Wärmepumpe ${SITE.city}`,
     "Fachbetrieb Wärmepumpe",
     "VDI 4645",
-    "Heizung Neumünster",
-    "Heizungsbauer Neumünster",
-    "Badsanierung Neumünster",
-    "Sanitär Neumünster",
+    `Heizung ${SITE.city}`,
+    `Heizungsbauer ${SITE.city}`,
+    `Badsanierung ${SITE.city}`,
+    `Sanitär ${SITE.city}`,
     "Kundendienst Heizung",
-    "SHK Neumünster",
+    `SHK ${SITE.city}`,
   ],
   authors: [{ name: SITE.legalName }],
   alternates: { canonical: "/" },
@@ -63,7 +63,8 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: ["/brand/og-image.jpg"],
   },
-  robots: { index: true, follow: true },
+  // Demo-Instanz darf nicht in Suchmaschinen auftauchen.
+  robots: IS_DEMO ? { index: false, follow: false } : { index: true, follow: true },
 };
 
 export const viewport = {
@@ -76,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="de" suppressHydrationWarning>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
+        {IS_DEMO && <DemoBanner />}
         {children}
         {/* Cookie-lose Besucherstatistik (Vercel Web Analytics) + Quellen-Erfassung */}
         <Analytics />

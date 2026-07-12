@@ -1,18 +1,20 @@
-import { SITE } from "@/lib/site";
+import { IS_DEMO, SITE } from "@/lib/site";
 
 /**
  * JSON-LD strukturierte Daten (LocalBusiness / HVACBusiness) für lokale SEO.
  * Hilft Google, Firmenname, Standort, Leistungen und Kontakt korrekt zu verstehen.
  */
 export function StructuredData() {
-  const sameAs = [SITE.google, SITE.myhammer].filter(Boolean);
+  // Demo-Instanz: keine strukturierten Daten für einen fiktiven Betrieb.
+  if (IS_DEMO) return null;
+
+  const sameAs = [SITE.google, SITE.myhammer].filter((u) => u.startsWith("http"));
 
   const data = {
     "@context": "https://schema.org",
     "@type": ["HVACBusiness", "Plumber"],
     name: SITE.legalName,
-    description:
-      "Zertifizierter Fachbetrieb Wärmepumpe (VDI 4645) und Meisterbetrieb für Sanitär, Heizung und Bad in Neumünster.",
+    description: `Zertifizierter Fachbetrieb Wärmepumpe (VDI 4645) und Meisterbetrieb für Sanitär, Heizung und Bad in ${SITE.city}.`,
     url: SITE.url,
     telephone: "+4943215399933",
     email: SITE.email,

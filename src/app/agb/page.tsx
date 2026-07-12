@@ -3,7 +3,7 @@ import { LegalPage, LegalSection } from "@/components/landing/legal-page";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AGB · ST-Haustechnik",
+  title: "AGB",
   robots: { index: false },
 };
 

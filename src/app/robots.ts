@@ -1,7 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/site";
+import { IS_DEMO, SITE } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
+  // Demo-Instanz komplett von Suchmaschinen ausschließen.
+  if (IS_DEMO) {
+    return { rules: { userAgent: "*", disallow: "/" } };
+  }
   return {
     rules: {
       userAgent: "*",

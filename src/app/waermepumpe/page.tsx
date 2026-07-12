@@ -27,9 +27,9 @@ import { Footer } from "@/components/landing/footer";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Wärmepumpe Neumünster – Beratung, Förderung & Einbau";
+const TITLE = `Wärmepumpe ${SITE.city} – Beratung, Förderung & Einbau`;
 const DESCRIPTION =
-  "Wärmepumpe in Neumünster & Umgebung: zertifizierter Fachbetrieb (VDI 4645) für Beratung, " +
+  `Wärmepumpe in ${SITE.city} & Umgebung: zertifizierter Fachbetrieb (VDI 4645) für Beratung, ` +
   "Planung, Förderservice (bis zu 70 % Zuschuss) und Montage – auch im Altbau. " +
   "Jetzt kostenlosen Wärmepumpen-Check starten.";
 
@@ -68,7 +68,7 @@ const VORTEILE = [
   {
     icon: MapPin,
     title: "Aus der Region",
-    text: "Kurze Wege aus Neumünster: schnelle Termine, persönliche Betreuung, verlässlich auch nach der Montage.",
+    text: `Kurze Wege aus ${SITE.city}: schnelle Termine, persönliche Betreuung, verlässlich auch nach der Montage.`,
   },
   {
     icon: Wrench,
@@ -107,7 +107,7 @@ const ABLAUF = [
 
 const FAQ_WP = [
   {
-    q: "Lohnt sich eine Wärmepumpe in Neumünster auch im Altbau?",
+    q: `Lohnt sich eine Wärmepumpe in ${SITE.city} auch im Altbau?`,
     a: "In den allermeisten Fällen ja. Entscheidend sind Heizlast und Heizflächen – beides prüfen wir kostenlos vor Ort. Häufig funktioniert die Wärmepumpe mit den vorhandenen Heizkörpern; manchmal tauschen wir einzelne Heizkörper oder machen einen hydraulischen Abgleich.",
   },
   {
@@ -124,7 +124,7 @@ const FAQ_WP = [
   },
   {
     q: "In welchen Orten sind Sie unterwegs?",
-    a: `Wir installieren Wärmepumpen in ${SITE.areaServed.join(", ")} und im weiteren Umland von Neumünster.`,
+    a: `Wir installieren Wärmepumpen in ${SITE.areaServed.join(", ")} und im weiteren Umland von ${SITE.city}.`,
   },
 ];
 
@@ -175,12 +175,12 @@ export default function WaermepumpePage() {
                 <BadgeCheck className="size-4 shrink-0" /> Fachbetrieb Wärmepumpe · VDI 4645
               </span>
               <h1 className="text-3xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-                Wärmepumpe in Neumünster &amp; Umgebung – vom zertifizierten
+                Wärmepumpe in {SITE.city} &amp; Umgebung – vom zertifizierten
                 Fachbetrieb.
               </h1>
               <p className="max-w-2xl text-lg text-muted-foreground">
                 Beratung, Planung, Förderservice und Montage aus einer Hand: Als
-                Meisterbetrieb aus Neumünster installieren wir Luft-Wasser-Wärmepumpen
+                Meisterbetrieb aus {SITE.city} installieren wir Luft-Wasser-Wärmepumpen
                 im Neubau und im Altbau – korrekt ausgelegt nach VDI 4645, mit bis zu
                 70&nbsp;% staatlicher Förderung.
               </p>
@@ -219,7 +219,7 @@ export default function WaermepumpePage() {
         <Section tone="sand">
           <SectionHeading
             eyebrow="Ihre Vorteile"
-            title="Warum ST-Haustechnik für Ihre Wärmepumpe?"
+            title={`Warum ${SITE.name} für Ihre Wärmepumpe?`}
             description="Zertifiziert, regional und ehrlich: Wir sagen Ihnen auch, wenn eine Wärmepumpe (noch) nicht die beste Lösung für Ihr Haus ist."
             centered
           />
@@ -279,7 +279,7 @@ export default function WaermepumpePage() {
                 ohne teure Komplettsanierung.
               </p>
               <p className="text-muted-foreground">
-                Beim kostenlosen Vor-Ort-Termin in Neumünster und Umgebung sagen wir
+                Beim kostenlosen Vor-Ort-Termin in {SITE.city} und Umgebung sagen wir
                 Ihnen klar, was bei Ihrem Haus sinnvoll ist – und was nicht.
               </p>
             </Reveal>
@@ -309,7 +309,7 @@ export default function WaermepumpePage() {
           <SectionHeading
             eyebrow="Einzugsgebiet"
             title="Wärmepumpen-Installation in Ihrer Nähe"
-            description="Kurze Anfahrt, schnelle Termine: Wir sind in Neumünster zuhause und im gesamten Umland für Sie unterwegs."
+            description={`Kurze Anfahrt, schnelle Termine: Wir sind in ${SITE.city} zuhause und im gesamten Umland für Sie unterwegs.`}
             centered
           />
           <Reveal className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2.5">
