@@ -69,8 +69,9 @@ Konkrete Code-Snippets: siehe `references/code-patterns.md`. Inhalts-Checkliste:
 
 ## Sektions-Katalog (One-Page-Reihenfolge)
 Nav (navy Top-Strip „Fachbetrieb/USP" + Hauptbar mit großem Logo + sticky) → **Hero (Bild-Slideshow** +
-Eyebrow/USP + 2 CTAs + Trust-Badges + schwebendes Siegel/Stat) → **Newsticker** (aus `src/data/news.json`,
-automatisierbar) → **Leistungen** (Foto-Cards) → **Förder-/CTA-Banner** (z. B. „bis zu X € Förderung") →
+Eyebrow/USP + 2 CTAs + Trust-Badges + schwebendes Siegel/Stat) → **Newsticker** (async Server-Component,
+lädt RSS-Feed(s) via Env `NEWS_RSS_URL`, stündlich revalidiert, Fallback: kuratiertes `src/data/news.json` –
+Ticker ist nie leer) → **Leistungen** (Foto-Cards) → **Förder-/CTA-Banner** (z. B. „bis zu X € Förderung") →
 **Über uns** (Team/Fahrzeug-Foto + Punkte + 3-Schritte-Ablauf) → **Referenzen** (Masonry-Galerie) →
 **Kundenstimmen** (Trustindex-Widget + Rating-Badges Google/MyHammer) → **Fachbetrieb/USP-Band** (dunkel,
 6-Schritte „alles aus einer Hand" + Zertifikat) → **Konfigurator/Anfrage-Formulare** → **FAQ** (Accordion +
@@ -90,6 +91,15 @@ Logo-Chip, Spalten, Rechtslinks). Hintergrund-Rhythmus: hell / sand / dunkel abw
   Datenschutzerklärung pflegen. Trustindex-Schema ggf. abschalten, um doppeltes AggregateRating zu vermeiden.
 - **Bilder web-optimieren** (max ~1600px, q≈82) bevor sie ins Repo wandern.
 - **zod v4** Enum-Cast (s. o.); JSON-Import braucht `resolveJsonModule` (Next-Default ok).
+- **Breakpoint-Konsistenz in der Nav**: Elemente des Top-Strips (Telefon/Öffnungszeiten) am
+  **selben** Breakpoint ein-/ausblenden wie das Desktop-Menü (z. B. beide `xl`), nicht früher (`md`).
+  Sonst wirkt Tablet-Breite „halb-desktop" – tritt real in In-App-Browsern auf, die breit rendern.
+- **Hero-Bild responsiv im Seitenverhältnis staffeln**: ein durchgehendes Hochformat
+  (`aspect-[4/5]`) wird auf schmalen Viewports riesig. Staffeln: mobil `aspect-[4/3]`,
+  ab `sm` `3/2`, erst ab `lg` (schmale Spalte neben Text) wieder `4/5`.
+- **Automatik als Pull, nicht als Push**: Auto-Inhalte (News-Ticker) zur Laufzeit aus einer
+  Quelle ziehen (RSS, revalidiert) mit kuratiertem JSON-Fallback – NICHT als geplante
+  KI-Routine, die Commits nach `main` pusht (unzuverlässig, zweimal real fehlgeschlagen).
 
 ## Formulare – Pflichtfelder & fachliche Vollständigkeit
 - Validierung **zweistufig**: Wizard pro Schritt (Client) **und** zod auf dem Server.
