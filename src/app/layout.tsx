@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { IS_DEMO, SITE } from "@/lib/site";
 import { AttributionTracker } from "@/components/tracking/attribution-tracker";
 import { DemoBanner } from "@/components/landing/demo-banner";
@@ -81,6 +82,7 @@ export default function RootLayout({
         {children}
         {/* Cookie-lose Besucherstatistik (Vercel Web Analytics) + Quellen-Erfassung */}
         <Analytics />
+        <SpeedInsights />
         <AttributionTracker />
       </body>
     </html>
