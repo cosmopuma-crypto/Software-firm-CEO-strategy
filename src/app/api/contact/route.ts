@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { contactFormSchema, flattenErrors, HONEYPOT_FIELD } from "@/lib/forms/schemas";
 import { buildEmail } from "@/lib/forms/email-template";
 import { sendContactEmail, type MailAttachment } from "@/lib/forms/mailer";
+import { parseAttribution } from "@/lib/tracking/attribution";
+import { logLeadEvent } from "@/lib/tracking/lead-log";
 
 export const runtime = "nodejs";
 
@@ -124,8 +126,9 @@ export async function POST(request: Request) {
     );
   }
 
-  // 4) E-Mail bauen + senden
-  const email = buildEmail(result.data);
+  // 4) E-Mail bauen + senden (inkl. Quellen-Attribution, falls mitgeschickt)
+  const attribution = parseAttribution(data.attribution);
+  const email = buildEmail(result.data, attribution);
 
   const attachments: MailAttachment[] = await Promise.all(
     files.map(async (file) => ({
@@ -153,6 +156,9 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+
+  // 5) Lead-Log (wirft nie — ein Log-Fehler lässt die Anfrage nicht scheitern)
+  await logLeadEvent({ formType: result.data.formType, attribution });
 
   return NextResponse.json({ ok: true });
 }

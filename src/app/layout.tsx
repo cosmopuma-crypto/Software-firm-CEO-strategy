@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Lexend, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/lib/site";
+import { AttributionTracker } from "@/components/tracking/attribution-tracker";
 import "./globals.css";
 
 // Schrift-Pairing „Corporate Trust": Lexend (Headlines) + Source Sans 3 (Fließtext)
@@ -75,6 +77,9 @@ export default function RootLayout({
     <html lang="de" suppressHydrationWarning>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
         {children}
+        {/* Cookie-lose Besucherstatistik (Vercel Web Analytics) + Quellen-Erfassung */}
+        <Analytics />
+        <AttributionTracker />
       </body>
     </html>
   );
