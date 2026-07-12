@@ -16,6 +16,7 @@ import {
   URGENCIES,
 } from "@/domain/forms";
 import type { ContactFormPayload } from "./schemas";
+import type { Attribution } from "@/lib/tracking/attribution";
 
 export interface BuiltEmail {
   readonly subject: string;
@@ -90,16 +91,32 @@ function specificRows(p: ContactFormPayload): Row[] {
   }
 }
 
+/** Quelle der Anfrage als beschriftete Zeilen (nur wenn Attribution vorliegt). */
+function attributionRows(a: Attribution | undefined): Row[] {
+  if (!a) return [];
+  const rows: Row[] = [["Quelle", a.source]];
+  if (a.utmCampaign) rows.push(["Kampagne", a.utmCampaign]);
+  if (a.landingPage) rows.push(["Einstiegsseite", a.landingPage]);
+  return rows;
+}
+
 /**
  * Baut Betreff, Text- und HTML-Body aus einer validierten Formular-Anfrage.
  */
-export function buildEmail(p: ContactFormPayload): BuiltEmail {
+export function buildEmail(
+  p: ContactFormPayload,
+  attribution?: Attribution,
+): BuiltEmail {
   const formLabel = FORM_LABELS[p.formType];
   // CR/LF aus dem Namen entfernen (Header-Injection im Betreff vorbeugen).
   const safeName = p.name.replace(/[\r\n]+/g, " ").trim();
   const subject = `[${formLabel}] Neue Anfrage von ${safeName}`;
 
-  const allRows: Row[] = [...specificRows(p), ...contactRows(p)];
+  const allRows: Row[] = [
+    ...specificRows(p),
+    ...contactRows(p),
+    ...attributionRows(attribution),
+  ];
 
   const text = [
     `Neue Anfrage über das ${formLabel}-Formular der Website.`,

@@ -132,27 +132,36 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="9. Reichweitenmessung (Vercel Web Analytics)">
-        <p>
-          Zur Verbesserung unserer Website nutzen wir Vercel Web Analytics, ein
-          datenschutzfreundliches Analysewerkzeug des Hosting-Anbieters Vercel
-          Inc. Es werden keine Cookies gesetzt und keine geräteübergreifenden
-          Profile gebildet; erfasst werden aggregierte Nutzungsdaten wie
-          aufgerufene Seiten, Herkunftsland, Browser- und Gerätetyp. Die
-          IP-Adresse wird nicht dauerhaft gespeichert, sondern nur zur
-          Erzeugung eines kurzlebigen, anonymisierten Kennzeichens verarbeitet.
-          Rechtsgrundlage ist unser berechtigtes Interesse an der Analyse und
-          Verbesserung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).
-        </p>
-      </LegalSection>
-
-      <LegalSection heading="10. Cookies">
+      <LegalSection heading="9. Cookies">
         <p>
           Für den eigenen Betrieb dieser Website setzen wir keine Analyse- oder
           Marketing-Cookies ein und erstellen keine Nutzerprofile. Technisch
           notwendige Cookies sowie ggf. durch die vorstehend genannten
           Drittdienste gesetzte Cookies dienen der Funktion der jeweiligen
           Inhalte.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="10. Reichweitenmessung und Anfragen-Statistik">
+        <p>
+          Zur Verbesserung unseres Online-Angebots nutzen wir Vercel Web
+          Analytics, eine cookie-lose Reichweitenmessung der Vercel Inc.
+          (USA). Dabei werden aufgerufene Seiten und technische Angaben (z. B.
+          Browsertyp, Gerätekategorie, ungefähre Herkunftsregion) ausschließlich
+          in anonymisierter, aggregierter Form erfasst. Es werden keine Cookies
+          gesetzt, keine IP-Adressen dauerhaft gespeichert und keine
+          geräteübergreifenden Nutzerprofile gebildet. Rechtsgrundlage ist unser
+          berechtigtes Interesse an der statistischen Auswertung und
+          Verbesserung unserer Website (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+        <p>
+          Beim Absenden eines Anfrage-Formulars erfassen wir zudem in einer
+          internen Statistik, über welchen Weg die Anfrage zustande kam (z. B.
+          Suchmaschine oder direkter Aufruf, besuchte Einstiegsseite). Diese
+          Statistik enthält keine personenbezogenen Daten — insbesondere keine
+          Namen, Kontaktdaten oder IP-Adressen — und dient allein der
+          Auswertung, welche Wege zu Anfragen führen (Art. 6 Abs. 1 lit. f
+          DSGVO).
         </p>
       </LegalSection>
 
