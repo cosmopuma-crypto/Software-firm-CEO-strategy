@@ -2,8 +2,10 @@ import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
   const routes = [
     { path: "/", priority: 1 },
+    { path: "/waermepumpe", priority: 0.9 },
     { path: "/badplaner", priority: 0.8 },
     { path: "/kundendienst", priority: 0.8 },
     { path: "/impressum", priority: 0.3 },
@@ -12,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   return routes.map((r) => ({
     url: `${SITE.url}${r.path}`,
+    lastModified,
     changeFrequency: "monthly",
     priority: r.priority,
   }));

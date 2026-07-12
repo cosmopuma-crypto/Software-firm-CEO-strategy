@@ -53,13 +53,13 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: "/brand/photos/foto-16.jpg", width: 900, height: 1600, alt: SITE.claim }],
+    images: [{ url: "/brand/og-image.jpg", width: 1200, height: 630, alt: SITE.claim }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/brand/photos/foto-16.jpg"],
+    images: ["/brand/og-image.jpg"],
   },
   robots: { index: true, follow: true },
 };

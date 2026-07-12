@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ShieldCheck, BadgeCheck, MapPin, Wrench, ArrowRight, Phone } from "lucide-react";
+import Link from "next/link";
+import { ShieldCheck, BadgeCheck, MapPin, Wrench, ArrowRight, Phone, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -35,7 +36,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-16 lg:px-8">
         <Reveal className="order-2 flex flex-col gap-6 lg:order-1">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-ink">
-            <BadgeCheck className="size-4" /> Zertifizierter Fachbetrieb Wärmepumpe
+            <BadgeCheck className="size-4 shrink-0" /> Zertifizierter Fachbetrieb Wärmepumpe · Neumünster &amp; Umgebung
           </span>
 
           <h1 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
@@ -52,6 +53,24 @@ export function Hero() {
             zertifizierter Fachbetrieb Wärmepumpe. Wir planen, liefern und montieren
             persönlich und termintreu. Alles aus einer Hand, ohne Wenn und Aber.
           </p>
+
+          {/* Bewertungen – stärkstes regionales Kaufargument, direkt sichtbar */}
+          <Link
+            href="/#kundenstimmen"
+            className="group flex w-fit items-center gap-2.5 text-sm"
+          >
+            <span className="flex gap-0.5" aria-hidden>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-4 fill-gold text-gold" />
+              ))}
+            </span>
+            <span className="font-semibold text-foreground">
+              {String(SITE.rating.value).replace(".", ",")}/5
+            </span>
+            <span className="text-muted-foreground group-hover:text-brand group-hover:underline">
+              {`aus ${SITE.rating.count} Bewertungen bei Google & MyHammer`}
+            </span>
+          </Link>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <a

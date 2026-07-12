@@ -30,6 +30,21 @@ export function StructuredData() {
       latitude: SITE.geo.lat,
       longitude: SITE.geo.lng,
     },
+    priceRange: "€€",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+4943215399933",
+      contactType: "customer service",
+      availableLanguage: "German",
+    },
+    makesOffer: {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Wärmepumpen-Beratung, -Planung und -Installation",
+        url: `${SITE.url}/waermepumpe`,
+      },
+    },
     areaServed: SITE.areaServed.map((name) => ({ "@type": "City", name })),
     openingHoursSpecification: [
       {
