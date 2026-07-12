@@ -1,5 +1,5 @@
 {
-  "_hinweis": "Diese Datei speist den Newsticker. Sie kann automatisiert (z. B. n8n oder Claude) ein- bis mehrmals pro Woche überschrieben werden. Format pro Eintrag: date (YYYY-MM-DD), tag (kurzes Label wie 'Förderung', 'SHK-Welt' oder 'Betrieb'), title, text, url (echte Quelle zum Nachlesen).",
+  "_hinweis": "FALLBACK für den Newsticker. Der Ticker zieht primär einen RSS-Feed (siehe src/lib/news.ts, Env NEWS_RSS_URL). Nur wenn kein Feed erreichbar ist, werden diese kuratierten Meldungen gezeigt. Format pro Eintrag: date (YYYY-MM-DD), tag (kurzes Label), title, text, url.",
   "updated": "2026-07-11",
   "items": [
     {
