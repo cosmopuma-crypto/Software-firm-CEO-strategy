@@ -18,6 +18,7 @@ import {
   isHeizreportConfigured,
 } from "@/lib/heizreport/config";
 import type { HeizreportWebhookPayload } from "@/lib/heizreport/types";
+import { logLeadEvent } from "@/lib/tracking/lead-log";
 
 export const runtime = "nodejs";
 
@@ -130,6 +131,9 @@ export async function POST(request: Request) {
   if (!sent.ok) {
     console.error("[heizreport-webhook] Mailversand fehlgeschlagen:", sent.error);
   }
+
+  // Lead-Log: abgeschlossene Heizreport-Checks zählen mit (wirft nie).
+  await logLeadEvent({ formType: "heizreport" });
 
   return NextResponse.json({ ok: true, projektKey: projektKey ?? null });
 }

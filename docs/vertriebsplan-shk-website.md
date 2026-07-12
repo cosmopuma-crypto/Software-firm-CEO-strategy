@@ -325,22 +325,25 @@ ist der günstigste Hebel im ganzen Plan.
 **F7 · Messdaten der eigenen Seite — beantwortet:** **ca. 3–5 Anfragen/
 Monat**, nachvollziehbar über die eingehenden Anfrage-E-Mails. Das reicht
 als Fallstudien-Basis (1 gewonnener WP- oder Bad-Auftrag pro Quartal
-rechtfertigt das Abo um ein Vielfaches). Was fürs Tracking noch fehlt:
+rechtfertigt das Abo um ein Vielfaches).
 
-1. **Strukturiertes Lead-Log statt Postfach-Zählen:** kleines
-   Server-Event in den Formular-Routen (`/api/contact` u. a.): Zeitpunkt,
-   Formular-Typ (WP-Konfigurator / Badplaner / Kundendienst / Kontakt),
-   Quelle — z. B. in eine Supabase-Tabelle. ~0,5 Arbeitstage. Basis für
-   den späteren monatlichen Lead-Report an Kunden (Churn-Gegenmittel).
-2. **Besucherzahlen für die Conversion-Rate:** DSGVO-freundliche,
-   Cookie-lose Analytics (Plausible, Umami o. Vercel Analytics).
-   „X Besucher → Y Anfragen" macht die Fallstudie erst belastbar und
-   liefert das Argument gegen „mein Neffe macht das mit Wix".
-3. **Quellen-Attribution:** Referrer + UTM-Parameter beim Absenden als
-   verstecktes Feld mitschicken und ins Lead-Log schreiben — dann weißt
-   du, ob Anfragen über Google, Maps oder direkt kommen.
-4. Optional: Google-Business-Profil-Statistiken (Anrufe, Routen-Klicks)
-   monatlich notieren — kostenlos, ergänzt das Bild.
+**Tracking ist umgesetzt** (Details: [`docs/tracking.md`](tracking.md)):
+
+1. ✅ **Lead-Log:** jede erfolgreiche Anfrage (WP-Konfigurator, Badplaner,
+   Kundendienst, Heizreport-Webhook) wird in eine Supabase-Tabelle
+   `lead_events` geschrieben (Konsolen-Fallback ohne Config). Basis für
+   den monatlichen Lead-Report an Kunden (Churn-Gegenmittel).
+2. ✅ **Besucherzahlen:** Vercel Web Analytics (cookie-los) im Layout —
+   muss einmalig im Vercel-Dashboard aktiviert werden.
+3. ✅ **Quellen-Attribution:** Referrer + UTM werden beim ersten
+   Seitenaufruf erfasst und wandern mit jedem Formular-Submit ins
+   Lead-Log und als „Quelle"-Zeile in die Anfrage-E-Mail.
+4. Noch offen (manuell, optional): Google-Business-Profil-Statistiken
+   (Anrufe, Routen-Klicks) monatlich notieren — kostenlos, ergänzt das Bild.
+
+**Verbleibende Handgriffe:** Supabase-Projekt anlegen + 2 Env-Vars setzen,
+Analytics im Vercel-Dashboard aktivieren, Datenschutzerklärung um den
+Statistik-Absatz ergänzen (alles in `docs/tracking.md` beschrieben).
 
 ---
 
