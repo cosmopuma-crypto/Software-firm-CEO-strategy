@@ -341,9 +341,10 @@ rechtfertigt das Abo um ein Vielfaches).
 4. Noch offen (manuell, optional): Google-Business-Profil-Statistiken
    (Anrufe, Routen-Klicks) monatlich notieren — kostenlos, ergänzt das Bild.
 
-**Verbleibende Handgriffe:** Supabase-Projekt anlegen + 2 Env-Vars setzen,
-Analytics im Vercel-Dashboard aktivieren, Datenschutzerklärung um den
-Statistik-Absatz ergänzen (alles in `docs/tracking.md` beschrieben).
+**Verbleibende Handgriffe:** Supabase-Projekt ✅ angelegt
+(`st-haustechnik-leads`), Datenschutzerklärung ✅ ergänzt. Noch offen
+(nur im Vercel-Dashboard möglich): die 2 Env-Vars setzen und Analytics
+aktivieren — siehe `docs/tracking.md`.
 
 ---
 

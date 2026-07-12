@@ -20,10 +20,26 @@ erzeugt ein Event in der Supabase-Tabelle `lead_events`.
 Ohne konfigurierte Env-Vars fällt das Log auf die Konsole zurück —
 Build/Dev laufen also auch ohne Secrets (gleiches Muster wie der Mailer).
 
-### Setup (einmalig, ~10 Minuten)
+### Setup
 
-1. Supabase-Projekt anlegen (kostenloser Tarif reicht) → https://supabase.com
-2. Im SQL-Editor die Tabelle anlegen:
+**Status: eingerichtet (Juli 2026).** Das Supabase-Projekt
+`st-haustechnik-leads` (Region Frankfurt/eu-central-1, kostenloser Tarif,
+Projekt-Ref `bpuzhxlvibhshcyoucbp`) existiert und die Tabelle `lead_events`
+ist per Migration `create_lead_events` angelegt.
+
+**Einziger offener Schritt:** Im Vercel-Dashboard → Projekt → Settings →
+Environment Variables setzen und neu deployen:
+
+```bash
+SUPABASE_URL=https://bpuzhxlvibhshcyoucbp.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<aus Supabase-Dashboard: Settings → API → service_role>
+```
+
+Der `service_role`-Key ist geheim — nur als Server-Env-Var verwenden,
+niemals in Client-Code oder ins Repo.
+
+Zur Referenz (falls das Projekt je neu aufgesetzt werden muss) — die
+Tabelle wurde so angelegt:
 
 ```sql
 create table public.lead_events (
@@ -41,13 +57,6 @@ create table public.lead_events (
 -- Kein öffentlicher Zugriff: RLS aktivieren, keine Policies anlegen.
 -- Die Website schreibt mit dem Service-Role-Key (umgeht RLS, nur serverseitig).
 alter table public.lead_events enable row level security;
-```
-
-3. Env-Vars im Deployment setzen (Werte aus Supabase → Settings → API):
-
-```bash
-SUPABASE_URL=https://<projekt>.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=<service-role-key>   # niemals in den Client!
 ```
 
 ### Auswertung: Anfragen pro Monat (für Fallstudie & Kunden-Report)
@@ -107,5 +116,5 @@ Kampagne in E-Mail und Auswertung auf.
 
 Das Lead-Log speichert keine Namen, E-Mails oder IPs — nur Formular-Typ,
 Quelle und Zeitpunkt. Vercel Web Analytics arbeitet ohne Cookies und ohne
-geräteübergreifendes Tracking. Beides sollte der Vollständigkeit halber in
-der Datenschutzerklärung erwähnt werden (Abschnitt „Statistik/Reichweitenmessung").
+geräteübergreifendes Tracking. Beides ist in der Datenschutzerklärung
+beschrieben (Abschnitt „10. Reichweitenmessung und Anfragen-Statistik").

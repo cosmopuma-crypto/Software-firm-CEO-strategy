@@ -142,7 +142,30 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="10. Speicherdauer">
+      <LegalSection heading="10. Reichweitenmessung und Anfragen-Statistik">
+        <p>
+          Zur Verbesserung unseres Online-Angebots nutzen wir Vercel Web
+          Analytics, eine cookie-lose Reichweitenmessung der Vercel Inc.
+          (USA). Dabei werden aufgerufene Seiten und technische Angaben (z. B.
+          Browsertyp, Gerätekategorie, ungefähre Herkunftsregion) ausschließlich
+          in anonymisierter, aggregierter Form erfasst. Es werden keine Cookies
+          gesetzt, keine IP-Adressen dauerhaft gespeichert und keine
+          geräteübergreifenden Nutzerprofile gebildet. Rechtsgrundlage ist unser
+          berechtigtes Interesse an der statistischen Auswertung und
+          Verbesserung unserer Website (Art. 6 Abs. 1 lit. f DSGVO).
+        </p>
+        <p>
+          Beim Absenden eines Anfrage-Formulars erfassen wir zudem in einer
+          internen Statistik, über welchen Weg die Anfrage zustande kam (z. B.
+          Suchmaschine oder direkter Aufruf, besuchte Einstiegsseite). Diese
+          Statistik enthält keine personenbezogenen Daten — insbesondere keine
+          Namen, Kontaktdaten oder IP-Adressen — und dient allein der
+          Auswertung, welche Wege zu Anfragen führen (Art. 6 Abs. 1 lit. f
+          DSGVO).
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="11. Speicherdauer">
         <p>
           Wir verarbeiten und speichern personenbezogene Daten nur so lange, wie
           es für die Erreichung des jeweiligen Zwecks erforderlich ist.
@@ -154,7 +177,7 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="11. Aktualität und Änderung dieser Datenschutzerklärung">
+      <LegalSection heading="12. Aktualität und Änderung dieser Datenschutzerklärung">
         <p>
           Diese Datenschutzerklärung hat den Stand Juli 2026. Durch die
           Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher
