@@ -11,3 +11,8 @@ cd "$CLAUDE_PROJECT_DIR"
 # Idempotent: npm install nutzt den Container-Cache und ist bei vorhandenem
 # node_modules deutlich schneller als npm ci (das immer alles löscht).
 npm install --no-audit --no-fund
+
+# superpowers-Plugin in jeder neuen Remote-Umgebung automatisch bereitstellen
+# (Plugin-Installation ist container-lokal und überlebt sonst keine neue Session).
+claude plugin marketplace add anthropics/claude-plugins-official >/dev/null 2>&1 || true
+claude plugin install superpowers@claude-plugins-official >/dev/null 2>&1 || true
