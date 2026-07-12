@@ -1,16 +1,8 @@
 import { Megaphone } from "lucide-react";
-import news from "@/data/news.json";
+import { getTickerItems } from "@/lib/news";
 
-interface NewsItem {
-  date: string;
-  tag: string;
-  title: string;
-  text?: string;
-  url?: string;
-}
-
-export function NewsTicker() {
-  const items = (news.items ?? []) as NewsItem[];
+export async function NewsTicker() {
+  const items = await getTickerItems();
   if (items.length === 0) return null;
 
   const Row = (
