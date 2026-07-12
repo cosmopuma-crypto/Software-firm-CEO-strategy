@@ -22,6 +22,9 @@ function isSet(name: string): boolean {
   return Boolean(process.env[name]?.trim());
 }
 
+// Diagnose-Antworten dürfen nie aus dem (Browser-)Cache kommen.
+const NO_STORE = { "Cache-Control": "no-store, max-age=0" };
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const key = url.searchParams.get("key")?.trim();
@@ -33,7 +36,7 @@ export async function GET(request: Request) {
         hinweis:
           "Nicht autorisiert. Wenn der key sicher stimmt: HEIZREPORT_WEBHOOK_SECRET ist in diesem Deployment nicht aktiv → Env-Var prüfen und redeployen.",
       },
-      { status: 401 },
+      { status: 401, headers: NO_STORE },
     );
   }
 
@@ -64,7 +67,10 @@ export async function GET(request: Request) {
   };
 
   if (url.searchParams.get("send") !== "1") {
-    return NextResponse.json({ ok: true, ...config });
+    return NextResponse.json(
+      { ok: true, zeitpunkt: new Date().toISOString(), ...config },
+      { headers: NO_STORE },
+    );
   }
 
   // Test-Mail wirklich senden – Ergebnis (inkl. echter Fehlermeldung) zurückgeben.
@@ -77,6 +83,7 @@ export async function GET(request: Request) {
   return NextResponse.json(
     {
       ok: sent.ok,
+      zeitpunkt: new Date().toISOString(),
       testMail: {
         gesendetUeber: sent.transport,
         erfolgreich: sent.ok,
@@ -84,6 +91,6 @@ export async function GET(request: Request) {
       },
       ...config,
     },
-    { status: sent.ok ? 200 : 502 },
+    { status: sent.ok ? 200 : 502, headers: NO_STORE },
   );
 }
