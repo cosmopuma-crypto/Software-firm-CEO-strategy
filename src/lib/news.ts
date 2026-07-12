@@ -85,7 +85,7 @@ export async function getTickerItems(): Promise<TickerItem[]> {
       const res = await fetch(url, {
         next: { revalidate: REVALIDATE_SECONDS },
         signal: AbortSignal.timeout(6000),
-        headers: { "User-Agent": "ST-Haustechnik-News/1.0" },
+        headers: { "User-Agent": "Handwerk-Website-News/1.0" },
       });
       if (!res.ok) continue;
       const xml = await res.text();

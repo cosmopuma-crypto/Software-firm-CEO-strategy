@@ -24,7 +24,7 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <Logo onDark href="/#top" />
           <p className="max-w-sm text-sm text-white/70">
-            Ihr Fachbetrieb für Sanitär, Heizung und Wärmepumpen in Neumünster –
+            Ihr Fachbetrieb für Sanitär, Heizung und Wärmepumpen in {SITE.city} –
             persönlich, ehrlich und aus der Region.
           </p>
         </div>

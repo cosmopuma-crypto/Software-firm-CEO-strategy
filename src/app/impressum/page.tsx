@@ -3,7 +3,7 @@ import { LegalPage, LegalSection } from "@/components/landing/legal-page";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Impressum · ST-Haustechnik",
+  title: "Impressum",
   robots: { index: false },
 };
 
@@ -32,7 +32,7 @@ export default function ImpressumPage() {
 
       <LegalSection heading="Fachliche Vertretung">
         <p>
-          Jens Peter Stürck
+          {SITE.technicalDirector}
           <br />
           Installations- und Heizungsbaumeister
         </p>

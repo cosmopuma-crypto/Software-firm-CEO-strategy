@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
 // Häufige Fragen – Schwerpunkt Wärmepumpe (Hauptziel), plus allgemein.
@@ -26,7 +27,7 @@ const FAQS = [
   },
   {
     q: "Welche Gebiete bedienen Sie?",
-    a: "Wir sind in Neumünster und Umgebung für Sie da – unter anderem Bad Bramstedt, Bad Segeberg, Bordesholm, Wasbek, Nortorf und Boostedt.",
+    a: `Wir sind in ${SITE.areaServed[0]} und Umgebung für Sie da – unter anderem ${SITE.areaServed.slice(1).join(", ")}.`,
   },
   {
     q: "Machen Sie auch Bäder und Kundendienst?",

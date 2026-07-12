@@ -14,7 +14,7 @@ export function Kontakt() {
           <SectionHeading
             eyebrow="Kontakt"
             title="Sprechen Sie uns an"
-            description="Persönlich erreichbar – telefonisch, per E-Mail oder direkt vor Ort in Neumünster."
+            description={`Persönlich erreichbar – telefonisch, per E-Mail oder direkt vor Ort in ${SITE.city}.`}
           />
           <Reveal className="mt-8 flex flex-col gap-5">
             <a href={SITE.phoneHref} className="flex items-start gap-3">

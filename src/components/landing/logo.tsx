@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IS_DEMO, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
- * ST-Haustechnik Logo (echtes Logo, navy, freigestellt).
+ * Betriebs-Logo. Echtbetrieb: Bild-Logo (navy, freigestellt).
+ * Demo-Instanz: neutrales Text-Logo, damit kein echtes Logo unter dem
+ * Musterbetrieb-Namen erscheint.
  * `onDark` legt es auf einen weißen Chip für dunkle Hintergründe (Footer/CTA).
  */
 export function Logo({
@@ -17,10 +20,19 @@ export function Logo({
   className?: string;
   href?: string;
 }) {
-  const img = (
+  const img = IS_DEMO ? (
+    <span
+      className={cn(
+        "flex w-auto items-center font-heading text-xl font-extrabold tracking-tight text-[#173074]",
+        className ?? "h-12",
+      )}
+    >
+      {SITE.name}
+    </span>
+  ) : (
     <Image
       src="/brand/logo.png"
-      alt="ST-Haustechnik – Sanitär, Heizung, Wärmepumpen"
+      alt={`${SITE.name} – Sanitär, Heizung, Wärmepumpen`}
       width={600}
       height={188}
       priority={priority}
@@ -28,7 +40,7 @@ export function Logo({
     />
   );
   return (
-    <Link href={href} aria-label="ST-Haustechnik Startseite" className="inline-flex">
+    <Link href={href} aria-label={`${SITE.name} Startseite`} className="inline-flex">
       {onDark ? (
         <span className="rounded-xl bg-white px-4 py-3 shadow-sm">{img}</span>
       ) : (

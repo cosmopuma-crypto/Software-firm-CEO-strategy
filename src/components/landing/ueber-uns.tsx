@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { BadgeCheck, ShieldCheck, MapPin, Clock, ClipboardList, Handshake, Hammer } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
 const POINTS = [
   { icon: BadgeCheck, label: "Zertifizierter Fachbetrieb Wärmepumpe" },
   { icon: ShieldCheck, label: "Meisterbetrieb mit echtem Handwerk" },
-  { icon: MapPin, label: "Fest verwurzelt in Neumünster & Umgebung" },
+  { icon: MapPin, label: `Fest verwurzelt in ${SITE.city} & Umgebung` },
   { icon: Clock, label: "Termintreu & mit klarer Ansprechperson" },
 ];
 
@@ -24,7 +25,7 @@ export function UeberUns() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-xl ring-1 ring-black/5">
             <Image
               src="/brand/photos/foto-17.jpg"
-              alt="ST-Haustechnik Firmenfahrzeug mit Logo"
+              alt={`${SITE.name} Firmenfahrzeug mit Logo`}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover object-center"
