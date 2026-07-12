@@ -25,7 +25,8 @@ import { FoerderBanner } from "@/components/landing/foerder-banner";
 import { CtaBand } from "@/components/landing/cta-band";
 import { Footer } from "@/components/landing/footer";
 import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
-import { SITE } from "@/lib/site";
+import { IS_DEMO, SITE } from "@/lib/site";
+import { ortByName } from "@/data/orte";
 
 const TITLE = `Wärmepumpe ${SITE.city} – Beratung, Förderung & Einbau`;
 const DESCRIPTION =
@@ -313,14 +314,26 @@ export default function WaermepumpePage() {
             centered
           />
           <Reveal className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2.5">
-            {SITE.areaServed.map((ort) => (
-              <span
-                key={ort}
-                className="inline-flex items-center gap-1.5 rounded-full border bg-card px-4 py-1.5 text-sm font-medium shadow-sm"
-              >
-                <MapPin className="size-3.5 text-gold" /> {ort}
-              </span>
-            ))}
+            {SITE.areaServed.map((ort) => {
+              const eintrag = ortByName(ort);
+              // Orte mit eigener lokaler Seite verlinken (nur echter Betrieb).
+              return eintrag && !IS_DEMO ? (
+                <Link
+                  key={ort}
+                  href={`/waermepumpe/${eintrag.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border bg-card px-4 py-1.5 text-sm font-medium shadow-sm transition-colors hover:border-brand hover:text-brand"
+                >
+                  <MapPin className="size-3.5 text-gold" /> {ort}
+                </Link>
+              ) : (
+                <span
+                  key={ort}
+                  className="inline-flex items-center gap-1.5 rounded-full border bg-card px-4 py-1.5 text-sm font-medium shadow-sm"
+                >
+                  <MapPin className="size-3.5 text-gold" /> {ort}
+                </span>
+              );
+            })}
           </Reveal>
         </Section>
 

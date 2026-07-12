@@ -9,6 +9,7 @@ const NAV = [
   { href: "/#bad", label: "Bad" },
   { href: "/#referenzen", label: "Referenzen" },
   { href: "/#kundendienst", label: "Kundendienst" },
+  { href: "/ratgeber", label: "Ratgeber" },
 ];
 
 const LEGAL = [
