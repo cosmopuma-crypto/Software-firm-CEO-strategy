@@ -86,11 +86,16 @@ export interface PdfResult {
 export type HeizreportDocumentType = "check" | "heizreport";
 
 /**
- * Eingehende Webhook-Nutzlast von Heizreport (bei Abschluss eines Checks).
- * Der genaue Feldsatz kann variieren, deshalb offen typisiert – der Handler
- * liest die relevanten Felder defensiv aus und leitet den vollen Payload weiter.
+ * Eingehende Webhook-Nutzlast von Heizreport. Laut Doku („Webhook einrichten"):
+ * { event: "webhooksave" | "webhookcheck", authenticate: "<Key>", projektKey }.
+ * Der Feedsatz kann variieren, deshalb offen typisiert – der Handler liest die
+ * relevanten Felder defensiv aus.
  */
 export interface HeizreportWebhookPayload {
+  /** "webhooksave" (Projekt gespeichert) oder "webhookcheck" (Check erzeugt). */
+  readonly event?: string;
+  /** Webhook-Auth-Key aus dem Heizreport-Account (Body-Authentifizierung). */
+  readonly authenticate?: string;
   readonly projektKey?: string;
   readonly projektHeader?: HeizreportProjektHeader;
   readonly document?: string;

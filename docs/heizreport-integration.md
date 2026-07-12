@@ -62,14 +62,28 @@ Zieladresse ist `CONTACT_TO_EMAIL` bzw. der Default `info@st-haustechnik.de`.
 
 ### Webhook-Auth-Verifikation
 
-Der Handler akzeptiert den Token aus (Priorität):
+Laut Heizreport-Doku („Webhook einrichten") feuert der Webhook, sobald der
+Kunde im Widget **„speichern"** oder **„check starten"** klickt – ggf.
+**mehrfach pro Projekt** (jedes erneute Speichern). Payload:
 
-1. `Authorization: Bearer <token>` ← so sendet Heizreport
-2. `x-heizreport-secret: <token>` (nur für manuelle Tests)
-3. `?secret=<token>` (nur für manuelle Tests)
+```json
+{
+  "event": "webhookcheck",     // oder "webhooksave"
+  "authenticate": "<Key>",     // Webhook-Auth-Key aus dem Account
+  "projektKey": "xxxxxxxxx"    // 9-stelliger Projekt-Key
+}
+```
+
+Der Handler akzeptiert den Key aus (Priorität):
+
+1. JSON-Body-Feld **`authenticate`** ← so sendet Heizreport laut Doku
+2. `Authorization: Bearer <token>`
+3. `x-heizreport-secret: <token>` (nur für manuelle Tests)
+4. `?secret=<token>` (nur für manuelle Tests)
 
 Ohne gesetztes `HEIZREPORT_WEBHOOK_SECRET` werden **alle** Webhooks abgelehnt
-(fail closed, HTTP 401).
+(fail closed, HTTP 401). Der `authenticate`-Wert wird vor dem E-Mail-Versand
+aus dem Payload entfernt (Secret gehört nicht in die Lead-Mail).
 
 ---
 

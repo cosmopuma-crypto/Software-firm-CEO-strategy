@@ -5,10 +5,16 @@
 // Secret, holen bei Bedarf die PDF-URL nach und benachrichtigen das Team per
 // E-Mail (info@st-haustechnik.de über den bestehenden Mailer).
 //
-// Heizreport signiert ausgehende Webhooks mit einem Bearer-Token
-// (Einstellungen → Webhook Auth). Im Heizreport-Account hinterlegen:
+// Laut Heizreport-Doku („Webhook einrichten") feuert der Webhook, sobald der
+// Kunde im Widget „speichern" oder „check starten" klickt – ggf. mehrfach pro
+// Projekt. Gesendet wird ein JSON der Form:
+//   { "event": "webhooksave" | "webhookcheck",
+//     "authenticate": "<Webhook-Auth-Key>",
+//     "projektKey": "xxxxxxxxx" }
+// Der Auth-Key steht also IM BODY (Feld `authenticate`); zusätzlich
+// akzeptieren wir Bearer-/Header-/Query-Varianten. Im Heizreport-Account:
 //   Webhook-Adresse: https://<domain>/api/heizreport/webhook
-//   Webhook Auth:    Bearer <HEIZREPORT_WEBHOOK_SECRET>
+//   Webhook Auth:    <HEIZREPORT_WEBHOOK_SECRET>
 
 import { NextResponse } from "next/server";
 import { sendContactEmail } from "@/lib/forms/mailer";
@@ -23,11 +29,14 @@ import { logLeadEvent } from "@/lib/tracking/lead-log";
 export const runtime = "nodejs";
 
 /**
- * Verifiziert den von Heizreport gesendeten Bearer-Token.
- * Zusätzlich werden ein `x-heizreport-secret`-Header und ein `?secret=`-Query
- * akzeptiert (praktisch für manuelle Tests), primär ist aber der Bearer-Token.
+ * Verifiziert den Webhook-Auth-Key. Heizreport sendet ihn laut Doku im
+ * JSON-Body als Feld `authenticate`; zusätzlich akzeptieren wir einen
+ * Bearer-Header, `x-heizreport-secret` und `?secret=` (manuelle Tests).
  */
-function isAuthorized(request: Request): boolean {
+function isAuthorized(
+  request: Request,
+  payload: HeizreportWebhookPayload,
+): boolean {
   const expected = heizreportWebhookSecret();
   // Ohne konfiguriertes Secret akzeptieren wir keine Webhooks (fail closed).
   if (!expected) return false;
@@ -37,7 +46,16 @@ function isAuthorized(request: Request): boolean {
     .trim();
   const header = request.headers.get("x-heizreport-secret")?.trim();
   const query = new URL(request.url).searchParams.get("secret")?.trim();
-  return bearer === expected || header === expected || query === expected;
+  const body =
+    typeof payload.authenticate === "string"
+      ? payload.authenticate.trim()
+      : undefined;
+  return (
+    bearer === expected ||
+    header === expected ||
+    query === expected ||
+    body === expected
+  );
 }
 
 function asString(value: unknown): string | undefined {
@@ -76,16 +94,28 @@ function buildNotification(
   projektKey: string | undefined,
   pdfLink: string | undefined,
 ) {
-  const subject = `Neuer Heizreport-Lead${projektKey ? ` (${projektKey})` : ""}`;
-  const pretty = JSON.stringify(payload, null, 2);
+  // Kunde kann mehrfach speichern → Event mit ausweisen (webhooksave = nur
+  // gespeichert, webhookcheck = Check erzeugt). Auth-Key nie in die Mail.
+  const event = asString(payload.event);
+  const sanitized: Record<string, unknown> = { ...payload };
+  delete sanitized.authenticate;
+
+  const subject = `Neuer Heizreport-Lead${projektKey ? ` (${projektKey})` : ""}${
+    event === "webhooksave" ? " – Projekt gespeichert" : ""
+  }`;
+  const pretty = JSON.stringify(sanitized, null, 2);
   const text =
     `Ein Wärmepumpen-Check wurde über die Website abgeschlossen.\n\n` +
     (projektKey ? `Projekt-Key: ${projektKey}\n` : "") +
+    (event ? `Event: ${event}\n` : "") +
     (pdfLink ? `PDF-Dokument: ${pdfLink}\n` : "") +
+    `\nHinweis: Derselbe Projekt-Key kann mehrfach eintreffen, wenn der Kunde ` +
+    `seine Angaben erneut speichert.\n` +
     `\nVollständige Daten:\n${pretty}\n`;
   const html =
     `<h2>Neuer Heizreport-Lead</h2>` +
     (projektKey ? `<p><strong>Projekt-Key:</strong> ${projektKey}</p>` : "") +
+    (event ? `<p><strong>Event:</strong> ${event}</p>` : "") +
     (pdfLink
       ? `<p><strong>PDF-Dokument:</strong> <a href="${pdfLink}">${pdfLink}</a></p>`
       : "") +
@@ -96,10 +126,7 @@ function buildNotification(
 }
 
 export async function POST(request: Request) {
-  if (!isAuthorized(request)) {
-    return NextResponse.json({ ok: false }, { status: 401 });
-  }
-
+  // Body zuerst parsen – der Auth-Key steckt laut Heizreport-Doku im JSON.
   let payload: HeizreportWebhookPayload;
   try {
     payload = (await request.json()) as HeizreportWebhookPayload;
@@ -108,6 +135,10 @@ export async function POST(request: Request) {
       { ok: false, message: "Ungültiges JSON." },
       { status: 400 },
     );
+  }
+
+  if (!isAuthorized(request, payload)) {
+    return NextResponse.json({ ok: false }, { status: 401 });
   }
 
   const projektKey = readProjektKey(payload);
