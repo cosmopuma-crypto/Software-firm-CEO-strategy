@@ -14,16 +14,17 @@ import { Faq } from "@/components/landing/faq";
 import { Kontakt } from "@/components/landing/kontakt";
 import { CtaBand } from "@/components/landing/cta-band";
 import { Footer } from "@/components/landing/footer";
+import { MobileCtaBar } from "@/components/landing/mobile-cta-bar";
 import { StructuredData } from "@/components/landing/structured-data";
 
 export default function Home() {
   return (
-    <>
+    <div className="pb-14 xl:pb-0">
       <StructuredData />
       <Nav />
       <main>
-        <NewsTicker />
         <Hero />
+        <NewsTicker />
         <HeizreportSection />
         <Leistungen />
         <FoerderBanner />
@@ -38,6 +39,7 @@ export default function Home() {
         <CtaBand />
       </main>
       <Footer />
-    </>
+      <MobileCtaBar />
+    </div>
   );
 }

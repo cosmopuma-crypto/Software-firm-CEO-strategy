@@ -11,7 +11,7 @@ import { Logo } from "./logo";
 // Home-relative Anker, damit die Links auch auf Unterseiten (Formular-/Rechtsseiten) funktionieren.
 const LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
-  { href: "/#waermepumpen-check", label: "Wärmepumpe" },
+  { href: "/waermepumpe", label: "Wärmepumpe" },
   { href: "/#bad", label: "Bad" },
   { href: "/#kundendienst", label: "Kundendienst" },
   { href: "/#kundenstimmen", label: "Bewertungen" },
