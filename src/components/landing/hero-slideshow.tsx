@@ -30,7 +30,7 @@ export function HeroSlideshow() {
   }, []);
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-2xl shadow-brand/20 ring-1 ring-black/5 sm:aspect-[3/2] lg:aspect-[4/5]">
+    <div className="relative aspect-[4/3] max-h-[440px] overflow-hidden rounded-[1.75rem] shadow-2xl shadow-brand/20 ring-1 ring-black/5 lg:aspect-[4/5] lg:max-h-none">
       {IMAGES.map((img, i) => (
         <Image
           key={img.src}
