@@ -1,9 +1,14 @@
 # Vertriebsplan: SHK-Website-Lösung an Handwerksbetriebe verkaufen
 
-> Stand: Juli 2026 · Status: Entwurf zur Diskussion
+> Stand: Juli 2026 · Status: **abgestimmt** (Interview-Antworten eingearbeitet, siehe Abschnitt 11)
 > Grundlage: die für ST-Haustechnik gebaute Next.js-Website (Badplaner,
 > Kundendienst-Formular, Wärmepumpen-Check + Förderrechner via Heizreport,
 > Trustindex-Bewertungen, lokales SEO, Lead-Zustellung per E-Mail/Webhook).
+>
+> **Rahmenbedingungen laut Interview:** Hybrid-Modell (Setup + Abo) ·
+> solo, nebenbei mit **< 10 h/Woche** · ST-Haustechnik ist der **eigene
+> Betrieb/Familie** (Referenz voll nutzbar) · Ziel: **Validierung mit 3–5
+> zahlenden Kunden in 12 Monaten**.
 
 ---
 
@@ -17,9 +22,12 @@ gleichzeitig **voll mit Anbietern** (Baukästen ab ~20 €/Monat, Freelancer
 mit 500–1.500 €/Monat SEO-Retainern). Eine weitere „Website-Agentur" hat
 keine Chance — ein **produktisiertes Lead-System speziell für SHK** schon.
 
-**Empfehlung:** Hybrid-Modell (einmalige Einrichtung + monatliches Abo),
-positioniert als „SHK-Lead-Website in 14 Tagen", validiert mit 3–5
-Pilotkunden in 90 Tagen, bevor irgendetwas skaliert wird.
+**Entschieden:** Hybrid-Modell (einmalige Einrichtung + monatliches Abo),
+positioniert als **„Vom SHK-Betrieb für SHK-Betriebe"** — die stärkste
+Story im Markt, weil du selbst aus der Branche kommst und die eigene Seite
+der Beweis ist. Validierung mit 3–5 Pilotkunden, bevor irgendetwas
+skaliert wird. Bei < 10 h/Woche ist der realistische Zeithorizont dafür
+**4–6 Monate, nicht 90 Tage** — der Plan unten ist darauf ausgelegt.
 
 **Kritischster Punkt:** Du hast aktuell **ein Projekt, kein Produkt**. Ohne
 (a) messbare Ergebnisse der Referenzseite und (b) einen wiederholbaren
@@ -108,11 +116,17 @@ vgl. [BlackForest-WebCraft](https://blackforest-webcraft.de/blog/handwerker-webs
 **Contra:** Onboarding-Aufwand wird erst nach 6–12 Monaten verdient;
 Churn tut weh; du finanzierst die Akquise vor.
 
-### Option C — Hybrid: Setup + Abo ⭐ Empfehlung
+### Option C — Hybrid: Setup + Abo ✅ GEWÄHLT (Interview F1)
 **990–1.990 € Einrichtung + 149–249 €/Monat.**
 Setup deckt den Onboarding-Aufwand, das Abo baut MRR auf. Marktüblich,
 für Betriebe nachvollziehbar („Einrichtung + laufender Betrieb"), und es
 filtert Schnäppchenjäger heraus, die später die teuersten Kunden sind.
+
+**Konkreter Pilotpreis (bei < 10 h/Woche bewusst nicht zu billig):**
+990 € Setup + 179 €/Monat, 12 Monate Laufzeit, als Pilotkondition
+deklariert mit Testimonial-Vereinbarung. Wenige, gut zahlende Kunden
+schlagen viele billige — dein Zeitbudget ist der Engpass, nicht die
+Nachfrage.
 
 ### Option D — White-Label an Agenturen/Softwareanbieter
 Lizenz pro Instanz an Web-Agenturen ohne SHK-Kompetenz oder an
@@ -140,70 +154,92 @@ zusätzlichen Anfrage pro Monat messen lassen — das ist die ganze Rechnung.
 **Nicht-Kunden (bewusst ablehnen):** 1-Mann-Betriebe ohne Wachstumsabsicht,
 Betriebe ohne Kapazität für neue Aufträge, Preisfeilscher unter 100 €/Monat.
 
-**Positionierungssatz:**
-> „Die Anfragen-Website für SHK-Betriebe: Wärmepumpen-Check, Förderrechner
-> und Bad-Konfigurator — live in 14 Tagen, exklusive Anfragen direkt in
-> dein Postfach. Vom Team hinter [Referenzseite]."
+**Positionierungssatz (angepasst an „eigener Betrieb" aus dem Interview):**
+> „Wir sind selbst ein SHK-Betrieb. Diese Website bringt uns unsere
+> Wärmepumpen- und Bad-Anfragen — jetzt bekommst du dieselbe Lösung:
+> Wärmepumpen-Check, Förderrechner und Bad-Konfigurator, live in 14 Tagen,
+> exklusive Anfragen direkt in dein Postfach."
+
+Das ist glaubwürdiger als jede Agentur-Botschaft: Du verkaufst nichts,
+was du nicht selbst benutzt. Diese Story konsequent überall führen
+(Angebot, Website, Gespräch).
+
+**Wichtig wegen Eigenbetrieb:** Betriebe im eigenen Einzugsgebiet sind
+Wettbewerber von ST-Haustechnik. Entweder außerhalb des eigenen
+Kerngebiets verkaufen oder Gebietsschutz als Feature einpreisen
+(„1 Betrieb pro Gebiet — wir machen das selbst genauso"). Das löst den
+Interessenkonflikt und ist zugleich ein Verkaufsargument.
 
 ---
 
-## 6. Vertriebswege (priorisiert nach Aufwand/Ertrag)
+## 6. Vertriebswege (zugeschnitten auf solo + < 10 h/Woche)
 
-1. **Referenz + Empfehlung (sofort):** ST-Haustechnik-Ergebnisse als
-   Fallstudie aufbereiten; Inhaber um 2–3 Intros zu befreundeten Betrieben
-   bitten (SHK-Inhaber kennen einander über Großhandel und Innung).
-   Empfehlungsprämie anbieten (z. B. 1 Monat gratis je geworbenem Betrieb).
-2. **Heizreport-Partnerschaft (hoher Hebel):** Du bist zahlender
-   API-Nutzer und Integrations-Showcase. Frage nach Listung als
-   Integrations-/Umsetzungspartner — deren Kundenbasis ist exakt deine
-   Zielgruppe.
-3. **Großhandel & Hersteller:** SHK-Großhändler (GC, Pietsch, Richter+Frenzel)
-   und WP-Hersteller machen Händler-Marketing-Programme; ein Vortrag bei
-   einer Hausmesse erreicht 50 Inhaber an einem Tag.
-4. **Innung/Kreishandwerkerschaft:** Kurzvortrag „Wärmepumpen-Anfragen über
-   die eigene Website" bei Innungsversammlungen — Vertrauenskanal, langsam
-   aber hochwertig.
-5. **Gezielte Direktansprache (statt Kaltakquise-Masse):** 20 Betriebe im
-   Umkreis identifizieren, deren Website messbar schwach ist; individuelles
-   3-Minuten-Video („So sieht Ihre Seite aus, so sähe sie mit
-   Wärmepumpen-Check aus") per E-Mail. Aufwändig, aber Abschlussquoten
-   weit über Massenmails.
-6. **Content/Inbound (ab Monat 3):** 1 Fallstudie + 2–3 Fachartikel
-   („Was kostet eine SHK-Website 2026", „Leads kaufen vs. selbst
-   generieren") — die Suchanfragen existieren nachweislich (siehe Quellen).
+Bei deinem Zeitbudget zählt nur, was **pro investierter Stunde** die
+meisten warmen Gespräche bringt. Dein unfairer Vorteil: Als eigener
+Betrieb hast du bereits echte Beziehungen zu Großhandel, Innung und
+Kollegenbetrieben — nutze die, statt kalte Kanäle aufzubauen.
 
-**Bewusst NICHT am Anfang:** bezahlte Ads auf das eigene Angebot, Messen
-mit Standkosten, Kaltakquise-Callcenter — alles Geldvernichtung ohne
-Referenz-Fallstudie.
+1. **Eigenes Netzwerk (Kanal Nr. 1, sofort):** Als SHK-Betrieb kennst du
+   Kollegen aus Nachbarregionen persönlich — über Großhandel, Innung,
+   Hersteller-Schulungen. 5–10 direkte Ansprachen („Schau, was unsere
+   Seite uns bringt — willst du das auch?") sind der schnellste Weg zu
+   den ersten 3 Piloten. Kein Kanal schlägt das bei deinem Zeitbudget.
+   Empfehlungsprämie für Weiterempfehlungen (z. B. 1 Monat gratis).
+2. **Heizreport-Partnerschaft (hoher Hebel, geringer Zeitaufwand):** Du
+   bist zahlender API-Nutzer und Integrations-Showcase. Eine E-Mail mit
+   der Bitte um Listung als Umsetzungspartner kostet 30 Minuten — deren
+   Kundenbasis ist exakt deine Zielgruppe.
+3. **Großhandels-Außendienst als Multiplikator:** Deinem
+   Großhandels-Vertreter (GC, Pietsch, Richter+Frenzel …) die Referenz
+   zeigen — der sitzt jede Woche bei 20 anderen Inhabern am Tisch und
+   empfiehlt gern etwas, das seine Kunden erfolgreicher macht. Ein
+   Gespräch, dauerhafte Reichweite.
+4. **Innung/Kreishandwerkerschaft (passiv halten):** Kein eigener Vortrag
+   (zu zeitintensiv) — aber die Fallstudie beim Obermeister/Newsletter
+   platzieren und bei ohnehin stattfindenden Versammlungen erwähnen.
+
+**Bewusst NICHT (bei < 10 h/Woche erst recht):** bezahlte Ads, Messen
+mit Standkosten, Kaltakquise, individuelle Video-Audits, Content-Marketing
+— alles frisst dein Zeitbudget, bevor es wirkt. Erst ab Kunde 5+ und
+nur, wenn du dann mehr Zeit investieren willst.
 
 ---
 
-## 7. 90-Tage-Validierungsplan
+## 7. Validierungsplan (angepasst: < 10 h/Woche → ~5 Monate statt 90 Tage)
 
-### Phase 1 — Beweis sichern (Woche 1–4)
-- [ ] Tracking auf Referenzseite: Anfragen/Monat, Quellen, ggf. einfaches
+Budgetrealität: < 10 h/Woche ≈ **~40 h/Monat**. Ein Onboarding kostet
+anfangs ~3 Personentage (~24 h) — d. h. **maximal 1 Neukunde pro Monat**
+neben Vertrieb und Support. Der Plan rechnet damit, statt es zu ignorieren.
+
+### Phase 1 — Beweis sichern (Monat 1, ~30–40 h)
+- [ ] Tracking auf der eigenen Seite: Anfragen/Monat, Quellen, einfaches
       Conversion-Dashboard (DSGVO-konform, z. B. serverseitig/Plausible)
-- [ ] Fallstudie schreiben (Zahlen, Zitat des Inhabers, Screenshots)
+- [ ] Fallstudie schreiben — als eigener Betrieb brauchst du niemanden zu
+      fragen: Zahlen, eigenes Zitat, Screenshots („Diese Seite bringt uns
+      X Anfragen im Monat")
 - [ ] Demo-Instanz „Musterbetrieb Mustermann GmbH" deployen
-- [ ] Einseitiges Angebot: Leistungsumfang, Preis, 14-Tage-Lieferversprechen
+- [ ] Einseitiges Angebot: Leistungsumfang, Preis, 14-Tage-Lieferversprechen,
+      Gebietsschutz-Regelung
 - [ ] Vertragsvorlage klären (Laufzeit, Kündigung, Eigentum an Domain/Inhalten,
       AV-Vertrag) — einmalig Anwalt/Vorlagen-Dienst nutzen
 
-### Phase 2 — 3–5 Pilotkunden (Woche 5–12)
-- [ ] Pilotpreis: z. B. 990 € Setup + 149 €/Monat (offen als Pilotpreis
-      deklarieren, +Testimonial-Pflicht) — **nicht gratis**: wer nichts
-      zahlt, gibt kein echtes Kaufsignal
-- [ ] Kanäle 1–3 (Empfehlung, Heizreport, Großhandel) bespielen,
-      Ziel: 15 Gespräche → 3–5 Abschlüsse
-- [ ] Jedes Onboarding dokumentieren → wird zur Checkliste/Automatisierung
+### Phase 2 — Erste 3 Pilotkunden (Monat 2–5, je ~1 Kunde/Monat)
+- [ ] Pilotpreis: 990 € Setup + 179 €/Monat, offen als Pilotkondition
+      deklariert, mit Testimonial-Vereinbarung — **nicht gratis**: wer
+      nichts zahlt, gibt kein echtes Kaufsignal
+- [ ] Kanäle 1–3 (eigenes Netzwerk, Heizreport, Großhandels-Außendienst),
+      Ziel: 10–15 Gespräche → 3 Abschlüsse
+- [ ] Jedes Onboarding dokumentieren und nach jedem Kunden 1–2 Schritte
+      automatisieren → Ziel: Onboarding-Zeit halbieren bis Kunde 3
 
-### Phase 3 — Entscheiden (Woche 13)
-Harte Kriterien, vorher festgelegt:
-- **Weiter & produktisieren**, wenn ≥ 3 zahlende Kunden UND Onboarding ≤ 3
-  Arbeitstage pro Kunde erreichbar scheint.
+### Phase 3 — Entscheiden (nach Kunde 3 bzw. spätestens Monat 6)
+Harte Kriterien, jetzt festgelegt:
+- **Weiter & produktisieren**, wenn ≥ 3 zahlende Kunden UND Onboarding auf
+  ≤ 1,5 Arbeitstage pro Kunde gesunken ist (sonst frisst jeder weitere
+  Kunde dein gesamtes Zeitbudget).
 - **Pivot zu White-Label/Agentur-Zulieferer**, wenn Gespräche gut laufen,
   aber Betriebe nicht direkt kaufen.
-- **Stopp/Hobby**, wenn < 2 Abschlüsse aus ≥ 15 echten Gesprächen — dann
+- **Stopp/Hobby**, wenn < 2 Abschlüsse aus ≥ 10 echten Gesprächen — dann
   ist die Zahlungsbereitschaft nicht da, und mehr Feature-Bau ändert das nicht.
 
 ---
@@ -236,9 +272,12 @@ Onboarding ~3 Personentage, Support ~1 h/Monat/Kunde.
 | 40 | ~7.200 € | ~110.000 € | Vollzeit bzw. Hilfe nötig |
 
 **Kritische Wahrheit:** Bis ~15 Kunden ist das ein solides Nebeneinkommen,
-kein Unternehmen. Der Sprung auf 40+ verlangt Vertriebszeit, die ein
-Techniker-Solo-Gründer meist nicht hat → dann Partner (Vertrieb) oder
-White-Label-Route.
+kein Unternehmen. Mit deinem Zeitbudget (< 10 h/Woche) liegt die
+realistische Obergrenze bei **~10–15 Kunden** — und auch das nur, wenn
+das Onboarding bis dahin auf ≤ 1,5 Tage automatisiert ist. Das passt zum
+Validierungsziel (3–5 Kunden ≈ 900–1.100 € MRR + Setups). Alles darüber
+verlangt eine bewusste neue Entscheidung: mehr eigene Zeit, ein Partner
+für Vertrieb/Umsetzung oder die White-Label-Route.
 
 ---
 
@@ -253,46 +292,45 @@ White-Label-Route.
 | Solo-Betreiber-Risiko (Urlaub, Krankheit, Bus-Faktor) | Betriebe kaufen Verlässlichkeit: dokumentierter Notfallprozess, ggf. Backup-Freelancer; ehrlich in den Vertrag. |
 | Churn nach Jahr 1 („wofür zahle ich noch?") | Monatlicher Lead-Report (s. o.), jährlicher „Website-TÜV", laufende Förder-Updates als sichtbarer Mehrwert. |
 | Rechtliches (Fernabsatz, DSGVO/AVV, Gewährleistung) | Einmalig saubere Vorlagen (Anwalt/IT-Recht-Vorlagendienst) — vor Kunde Nr. 1, nicht danach. |
+| Interessenkonflikt: Kunden im eigenen Einzugsgebiet stärken den Wettbewerber von ST-Haustechnik | Außerhalb des Kerngebiets verkaufen und/oder Gebietsschutz anbieten — löst den Konflikt und ist zugleich Verkaufsargument. |
+| Zeitbudget: < 10 h/Woche — ein anspruchsvoller Kunde oder eine Störung frisst den ganzen Monat | Support-Erwartung vertraglich definieren (Reaktionszeit „werktags binnen 48 h"), Standardprodukt ohne Sonderwünsche, Sonderwünsche nur gegen Aufpreis oder gar nicht. |
 | Fördermarkt-Abhängigkeit: bricht die WP-Förderung ein, bricht das Hauptargument | Produkt trägt drei Funnels (WP, Bad, Kundendienst) — Positionierung nie nur auf Wärmepumpe bauen. |
 
 ---
 
-## 11. Interview: offene Fragen (bitte beantworten)
+## 11. Interview: Ergebnisse & verbleibende offene Fragen
 
-Die Antworten verändern den Plan konkret — pro Frage steht dabei, was sich ändert.
+### Beantwortet (Juli 2026)
 
-**F1 · Geschäftsmodell:** Einmalprojekt, reines Abo, Hybrid oder White-Label?
-→ *Ohne Antwort gehe ich von der Empfehlung Hybrid (Option C) aus.*
+| Frage | Antwort | Konsequenz im Plan |
+| --- | --- | --- |
+| F1 · Geschäftsmodell | **Hybrid: Setup + Abo** | Option C fixiert; Pilotpreis 990 € + 179 €/Monat (Abschnitt 4). |
+| F2 · Kapazität | **Nebenbei, solo, < 10 h/Woche** | Zeitplan auf ~5 Monate gestreckt, max. 1 Onboarding/Monat, nur zeiteffiziente Kanäle (Abschnitte 6–7), Kundenobergrenze ~10–15 (Abschnitt 9). |
+| F3 · Referenz | **Eigener Betrieb / Familie** | Stärkste Positionierung „Vom SHK-Betrieb für SHK-Betriebe"; Fallstudie ohne Freigabe-Hürden; eigenes Branchennetzwerk = Vertriebskanal Nr. 1; neuer Risikopunkt Interessenkonflikt im eigenen Gebiet (Abschnitte 5, 6, 10). |
+| F4 · 12-Monats-Ziel | **Validieren: 3–5 zahlende Kunden** | Kein Skalierungsdruck; harte Weiter/Pivot/Stopp-Kriterien nach Kunde 3 bzw. Monat 6 (Abschnitt 7). |
 
-**F2 · Deine Kapazität & Rolle:** Wie viele Stunden/Woche, und siehst du dich
-im Vertrieb (Telefon, Innung, Vorträge) oder nur in der Technik?
-→ *„Nur Technik" verschiebt den Plan Richtung Empfehlungs-/Partnerkanäle
-und mittelfristig White-Label; „Vertrieb ok" erlaubt Direktansprache und
-schnellere Skalierung.*
+### Noch offen (für die nächste Runde)
 
-**F3 · Referenz-Status:** Ist die ST-Haustechnik-Seite live, und gibt es
-schon messbare Anfragen? Darfst du Zahlen + Testimonial verwenden?
-→ *Falls nein: Phase 1 (Beweis sichern) wird zum alleinigen Fokus der
-ersten 4–8 Wochen; Verkauf vorher ist Zeitverschwendung.*
+**F5 · Gebietsschutz:** Bietest du Exklusivität an („nur 1 Betrieb pro
+Gebiet")? Empfehlung: **ja** — es löst deinen Interessenkonflikt als
+Betriebsinhaber und ist in dieser Branche ein starkes Verkaufsargument.
+Offen ist nur der Zuschnitt (Landkreis? PLZ-Radius?).
 
-**F4 · 12-Monats-Ziel:** Validierung, Nebeneinkommen (~1–3k €/Monat MRR)
-oder Haupterwerb?
-→ *Haupterwerb erfordert ab Tag 1 Vertriebspartner-Suche und höhere Preise;
-Nebeneinkommen erlaubt den ruhigeren Empfehlungs-Weg.*
+**F6 · Heizreport-Verhältnis:** Gibt es persönlichen Kontakt zu Heizreport?
+Die Partner-Anfrage (Listung als Umsetzungspartner) kostet 30 Minuten und
+ist der günstigste Hebel im ganzen Plan.
 
-**F5 · Region & Exklusivität:** Willst du Gebietsschutz anbieten („nur 1
-Betrieb pro Landkreis")? Das ist ein starkes Verkaufsargument in dieser
-Branche, begrenzt aber die Skalierung pro Region.
-
-**F6 · Heizreport-Verhältnis:** Gibt es Kontakt zu Heizreport? Wärst du
-bereit, eine Partnerschaft aktiv anzufragen (Listung, Konditionen)?
+**F7 · Messdaten der eigenen Seite:** Wie viele Anfragen/Monat liefert die
+ST-Haustechnik-Seite aktuell, und gibt es schon Tracking? Diese Zahl IST
+das Produktversprechen — ohne sie startet Phase 1, nicht Phase 2.
 
 ---
 
 ## 12. KPIs (ab Woche 1 messen)
 
-- Gespräche geführt / Angebote gestellt / Abschlüsse (Ziel Q1: 15 / 8 / 3)
-- Onboarding-Zeit pro Kunde in Arbeitstagen (Ziel: ≤ 3)
+- Gespräche geführt / Angebote gestellt / Abschlüsse (Ziel bis Monat 5: 10–15 / 6 / 3)
+- Onboarding-Zeit pro Kunde in Arbeitstagen (Start ~3, Ziel bis Kunde 3: ≤ 1,5)
+- Eigene investierte Stunden/Woche (Budget: < 10 — ehrlich mitschreiben)
 - MRR und Churn (ab Kunde 1)
 - Anfragen/Monat pro Kundenseite (das Produktversprechen selbst)
 
