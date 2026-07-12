@@ -32,7 +32,6 @@ automatisch.
 | Route | Inhalt |
 | --- | --- |
 | `/` | One-Page-Landing: Hero, News-Ticker (RSS), Leistungen, Referenzen, Kundenstimmen, Formulare, FAQ, Kontakt |
-| `/konfigurator` | Wärmepumpen-Konfigurator (mehrstufiger Wizard) |
 | `/badplaner` | Badplaner (mehrstufiger Wizard) |
 | `/kundendienst` | Kundendienst-Formular (einstufig, mit Datei-Upload) |
 | `/impressum`, `/datenschutz`, `/agb` | Rechtsseiten (`noindex`) |
