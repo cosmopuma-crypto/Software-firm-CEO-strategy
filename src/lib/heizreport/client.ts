@@ -17,7 +17,9 @@ import type {
   PdfResult,
 } from "./types";
 
-const TIMEOUT_MS = 15_000;
+// Muss deutlich unter dem Vercel-Function-Limit (10 s auf Hobby) bleiben,
+// da der Webhook-Handler dieses Timeout synchron abwartet (PDF-Nachladen).
+const TIMEOUT_MS = 7_000;
 
 interface RequestOptions {
   readonly method: "GET" | "POST" | "PATCH" | "PUT";
