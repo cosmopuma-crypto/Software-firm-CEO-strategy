@@ -39,7 +39,7 @@ export function Nav() {
             <span className="text-gold-soft">Fachbetrieb Wärmepumpe</span>
             <span className="hidden text-white/70 sm:inline">· Sachkunde nach VDI 4645</span>
           </span>
-          <span className="hidden items-center gap-4 text-sm text-white/80 md:flex">
+          <span className="hidden items-center gap-4 text-sm text-white/80 xl:flex">
             <a href={SITE.phoneHref} className="flex items-center gap-1.5 font-semibold text-white hover:text-gold-soft">
               <Phone className="size-4" /> {SITE.phone}
             </a>
