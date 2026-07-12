@@ -66,9 +66,11 @@ Agentur-Aufwand.
    wem gehört die Domain/Inhalte).
 4. **Eigene Verkaufs-Website.** Wer Websites verkauft, wird an der eigenen
    gemessen. Eine Produktseite mit Demo, Preisen und Referenz ist Pflicht.
-5. **Abhängigkeit Heizreport.** Der stärkste Differenzierer hängt an einem
-   Drittanbieter (Preise, API-Änderungen, Exklusivität). Plan B nötig
-   (eigener einfacher WP-Vorcheck als Fallback).
+5. **Abhängigkeit Heizreport — entschärft:** Für Kunden ohne eigenen
+   Heizreport-Account wird der Wärmepumpen-Check durch den **eigenen
+   Konfigurator** ersetzt. Damit ist das Produkt ohne Drittanbieter
+   verkaufbar; Heizreport wird zum optionalen Premium-Baustein für
+   Betriebe, die es ohnehin nutzen.
 
 ---
 
@@ -288,7 +290,7 @@ für Vertrieb/Umsetzung oder die White-Label-Route.
 | „Ich habe genug Aufträge." | Zielgruppe schärfen: Betriebe, die *wachsen* oder von Notdienst auf WP/Bad umsteigen wollen. Nicht jeden überzeugen wollen. |
 | „Mein Neffe macht das mit Wix." | Nicht Design verkaufen, sondern Funnel + Förderrechner + exklusive Leads. Gegen DIY gewinnt man über Ergebnis, nicht Optik. |
 | Software-Anbieter bündeln Websites ins Abo | Geschwindigkeit + Spezialisierung; langfristig Integrationspartner statt Konkurrent werden (offene Lead-Schnittstellen). |
-| Heizreport-Abhängigkeit | Fallback-Formular für WP-Anfragen im Produkt behalten; Konditionen/Partnerstatus früh schriftlich klären. |
+| Heizreport-Abhängigkeit | **Entschärft:** eigener WP-Konfigurator ersetzt den Check bei Kunden ohne Heizreport-Account; Heizreport ist optionaler Baustein. Partnerstatus trotzdem anfragen (Vertriebskanal). |
 | Solo-Betreiber-Risiko (Urlaub, Krankheit, Bus-Faktor) | Betriebe kaufen Verlässlichkeit: dokumentierter Notfallprozess, ggf. Backup-Freelancer; ehrlich in den Vertrag. |
 | Churn nach Jahr 1 („wofür zahle ich noch?") | Monatlicher Lead-Report (s. o.), jährlicher „Website-TÜV", laufende Förder-Updates als sichtbarer Mehrwert. |
 | Rechtliches (Fernabsatz, DSGVO/AVV, Gewährleistung) | Einmalig saubere Vorlagen (Anwalt/IT-Recht-Vorlagendienst) — vor Kunde Nr. 1, nicht danach. |
@@ -320,9 +322,25 @@ Offen ist nur der Zuschnitt (Landkreis? PLZ-Radius?).
 Die Partner-Anfrage (Listung als Umsetzungspartner) kostet 30 Minuten und
 ist der günstigste Hebel im ganzen Plan.
 
-**F7 · Messdaten der eigenen Seite:** Wie viele Anfragen/Monat liefert die
-ST-Haustechnik-Seite aktuell, und gibt es schon Tracking? Diese Zahl IST
-das Produktversprechen — ohne sie startet Phase 1, nicht Phase 2.
+**F7 · Messdaten der eigenen Seite — beantwortet:** **ca. 3–5 Anfragen/
+Monat**, nachvollziehbar über die eingehenden Anfrage-E-Mails. Das reicht
+als Fallstudien-Basis (1 gewonnener WP- oder Bad-Auftrag pro Quartal
+rechtfertigt das Abo um ein Vielfaches). Was fürs Tracking noch fehlt:
+
+1. **Strukturiertes Lead-Log statt Postfach-Zählen:** kleines
+   Server-Event in den Formular-Routen (`/api/contact` u. a.): Zeitpunkt,
+   Formular-Typ (WP-Konfigurator / Badplaner / Kundendienst / Kontakt),
+   Quelle — z. B. in eine Supabase-Tabelle. ~0,5 Arbeitstage. Basis für
+   den späteren monatlichen Lead-Report an Kunden (Churn-Gegenmittel).
+2. **Besucherzahlen für die Conversion-Rate:** DSGVO-freundliche,
+   Cookie-lose Analytics (Plausible, Umami o. Vercel Analytics).
+   „X Besucher → Y Anfragen" macht die Fallstudie erst belastbar und
+   liefert das Argument gegen „mein Neffe macht das mit Wix".
+3. **Quellen-Attribution:** Referrer + UTM-Parameter beim Absenden als
+   verstecktes Feld mitschicken und ins Lead-Log schreiben — dann weißt
+   du, ob Anfragen über Google, Maps oder direkt kommen.
+4. Optional: Google-Business-Profil-Statistiken (Anrufe, Routen-Klicks)
+   monatlich notieren — kostenlos, ergänzt das Bild.
 
 ---
 
