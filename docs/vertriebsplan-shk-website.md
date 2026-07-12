@@ -214,16 +214,17 @@ anfangs ~3 Personentage (~24 h) — d. h. **maximal 1 Neukunde pro Monat**
 neben Vertrieb und Support. Der Plan rechnet damit, statt es zu ignorieren.
 
 ### Phase 1 — Beweis sichern (Monat 1, ~30–40 h)
-- [ ] Tracking auf der eigenen Seite: Anfragen/Monat, Quellen, einfaches
-      Conversion-Dashboard (DSGVO-konform, z. B. serverseitig/Plausible)
-- [ ] Fallstudie schreiben — als eigener Betrieb brauchst du niemanden zu
-      fragen: Zahlen, eigenes Zitat, Screenshots („Diese Seite bringt uns
-      X Anfragen im Monat")
+- [x] Tracking auf der eigenen Seite: Lead-Log (Supabase), Quellen-
+      Attribution, Vercel Analytics — live seit Juli 2026 (`docs/tracking.md`)
+- [x] Fallstudie geschrieben — Entwurf in `docs/fallstudie-st-haustechnik.md`;
+      ⏳ Besucherzahlen/Conversion + Zitat ergänzen, sobald Tracking-Daten
+      vorliegen
 - [ ] Demo-Instanz „Musterbetrieb Mustermann GmbH" deployen
-- [ ] Einseitiges Angebot: Leistungsumfang, Preis, 14-Tage-Lieferversprechen,
-      Gebietsschutz-Regelung
-- [ ] Vertragsvorlage klären (Laufzeit, Kündigung, Eigentum an Domain/Inhalten,
-      AV-Vertrag) — einmalig Anwalt/Vorlagen-Dienst nutzen
+- [x] Einseitiges Angebot: `docs/angebot-einseiter.md` (Pilotpreis,
+      14-Tage-Versprechen, Gebietsschutz, Einwandbehandlung);
+      ⏳ Kontaktdaten/Firmierung einsetzen, als PDF gestalten
+- [~] Vertragsvorlage: Checkliste für Anwalt/Vorlagendienst erstellt
+      (`docs/vertrag-checkliste.md`); ⏳ Termin/Vorlagenkauf durch Inhaber
 
 ### Phase 2 — Erste 3 Pilotkunden (Monat 2–5, je ~1 Kunde/Monat)
 - [ ] Pilotpreis: 990 € Setup + 179 €/Monat, offen als Pilotkondition
