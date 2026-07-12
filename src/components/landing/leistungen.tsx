@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Leaf, Flame, Bath, Droplets, Waves, Wrench, ArrowRight } from "lucide-react";
+import { Leaf, Flame, Bath, Wrench, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 
@@ -16,7 +16,7 @@ const SERVICES = [
     title: "Heizung",
     text: "Verlässliche Wärme, Winter für Winter: ob neue Brennwerttechnik, Austausch oder Wartung – inklusive Heizungscheck und hydraulischem Abgleich.",
     img: "/brand/photos/foto-05.jpg",
-    href: "#leistungen",
+    href: "#faq",
   },
   {
     icon: Bath,
@@ -24,20 +24,6 @@ const SERVICES = [
     text: "Vom ersten Entwurf bis zur letzten Fuge: Wir machen aus Ihrem Bad einen Ort zum Wohlfühlen – schlüsselfertig und auf Wunsch barrierefrei.",
     img: "/brand/photos/foto-07.jpg",
     href: "#bad",
-  },
-  {
-    icon: Droplets,
-    title: "Sanitär",
-    text: "Tropfender Hahn oder komplette Installation? Wir kümmern uns sauber und zuverlässig um Wasser, Abwasser und Armaturen.",
-    img: "/brand/photos/foto-14.jpg",
-    href: "#leistungen",
-  },
-  {
-    icon: Waves,
-    title: "Fußbodenheizung",
-    text: "Behagliche Wärme von unten – und mit ihren niedrigen Vorlauftemperaturen der ideale Partner Ihrer Wärmepumpe.",
-    img: "/brand/photos/foto-09.jpg",
-    href: "#leistungen",
   },
   {
     icon: Wrench,
