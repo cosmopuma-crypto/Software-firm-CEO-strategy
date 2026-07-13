@@ -4,23 +4,22 @@ import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
-// Stärken in den eigenen Worten des Betriebs.
 const POINTS = [
   {
     icon: BadgeCheck,
-    label: "Nachgewiesene Sachkunde Wärmepumpe – „Fachbetrieb“ darf sich nicht jeder nennen",
+    label: "Geprüfte Sachkunde für Wärmepumpen – den Titel „Fachbetrieb“ muss man sich verdienen",
   },
   {
     icon: HeartHandshake,
-    label: "Ehrlich beraten – wir sagen auch, wenn sich etwas (noch) nicht lohnt",
+    label: "Wir beraten geradeheraus – auch wenn die ehrliche Antwort mal „lieber nicht“ lautet",
   },
   {
     icon: Lightbulb,
-    label: "Lösungsorientiert statt auf den maximalen Umsatz aus",
+    label: "Uns geht es um die richtige Lösung für Sie, nicht um den größten Auftrag",
   },
   {
     icon: Users,
-    label: "Echter Familienbetrieb – Vater, Sohn, Onkel & Cousins, Laura im Büro",
+    label: "Mehrere Generationen unter einem Dach – auf der Baustelle wie im Büro",
   },
 ];
 
@@ -52,8 +51,8 @@ export function UeberUns() {
         <div>
           <SectionHeading
             eyebrow="Über uns · Familienbetrieb"
-            title="Ein Familienbetrieb, der anpackt und mitdenkt."
-            description={`${SITE.name} ist ein echter Familienbetrieb: 2021 von Vater und Sohn gegründet, mit Onkel und Cousins als Gesellen auf der Baustelle und Laura, die im Büro den Überblick behält. Bei uns reden Sie nicht mit einer Hotline, sondern mit den Menschen, die Ihr Projekt selbst in die Hand nehmen – und Ihr Zuhause behandeln, als wäre es unser eigenes.`}
+            title="Ein Familienbetrieb, hinter dem echte Menschen stehen."
+            description={`Hinter ${SITE.name} steckt keine anonyme Firma, sondern eine Familie, die 2021 gemeinsam durchgestartet ist – vom Gründungsduo bis zu den Verwandten, die heute auf der Baustelle und im Büro mit anpacken. Wer bei uns anruft, spricht mit den Menschen, die später auch die Arbeit machen. Das bedeutet kurze Wege, klare Absprachen und ein Ergebnis, für das wir mit unserem Namen geradestehen.`}
           />
           <ul className="mt-6 flex flex-col gap-3">
             {POINTS.map((p) => (
