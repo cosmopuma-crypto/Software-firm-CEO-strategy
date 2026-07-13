@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BadgeCheck, ShieldCheck, MapPin, Clock, ClipboardList, Handshake, Hammer } from "lucide-react";
+import { BadgeCheck, ShieldCheck, MapPin, Clock } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
@@ -9,12 +9,6 @@ const POINTS = [
   { icon: ShieldCheck, label: "Meisterbetrieb mit echtem Handwerk" },
   { icon: MapPin, label: `Fest verwurzelt in ${SITE.city} & Umgebung` },
   { icon: Clock, label: "Termintreu & mit klarer Ansprechperson" },
-];
-
-const STEPS = [
-  { icon: ClipboardList, title: "Anfrage", text: "Online konfigurieren oder anrufen – unverbindlich." },
-  { icon: Handshake, title: "Beratung vor Ort", text: "Ehrliche Einschätzung & transparentes Angebot." },
-  { icon: Hammer, title: "Umsetzung", text: "Saubere, termintreue Ausführung durch unser Team." },
 ];
 
 export function UeberUns() {
@@ -58,30 +52,6 @@ export function UeberUns() {
               </Reveal>
             ))}
           </ul>
-        </div>
-      </div>
-
-      <div className="mt-16">
-        <h3 className="text-center text-sm font-semibold uppercase tracking-wide text-gold-ink">
-          So läuft&apos;s ab
-        </h3>
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          {STEPS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
-              <div className="flex h-full flex-col gap-2 rounded-2xl border bg-card p-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-brand text-brand-foreground">
-                    <s.icon className="size-5" />
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                    Schritt {i + 1}
-                  </span>
-                </div>
-                <h4 className="mt-1 text-lg font-semibold">{s.title}</h4>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </div>
     </Section>

@@ -34,7 +34,7 @@ export function FoerderBanner() {
                   "h-12 shrink-0 bg-white px-7 text-base text-brand hover:bg-white/90",
                 )}
               >
-                Wärmepumpen-Check starten <ArrowRight className="size-4" />
+                Förderung berechnen <ArrowRight className="size-4" />
               </a>
             </div>
           </div>
