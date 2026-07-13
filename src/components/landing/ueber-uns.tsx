@@ -5,22 +5,10 @@ import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
 const POINTS = [
-  {
-    icon: BadgeCheck,
-    label: "Geprüfte Sachkunde für Wärmepumpen – den Titel „Fachbetrieb“ muss man sich verdienen",
-  },
-  {
-    icon: HeartHandshake,
-    label: "Wir beraten geradeheraus – auch wenn die ehrliche Antwort mal „lieber nicht“ lautet",
-  },
-  {
-    icon: Lightbulb,
-    label: "Uns geht es um die richtige Lösung für Sie, nicht um den größten Auftrag",
-  },
-  {
-    icon: Users,
-    label: "Mehrere Generationen unter einem Dach – auf der Baustelle wie im Büro",
-  },
+  { icon: BadgeCheck, label: "Geprüfte Sachkunde für Wärmepumpen" },
+  { icon: HeartHandshake, label: "Ehrliche, unabhängige Beratung" },
+  { icon: Lightbulb, label: "Lösungsorientiert statt umsatzgetrieben" },
+  { icon: Users, label: "Familienbetrieb seit 2021" },
 ];
 
 export function UeberUns() {
@@ -51,8 +39,8 @@ export function UeberUns() {
         <div>
           <SectionHeading
             eyebrow="Über uns · Familienbetrieb"
-            title="Ein Familienbetrieb, hinter dem echte Menschen stehen."
-            description={`Hinter ${SITE.name} steckt keine anonyme Firma, sondern eine Familie, die 2021 gemeinsam durchgestartet ist – vom Gründungsduo bis zu den Verwandten, die heute auf der Baustelle und im Büro mit anpacken. Wer bei uns anruft, spricht mit den Menschen, die später auch die Arbeit machen. Das bedeutet kurze Wege, klare Absprachen und ein Ergebnis, für das wir mit unserem Namen geradestehen.`}
+            title={`Ein Familienbetrieb aus ${SITE.city}.`}
+            description="Gegründet 2021 von Vater und Sohn. Auf der Baustelle und im Büro arbeitet die Familie mit. Wer bei uns anruft, hat direkt einen von uns dran."
           />
           <ul className="mt-6 flex flex-col gap-3">
             {POINTS.map((p) => (
