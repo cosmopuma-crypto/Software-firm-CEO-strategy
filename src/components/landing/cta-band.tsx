@@ -9,7 +9,7 @@ export function CtaBand() {
   return (
     <section className="relative overflow-hidden bg-brand-deep">
       <Image
-        src="/brand/photos/foto-18.jpg"
+        src="/brand/photos/team-vor-fahrzeug.jpg"
         alt=""
         fill
         sizes="100vw"
@@ -33,7 +33,7 @@ export function CtaBand() {
               href="#waermepumpen-check"
               className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
             >
-              Wärmepumpen-Check starten <ArrowRight className="size-4" />
+              Kostenlose Einschätzung anfragen <ArrowRight className="size-4" />
             </a>
             <a
               href={SITE.phoneHref}

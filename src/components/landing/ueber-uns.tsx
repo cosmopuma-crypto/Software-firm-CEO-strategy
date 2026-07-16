@@ -1,20 +1,14 @@
 import Image from "next/image";
-import { BadgeCheck, ShieldCheck, MapPin, Clock, ClipboardList, Handshake, Hammer } from "lucide-react";
+import { BadgeCheck, HeartHandshake, Lightbulb, Users } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/lib/site";
 import { Section, SectionHeading } from "./section";
 
 const POINTS = [
-  { icon: BadgeCheck, label: "Zertifizierter Fachbetrieb Wärmepumpe" },
-  { icon: ShieldCheck, label: "Meisterbetrieb mit echtem Handwerk" },
-  { icon: MapPin, label: `Fest verwurzelt in ${SITE.city} & Umgebung` },
-  { icon: Clock, label: "Termintreu & mit klarer Ansprechperson" },
-];
-
-const STEPS = [
-  { icon: ClipboardList, title: "Anfrage", text: "Online konfigurieren oder anrufen – unverbindlich." },
-  { icon: Handshake, title: "Beratung vor Ort", text: "Ehrliche Einschätzung & transparentes Angebot." },
-  { icon: Hammer, title: "Umsetzung", text: "Saubere, termintreue Ausführung durch unser Team." },
+  { icon: BadgeCheck, label: "Geprüfte Sachkunde für Wärmepumpen" },
+  { icon: HeartHandshake, label: "Ehrliche, unabhängige Beratung" },
+  { icon: Lightbulb, label: "Lösungsorientiert statt umsatzgetrieben" },
+  { icon: Users, label: "Familienbetrieb seit 2021" },
 ];
 
 export function UeberUns() {
@@ -24,14 +18,14 @@ export function UeberUns() {
         <Reveal className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-xl ring-1 ring-black/5">
             <Image
-              src="/brand/photos/foto-17.jpg"
-              alt={`${SITE.name} Firmenfahrzeug mit Logo`}
+              src="/brand/photos/team-vater-sohn.jpg"
+              alt={`Vater und Sohn von ${SITE.name} vor dem Firmenfahrzeug`}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
           </div>
-          <div className="absolute -bottom-7 -right-3 w-60 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-right-7 sm:w-72">
+          <div className="absolute -bottom-7 -right-3 w-52 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-black/5 sm:-right-7 sm:w-64">
             <Image
               src="/brand/fachbetrieb-waermepumpe.png"
               alt="Gütesiegel Fachbetrieb Wärmepumpe"
@@ -44,44 +38,20 @@ export function UeberUns() {
 
         <div>
           <SectionHeading
-            eyebrow="Über uns"
-            title="Echte Handwerker, die anpacken und mitdenken."
-            description="Bei uns reden Sie nicht mit einer Hotline, sondern mit Menschen, die Ihr Projekt selbst in die Hand nehmen. Wir reden Klartext, halten Termine und behandeln Ihr Zuhause, als wäre es unser eigenes."
+            eyebrow="Über uns · Familienbetrieb"
+            title={`Ein Familienbetrieb aus ${SITE.city}.`}
+            description="Gegründet 2021 von Vater und Sohn. Auf der Baustelle und im Büro arbeitet die Familie mit. Wer bei uns anruft, hat direkt einen von uns dran."
           />
           <ul className="mt-6 flex flex-col gap-3">
             {POINTS.map((p) => (
-              <Reveal as="li" key={p.label} className="flex items-center gap-3">
+              <Reveal as="li" key={p.label} className="flex items-start gap-3">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
                   <p.icon className="size-5" />
                 </span>
-                <span className="text-sm font-medium">{p.label}</span>
+                <span className="pt-1.5 text-sm font-medium">{p.label}</span>
               </Reveal>
             ))}
           </ul>
-        </div>
-      </div>
-
-      <div className="mt-16">
-        <h3 className="text-center text-sm font-semibold uppercase tracking-wide text-gold-ink">
-          So läuft&apos;s ab
-        </h3>
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          {STEPS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
-              <div className="flex h-full flex-col gap-2 rounded-2xl border bg-card p-6">
-                <div className="flex items-center gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-brand text-brand-foreground">
-                    <s.icon className="size-5" />
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                    Schritt {i + 1}
-                  </span>
-                </div>
-                <h4 className="mt-1 text-lg font-semibold">{s.title}</h4>
-                <p className="text-sm text-muted-foreground">{s.text}</p>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </div>
     </Section>

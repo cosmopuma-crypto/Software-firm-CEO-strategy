@@ -22,15 +22,15 @@ const FAQS = [
     a: "Häufig ja. Manchmal tauschen wir einzelne Heizkörper oder führen einen hydraulischen Abgleich durch. Eine Fußbodenheizung ist ideal, aber kein Muss – wir sagen Ihnen ehrlich, was bei Ihnen sinnvoll ist.",
   },
   {
-    q: "Wie läuft ein Projekt bei Ihnen ab?",
+    q: "Wie läuft ein Wärmepumpen-Projekt ab?",
     a: "Alles aus einer Hand: Beratung, Planung, Förderservice, Fundament, Installation und Inbetriebnahme. Sie haben durchgehend einen Ansprechpartner, wir halten Termine und übergeben sauber.",
   },
   {
-    q: "Welche Gebiete bedienen Sie?",
+    q: "Welche Orte gehören zum Einzugsgebiet?",
     a: `Wir sind in ${SITE.areaServed[0]} und Umgebung für Sie da – unter anderem ${SITE.areaServed.slice(1).join(", ")}.`,
   },
   {
-    q: "Machen Sie auch Bäder und Kundendienst?",
+    q: "Gibt es auch Bäder und Kundendienst?",
     a: "Ja. Neben Wärmepumpen und Heizungen planen und bauen wir komplette Bäder und bieten einen eigenen Kundendienst aus der Region – auch bei Störungen.",
   },
 ];
