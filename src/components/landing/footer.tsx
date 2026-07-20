@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { IS_DEMO, SITE } from "@/lib/site";
+import { ORTE } from "@/data/orte";
 import { Logo } from "./logo";
 
 const NAV = [
@@ -71,6 +72,27 @@ export function Footer() {
           </ul>
         </div>
       </div>
+
+      {!IS_DEMO && (
+        <div className="border-t border-white/10">
+          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-white">
+              Einsatzgebiet – Wärmepumpe in Ihrer Nähe
+            </h3>
+            <nav className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+              {ORTE.map((o) => (
+                <Link
+                  key={o.slug}
+                  href={`/waermepumpe/${o.slug}`}
+                  className="transition-colors hover:text-white"
+                >
+                  Wärmepumpe {o.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 py-5 text-xs text-white/60 sm:flex-row sm:px-6 lg:px-8">

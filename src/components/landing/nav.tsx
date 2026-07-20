@@ -12,6 +12,7 @@ import { Logo } from "./logo";
 const LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
   { href: "/waermepumpe", label: "Wärmepumpe" },
+  { href: "/waermepumpe-foerderung-2026", label: "Förderung 2026" },
   { href: "/#bad", label: "Bad" },
   { href: "/#kundendienst", label: "Kundendienst" },
   { href: "/#kundenstimmen", label: "Bewertungen" },

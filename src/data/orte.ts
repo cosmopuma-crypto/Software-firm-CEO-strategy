@@ -91,6 +91,34 @@ export const ORTE: readonly Ort[] = [
     ],
   },
   {
+    slug: "kaltenkirchen",
+    name: "Kaltenkirchen",
+    anfahrt: "ca. 25 Minuten ab Neumünster (über die A7)",
+    intro: [
+      "Kaltenkirchen wächst – und mit den vielen Bestandshäusern aus den 70er- bis 2000er-Jahren wächst auch die Zahl der Heizungen, die in den nächsten Jahren fällig werden. Über die A7 sind wir in rund 25 Minuten bei Ihnen.",
+      "Für Eigentümerinnen und Eigentümer in Kaltenkirchen übernehmen wir alles aus einer Hand: von der ersten ehrlichen Einschätzung über Heizlastberechnung und Förderantrag bis zur Montage und späteren Wartung – ohne Subunternehmer.",
+    ],
+    punkte: [
+      "Anfahrt über die A7 – Beratung, Montage und Kundendienst aus einer Hand",
+      "Heizlastberechnung nach VDI 4645, oft mit den vorhandenen Heizkörpern",
+      "Den kompletten KfW-Antrag samt Nachweisen übernehmen wir",
+    ],
+  },
+  {
+    slug: "wahlstedt",
+    name: "Wahlstedt",
+    anfahrt: "ca. 20 Minuten ab Neumünster (über die B205)",
+    intro: [
+      "Wahlstedt ist geprägt von Siedlungshäusern der 50er- bis 80er-Jahre. In den meisten davon läuft eine Wärmepumpe heute zuverlässig – oft ohne große Umbauten. Über die B205 sind wir in rund 20 Minuten vor Ort.",
+      "Wir zeigen Ihnen ehrlich, was in Ihrem Haus geht: Erst prüfen wir Heizlast und Heizflächen, dann reden wir über ein Angebot. Falls sich eine Wärmepumpe bei Ihnen nicht rechnet, sagen wir Ihnen das.",
+    ],
+    punkte: [
+      "Kurze Anfahrt über die B205 – auch für Wartung und Kundendienst",
+      "Erfahrung mit Siedlungshäusern der 50er- bis 80er-Jahre",
+      "Montage durch unser eigenes Team, Service danach ebenfalls",
+    ],
+  },
+  {
     slug: "boostedt",
     name: "Boostedt",
     anfahrt: "ca. 10 Minuten ab Neumünster (direkt südlich, B4)",

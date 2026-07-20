@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Nav } from "@/components/landing/nav";
+import { FoerderNewsBanner } from "@/components/landing/foerder-news-banner";
 import { Section, SectionHeading } from "@/components/landing/section";
 import { AngebotsWege } from "@/components/landing/angebots-wege";
 import { HeizreportSection } from "@/components/landing/heizreport-section";
@@ -166,6 +167,7 @@ export default function WaermepumpePage() {
   return (
     <div className="pb-14 xl:pb-0">
       <ServiceJsonLd />
+      <FoerderNewsBanner />
       <Nav />
       <main>
         {/* Kopfbereich */}
