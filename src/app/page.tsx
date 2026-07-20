@@ -1,4 +1,5 @@
 import { Nav } from "@/components/landing/nav";
+import { FoerderNewsBanner } from "@/components/landing/foerder-news-banner";
 import { Hero } from "@/components/landing/hero";
 import { NewsTicker } from "@/components/landing/news-ticker";
 import { AngebotsWege } from "@/components/landing/angebots-wege";
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <div className="pb-14 xl:pb-0">
       <StructuredData />
+      <FoerderNewsBanner />
       <Nav />
       <main>
         <Hero />

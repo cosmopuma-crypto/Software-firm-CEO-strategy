@@ -27,6 +27,8 @@ export interface SiteProfile {
   /** Mobil – sekundär (z. B. Impressum/Kontakt zusätzlich angezeigt). */
   readonly mobile: string;
   readonly mobileHref: string;
+  /** WhatsApp-Link (wa.me, Nummer im Format 49… ohne führende 0/+). */
+  readonly whatsapp: string;
   readonly hours: string;
   readonly url: string;
   readonly geo: { readonly lat: number; readonly lng: number };
@@ -56,6 +58,7 @@ const ST_HAUSTECHNIK: SiteProfile = {
   phoneHref: "tel:+4943215399933",
   mobile: "0157 39596636",
   mobileHref: "tel:+4915739596636",
+  whatsapp: "https://wa.me/4915739596636",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   // TODO: finale Domain bestätigen (Platzhalter = bestehende Domain)
   url: "https://www.st-haustechnik.de",
@@ -68,6 +71,8 @@ const ST_HAUSTECHNIK: SiteProfile = {
     "Wasbek",
     "Nortorf",
     "Boostedt",
+    "Kaltenkirchen",
+    "Wahlstedt",
   ],
   // Bewertungsprofile (echte Links vom Inhaber).
   google: "https://maps.app.goo.gl/QTS2g2YLB2BCMh366",
@@ -96,6 +101,7 @@ const MUSTERBETRIEB: SiteProfile = {
   phoneHref: "tel:+491234567890",
   mobile: "0123 4567890",
   mobileHref: "tel:+491234567890",
+  whatsapp: "https://wa.me/491234567890",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   url:
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://musterbetrieb-demo.vercel.app",

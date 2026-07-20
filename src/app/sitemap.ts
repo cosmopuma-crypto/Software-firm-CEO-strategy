@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes: { path: string; priority: number }[] = [
     { path: "/", priority: 1 },
     { path: "/waermepumpe", priority: 0.9 },
+    { path: "/waermepumpe-foerderung-2026", priority: 0.9 },
     { path: "/badplaner", priority: 0.8 },
     { path: "/kundendienst", priority: 0.8 },
     { path: "/ratgeber", priority: 0.6 },
