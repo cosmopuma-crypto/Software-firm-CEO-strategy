@@ -6,6 +6,7 @@ import {
   YEAR_BANDS,
   HEATING_SYSTEMS,
   HEATPUMP_GOALS,
+  CONTACT_TIMES,
   RADIATOR_TYPES,
   BATH_CONDITIONS,
   BATH_ELEMENTS,
@@ -22,8 +23,8 @@ export interface BuiltEmail {
   readonly subject: string;
   readonly text: string;
   readonly html: string;
-  /** Antwortadresse = E-Mail des Absenders. */
-  readonly replyTo: string;
+  /** Antwortadresse = E-Mail des Absenders (fehlt bei Telefon-only-Anfragen). */
+  readonly replyTo?: string;
 }
 
 type Row = readonly [label: string, value: string];
@@ -36,13 +37,12 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-/** Felder, die jedes Formular gemeinsam hat (Kontaktteil). */
+/** Felder, die jedes Formular gemeinsam hat (Kontaktteil).
+ *  E-Mail/Telefon können bei der Schnellanfrage einzeln fehlen. */
 function contactRows(p: ContactFormPayload): Row[] {
-  const rows: Row[] = [
-    ["Name", p.name],
-    ["E-Mail", p.email],
-    ["Telefon", p.phone],
-  ];
+  const rows: Row[] = [["Name", p.name]];
+  if (p.email && p.email.trim().length > 0) rows.push(["E-Mail", p.email]);
+  if (p.phone && p.phone.trim().length > 0) rows.push(["Telefon", p.phone]);
   if (p.message && p.message.trim().length > 0) {
     rows.push(["Nachricht", p.message.trim()]);
   }
@@ -63,6 +63,17 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Ziele", labelsOf(HEATPUMP_GOALS, p.goals)],
         ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
+    case "schnellanfrage": {
+      const rows: Row[] = [
+        ["Aktuelle Heizung", labelOf(HEATING_SYSTEMS, p.currentHeating)],
+        ["Baujahr (Gebäude)", labelOf(YEAR_BANDS, p.yearBand)],
+        ["PLZ", p.addressZip],
+      ];
+      if (p.contactTime) {
+        rows.push(["Beste Erreichbarkeit", labelOf(CONTACT_TIMES, p.contactTime)]);
+      }
+      return rows;
+    }
     case "badplaner":
       return [
         ["Raumgröße", `${p.roomSizeM2} m²`],
@@ -147,5 +158,7 @@ export function buildEmail(
     `<p style="color:#6b7280;font-size:12px;margin-top:16px;">Automatisch von der Website gesendet.</p>` +
     `</div>`;
 
-  return { subject, text, html, replyTo: p.email };
+  const replyTo =
+    p.email && p.email.trim().length > 0 ? p.email.trim() : undefined;
+  return { subject, text, html, replyTo };
 }

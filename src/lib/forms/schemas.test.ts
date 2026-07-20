@@ -1,6 +1,7 @@
 import {
   contactFormSchema,
   waermepumpeSchema,
+  schnellanfrageSchema,
   badplanerSchema,
   kundendienstSchema,
   flattenErrors,
@@ -25,6 +26,17 @@ const validWaermepumpe = {
   addressZip: "24536",
   addressCity: "Neumünster",
   ...validContact,
+};
+
+const validSchnellanfrage = {
+  formType: "schnellanfrage",
+  currentHeating: "gas",
+  yearBand: "1979_1994",
+  addressZip: "24536",
+  name: "Max Mustermann",
+  phone: "04321 123456",
+  email: "",
+  consent: true,
 };
 
 const validBadplaner = {
@@ -91,6 +103,68 @@ describe("waermepumpeSchema", () => {
   });
 });
 
+describe("schnellanfrageSchema", () => {
+  it("akzeptiert eine gültige Anfrage nur mit Telefon", () => {
+    expect(schnellanfrageSchema.safeParse(validSchnellanfrage).success).toBe(true);
+  });
+
+  it("akzeptiert eine gültige Anfrage nur mit E-Mail", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      phone: "",
+      email: "max@example.de",
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it("lehnt ab, wenn weder Telefon noch E-Mail angegeben sind", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      phone: "",
+      email: "",
+    });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).phone).toMatch(/Telefonnummer oder E-Mail/);
+    }
+  });
+
+  it("lehnt ungültige PLZ ab", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      addressZip: "245",
+    });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).addressZip).toMatch(/Postleitzahl/);
+    }
+  });
+
+  it("lehnt ungültige E-Mail ab, wenn eine angegeben ist", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      email: "keine-email",
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("akzeptiert ein optionales Erreichbarkeits-Fenster", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      contactTime: "vormittags",
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it("verlangt consent === true", () => {
+    const r = schnellanfrageSchema.safeParse({
+      ...validSchnellanfrage,
+      consent: false,
+    });
+    expect(r.success).toBe(false);
+  });
+});
+
 describe("badplanerSchema", () => {
   it("akzeptiert eine gültige Anfrage", () => {
     expect(badplanerSchema.safeParse(validBadplaner).success).toBe(true);
@@ -151,8 +225,21 @@ describe("gemeinsame Kontaktfelder", () => {
 describe("contactFormSchema (diskriminierte Union)", () => {
   it("routet per formType korrekt", () => {
     expect(contactFormSchema.safeParse(validWaermepumpe).success).toBe(true);
+    expect(contactFormSchema.safeParse(validSchnellanfrage).success).toBe(true);
     expect(contactFormSchema.safeParse(validBadplaner).success).toBe(true);
     expect(contactFormSchema.safeParse(validKundendienst).success).toBe(true);
+  });
+
+  it("wendet die Erreichbarkeits-Prüfung auch auf Union-Ebene an", () => {
+    const r = contactFormSchema.safeParse({
+      ...validSchnellanfrage,
+      phone: "",
+      email: "",
+    });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).phone).toMatch(/Telefonnummer oder E-Mail/);
+    }
   });
 
   it("lehnt unbekannten formType ab", () => {

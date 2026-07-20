@@ -10,7 +10,12 @@ import { SITE } from "@/lib/site";
  * Seiten, die die Leiste einbinden, brauchen unten Platz dafür:
  * `pb-16 xl:pb-0` auf dem Seiten-Wrapper (siehe page.tsx).
  */
-export function MobileCtaBar() {
+interface MobileCtaBarProps {
+  /** Ziel-Anker des rechten CTAs. Default: Schnellanfrage auf der Startseite. */
+  readonly anchor?: string;
+}
+
+export function MobileCtaBar({ anchor = "/#schnellanfrage" }: MobileCtaBarProps) {
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-brand-deep/95 pb-[env(safe-area-inset-bottom)] backdrop-blur supports-[backdrop-filter]:bg-brand-deep/90 xl:hidden"
@@ -24,10 +29,10 @@ export function MobileCtaBar() {
           <Phone className="size-4 text-gold-soft" /> Anrufen
         </a>
         <Link
-          href="/#waermepumpen-check"
+          href={anchor}
           className="flex items-center justify-center gap-1.5 whitespace-nowrap bg-gold px-2 text-[13px] font-semibold text-gold-foreground transition-opacity hover:opacity-90 sm:gap-2 sm:text-sm"
         >
-          Wärmepumpen-Check <ArrowRight className="size-4 shrink-0" />
+          Ersteinschätzung anfordern <ArrowRight className="size-4 shrink-0" />
         </Link>
       </div>
     </div>

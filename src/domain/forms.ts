@@ -25,7 +25,12 @@ export function labelsOf<T extends string>(
   return vals.map((v) => labelOf(opts, v)).join(", ");
 }
 
-export const FORM_TYPES = ["waermepumpe", "badplaner", "kundendienst"] as const;
+export const FORM_TYPES = [
+  "waermepumpe",
+  "schnellanfrage",
+  "badplaner",
+  "kundendienst",
+] as const;
 export type FormType = (typeof FORM_TYPES)[number];
 
 /* ---------------- Wärmepumpenkonfigurator ---------------- */
@@ -74,6 +79,20 @@ export const RADIATOR_TYPES = [
   { value: "unbekannt", label: "Weiß ich nicht" },
 ] as const;
 export type RadiatorType = (typeof RADIATOR_TYPES)[number]["value"];
+
+/* ---------------- Wärmepumpen-Schnellanfrage ---------------- */
+
+/**
+ * Erreichbarkeits-Fenster für den persönlichen Rückruf (optional).
+ * Bewusst an den Geschäftszeiten (Mo–Fr 08–17 Uhr) ausgerichtet –
+ * wir versprechen nichts, was wir nicht halten können.
+ */
+export const CONTACT_TIMES = [
+  { value: "vormittags", label: "Vormittags (8–12 Uhr)" },
+  { value: "nachmittags", label: "Nachmittags (12–17 Uhr)" },
+  { value: "flexibel", label: "Bin flexibel" },
+] as const;
+export type ContactTime = (typeof CONTACT_TIMES)[number]["value"];
 
 /* ---------------- Badplaner ---------------- */
 
@@ -146,6 +165,7 @@ export const buildingTypeValues = values(BUILDING_TYPES);
 export const yearBandValues = values(YEAR_BANDS);
 export const heatingSystemValues = values(HEATING_SYSTEMS);
 export const heatpumpGoalValues = values(HEATPUMP_GOALS);
+export const contactTimeValues = values(CONTACT_TIMES);
 export const radiatorTypeValues = values(RADIATOR_TYPES);
 export const bathConditionValues = values(BATH_CONDITIONS);
 export const bathElementValues = values(BATH_ELEMENTS);
@@ -158,6 +178,7 @@ export const urgencyValues = values(URGENCIES);
 // E-Mail-Betreff-Präfixe je Formulartyp.
 export const FORM_LABELS: Record<FormType, string> = {
   waermepumpe: "Wärmepumpenkonfigurator",
+  schnellanfrage: "Wärmepumpen-Schnellanfrage",
   badplaner: "Badplaner",
   kundendienst: "Kundendienst",
 };

@@ -5,7 +5,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE } from "@/lib/site";
 
-export function CtaBand() {
+interface CtaBandProps {
+  /** Ziel-Anker des Haupt-CTAs. Default: Schnellanfrage auf der Startseite. */
+  readonly anchor?: string;
+}
+
+export function CtaBand({ anchor = "/#schnellanfrage" }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden bg-brand-deep">
       <Image
@@ -30,10 +35,10 @@ export function CtaBand() {
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <a
-              href="#waermepumpen-check"
+              href={anchor}
               className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
             >
-              Kostenlose Einschätzung anfragen <ArrowRight className="size-4" />
+              Kostenlose Ersteinschätzung anfordern <ArrowRight className="size-4" />
             </a>
             <a
               href={SITE.phoneHref}

@@ -10,11 +10,14 @@ export function SuccessPanel({
   description = "Wir haben deine Angaben erhalten und melden uns zeitnah bei dir.",
   onReset,
   resetLabel = "Neue Anfrage",
+  phoneNote = "Dringend? Ruf uns an:",
 }: {
   title?: string;
   description?: string;
   onReset?: () => void;
   resetLabel?: string;
+  /** Anpassbar z. B. für Sie-Form ("Dringend? Rufen Sie uns an:"). */
+  phoneNote?: string;
 }) {
   return (
     <div className="flex flex-col items-center gap-4 rounded-xl border border-brand/30 bg-brand-soft px-6 py-12 text-center">
@@ -23,7 +26,7 @@ export function SuccessPanel({
       <p className="max-w-md text-sm text-muted-foreground">{description}</p>
       <p className="flex items-center gap-2 text-sm text-muted-foreground">
         <Phone className="size-4 text-brand" />
-        Dringend? Ruf uns an:{" "}
+        {phoneNote}{" "}
         <a href={SITE.phoneHref} className="font-medium text-brand">
           {SITE.phone}
         </a>

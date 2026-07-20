@@ -37,7 +37,7 @@ export function HeizreportSection() {
       <SectionHeading
         eyebrow="Wärmepumpe & Förderung"
         title="Wärmepumpen-Check & Förderrechner"
-        description="In wenigen Klicks und ganz ohne Verpflichtung: Prüfen Sie, ob eine Wärmepumpe zu Ihrem Zuhause passt, und ermitteln Sie mögliche staatliche Förderungen."
+        description="Der Check dauert nur wenige Minuten und zeigt sofort eine erste Heizlast-Einschätzung. Ganz ohne Verpflichtung: Prüfen Sie, ob eine Wärmepumpe zu Ihrem Zuhause passt, und ermitteln Sie mögliche staatliche Förderungen."
         centered
       />
 
@@ -85,6 +85,20 @@ export function HeizreportSection() {
           />
         </Card>
       </div>
+
+      <Reveal>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
+          Gerade keine Verbrauchswerte zur Hand – oder lieber gleich persönlich
+          sprechen?{" "}
+          <a
+            href="#schnellanfrage"
+            className="font-medium text-brand underline underline-offset-4"
+          >
+            Zur 2-Minuten-Anfrage
+          </a>{" "}
+          – wir melden uns mit einer ehrlichen Ersteinschätzung.
+        </p>
+      </Reveal>
     </Section>
   );
 }
