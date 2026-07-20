@@ -23,7 +23,7 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-8 pt-10 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:py-16 lg:px-8">
         <Reveal className="order-2 flex flex-col gap-6 lg:order-1">
           <span className="inline-flex w-fit items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold-ink">
-            <BadgeCheck className="size-4 shrink-0" /> Zertifizierter Fachbetrieb Wärmepumpe · {SITE.city} &amp; Umgebung
+            <BadgeCheck className="size-4 shrink-0" /> Zertifizierter Fachbetrieb Wärmepumpe · {SITE.city}{" "}&amp; Umgebung
           </span>
 
           <h1 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
@@ -61,10 +61,10 @@ export function Hero() {
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href="#waermepumpen-check"
+              href="#schnellanfrage"
               className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
             >
-              Wärmepumpen-Check starten <ArrowRight className="size-4" />
+              Kostenlose Ersteinschätzung anfordern <ArrowRight className="size-4" />
             </a>
             <a
               href={SITE.phoneHref}
@@ -73,6 +73,16 @@ export function Hero() {
               <Phone className="size-4" /> {SITE.phone}
             </a>
           </div>
+
+          <a
+            href="#waermepumpen-check"
+            className="group -mt-1 flex w-fit items-center gap-1.5 text-sm font-medium text-brand"
+          >
+            <span className="underline-offset-4 group-hover:underline">
+              Oder direkt loslegen: Wärmepumpen-Check mit Heizlast-Ersteinschätzung
+            </span>
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+          </a>
 
           <ul className="mt-2 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:flex sm:flex-wrap">
             {TRUST.map((t) => (

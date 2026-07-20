@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Nav } from "@/components/landing/nav";
 import { Section, SectionHeading } from "@/components/landing/section";
+import { AngebotsWege } from "@/components/landing/angebots-wege";
 import { HeizreportSection } from "@/components/landing/heizreport-section";
 import { FoerderBanner } from "@/components/landing/foerder-banner";
 import { CtaBand } from "@/components/landing/cta-band";
@@ -112,10 +113,10 @@ export default async function OrtPage({ params }: Props) {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="#waermepumpen-check"
+                  href="#schnellanfrage"
                   className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
                 >
-                  Wärmepumpen-Check starten <ArrowRight className="size-4" />
+                  Kostenlose Ersteinschätzung anfordern <ArrowRight className="size-4" />
                 </a>
                 <a
                   href={SITE.phoneHref}
@@ -177,11 +178,12 @@ export default async function OrtPage({ params }: Props) {
         </Section>
 
         <FoerderBanner />
+        <AngebotsWege />
         <HeizreportSection />
-        <CtaBand />
+        <CtaBand anchor="#schnellanfrage" />
       </main>
       <Footer />
-      <MobileCtaBar />
+      <MobileCtaBar anchor="#schnellanfrage" />
     </div>
   );
 }

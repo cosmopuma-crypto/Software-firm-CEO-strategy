@@ -20,6 +20,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Nav } from "@/components/landing/nav";
 import { Section, SectionHeading } from "@/components/landing/section";
+import { AngebotsWege } from "@/components/landing/angebots-wege";
 import { HeizreportSection } from "@/components/landing/heizreport-section";
 import { FoerderBanner } from "@/components/landing/foerder-banner";
 import { CtaBand } from "@/components/landing/cta-band";
@@ -81,8 +82,8 @@ const VORTEILE = [
 const ABLAUF = [
   {
     icon: ClipboardCheck,
-    title: "Wärmepumpen-Check online",
-    text: "In wenigen Klicks prüfen, ob Ihr Haus geeignet ist – kostenlos und unverbindlich.",
+    title: "Anfrage oder Online-Check",
+    text: "Kurz Interesse bekunden oder direkt den Wärmepumpen-Check machen – beides kostenlos und unverbindlich.",
   },
   {
     icon: CalendarCheck,
@@ -176,12 +177,12 @@ export default function WaermepumpePage() {
                 <BadgeCheck className="size-4 shrink-0" /> Fachbetrieb Wärmepumpe · VDI 4645
               </span>
               <h1 className="text-3xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-                Wärmepumpe in {SITE.city} &amp; Umgebung – vom zertifizierten
+                Wärmepumpe in {SITE.city}{" "}&amp; Umgebung – vom zertifizierten
                 Fachbetrieb.
               </h1>
               <p className="max-w-2xl text-lg text-muted-foreground">
                 Beratung, Planung, Förderservice und Montage aus einer Hand: Als
-                Meisterbetrieb aus {SITE.city} installieren wir Luft-Wasser-Wärmepumpen
+                Meisterbetrieb aus {SITE.city}{" "}installieren wir Luft-Wasser-Wärmepumpen
                 im Neubau und im Altbau – korrekt ausgelegt nach VDI 4645, mit bis zu
                 70&nbsp;% staatlicher Förderung.
               </p>
@@ -200,10 +201,10 @@ export default function WaermepumpePage() {
               </Link>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="#waermepumpen-check"
+                  href="#schnellanfrage"
                   className={cn(buttonVariants({ variant: "gold" }), "h-12 px-7 text-base")}
                 >
-                  Wärmepumpen-Check starten <ArrowRight className="size-4" />
+                  Kostenlose Ersteinschätzung anfordern <ArrowRight className="size-4" />
                 </a>
                 <a
                   href={SITE.phoneHref}
@@ -303,6 +304,8 @@ export default function WaermepumpePage() {
           </div>
         </Section>
 
+        <AngebotsWege />
+
         <HeizreportSection />
 
         {/* Einzugsgebiet */}
@@ -359,10 +362,10 @@ export default function WaermepumpePage() {
           </div>
         </Section>
 
-        <CtaBand />
+        <CtaBand anchor="#schnellanfrage" />
       </main>
       <Footer />
-      <MobileCtaBar />
+      <MobileCtaBar anchor="#schnellanfrage" />
     </div>
   );
 }

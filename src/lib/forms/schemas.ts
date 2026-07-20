@@ -4,6 +4,7 @@ import {
   yearBandValues,
   heatingSystemValues,
   heatpumpGoalValues,
+  contactTimeValues,
   radiatorTypeValues,
   bathConditionValues,
   bathElementValues,
@@ -16,6 +17,7 @@ import {
   type YearBand,
   type HeatingSystem,
   type HeatpumpGoal,
+  type ContactTime,
   type RadiatorType,
   type BathCondition,
   type BathElement,
@@ -90,6 +92,70 @@ export const waermepumpeSchema = z.object({
   ...contactShape,
 });
 
+/* ---------------- Wärmepumpen-Schnellanfrage ---------------- */
+
+/**
+ * Niedrigschwelliger Einstieg: bewusst nur drei Angaben zum Haus plus
+ * Kontaktdaten. Telefon ODER E-Mail genügt – Details klärt der Betrieb
+ * im persönlichen Gespräch. (Sie-Form in den Meldungen, da das Formular
+ * direkt in der Landing-Sektion eingebettet ist.)
+ */
+export const schnellanfrageObjectSchema = z.object({
+  formType: z.literal("schnellanfrage"),
+  currentHeating: enumOf<HeatingSystem>(heatingSystemValues),
+  yearBand: enumOf<YearBand>(yearBandValues),
+  addressZip: zipField,
+  contactTime: enumOf<ContactTime>(contactTimeValues).optional(),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Bitte geben Sie Ihren Namen an.")
+    .max(120, "Der Name ist zu lang."),
+  phone: z
+    .string()
+    .trim()
+    .min(6, "Bitte geben Sie eine gültige Telefonnummer an.")
+    .max(40, "Die Telefonnummer ist zu lang.")
+    .optional()
+    .or(z.literal("")),
+  email: z
+    .string()
+    .trim()
+    .email("Bitte geben Sie eine gültige E-Mail-Adresse an.")
+    .max(160, "Die E-Mail-Adresse ist zu lang.")
+    .optional()
+    .or(z.literal("")),
+  message: z
+    .string()
+    .trim()
+    .max(1000, "Die Anmerkung ist zu lang (max. 1000 Zeichen).")
+    .optional(),
+  consent: z.literal(true, {
+    error: "Bitte stimmen Sie den Datenschutzhinweisen zu.",
+  }),
+});
+
+/** Kreuzfeld-Prüfung: mindestens ein Kontaktweg muss angegeben sein. */
+function checkReachability(
+  d: { phone?: string; email?: string },
+  ctx: z.RefinementCtx,
+): void {
+  const hasPhone = typeof d.phone === "string" && d.phone.trim().length > 0;
+  const hasEmail = typeof d.email === "string" && d.email.trim().length > 0;
+  if (!hasPhone && !hasEmail) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["phone"],
+      message: "Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse an.",
+    });
+  }
+}
+
+/** Vollständiges Schnellanfrage-Schema (Objekt + Erreichbarkeits-Prüfung). */
+export const schnellanfrageSchema = schnellanfrageObjectSchema.superRefine(
+  checkReachability,
+);
+
 /* ---------------- Badplaner ---------------- */
 export const badplanerSchema = z.object({
   formType: z.literal("badplaner"),
@@ -136,14 +202,25 @@ export const kundendienstSchema = z.object({
   ...contactShape,
 });
 
-/** Diskriminierte Union über alle drei Formulare. */
-export const contactFormSchema = z.discriminatedUnion("formType", [
-  waermepumpeSchema,
-  badplanerSchema,
-  kundendienstSchema,
-]);
+/**
+ * Diskriminierte Union über alle Formulare. Die Schnellanfrage geht als
+ * reines Objekt-Schema in die Union; die Kreuzfeld-Prüfung (Telefon oder
+ * E-Mail) läuft anschließend über superRefine auf der Union – so bleibt
+ * die Union kompatibel und die Regel gilt trotzdem beim API-Parse.
+ */
+export const contactFormSchema = z
+  .discriminatedUnion("formType", [
+    waermepumpeSchema,
+    schnellanfrageObjectSchema,
+    badplanerSchema,
+    kundendienstSchema,
+  ])
+  .superRefine((d, ctx) => {
+    if (d.formType === "schnellanfrage") checkReachability(d, ctx);
+  });
 
 export type WaermepumpePayload = z.infer<typeof waermepumpeSchema>;
+export type SchnellanfragePayload = z.infer<typeof schnellanfrageSchema>;
 export type BadplanerPayload = z.infer<typeof badplanerSchema>;
 export type KundendienstPayload = z.infer<typeof kundendienstSchema>;
 export type ContactFormPayload = z.infer<typeof contactFormSchema>;

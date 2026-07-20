@@ -1,6 +1,7 @@
 import { Nav } from "@/components/landing/nav";
 import { Hero } from "@/components/landing/hero";
 import { NewsTicker } from "@/components/landing/news-ticker";
+import { AngebotsWege } from "@/components/landing/angebots-wege";
 import { Leistungen } from "@/components/landing/leistungen";
 import { FoerderBanner } from "@/components/landing/foerder-banner";
 import { UeberUns } from "@/components/landing/ueber-uns";
@@ -25,6 +26,7 @@ export default function Home() {
       <main>
         <Hero />
         <NewsTicker />
+        <AngebotsWege />
         <HeizreportSection />
         <Leistungen />
         <FoerderBanner />

@@ -1,6 +1,7 @@
 import { buildEmail } from "./email-template";
 import type {
   WaermepumpePayload,
+  SchnellanfragePayload,
   BadplanerPayload,
   KundendienstPayload,
 } from "./schemas";
@@ -19,6 +20,18 @@ const waermepumpe: WaermepumpePayload = {
   name: "Max Mustermann",
   email: "max@example.de",
   phone: "04321 123456",
+  consent: true,
+};
+
+const schnellanfrage: SchnellanfragePayload = {
+  formType: "schnellanfrage",
+  currentHeating: "gas",
+  yearBand: "vor1979",
+  addressZip: "24536",
+  contactTime: "vormittags",
+  name: "Petra Probe",
+  phone: "04321 777",
+  email: "",
   consent: true,
 };
 
@@ -56,12 +69,31 @@ const kundendienst: KundendienstPayload = {
 describe("buildEmail", () => {
   it("setzt den Betreff-Präfix je Formulartyp", () => {
     expect(buildEmail(waermepumpe).subject).toMatch(/^\[Wärmepumpenkonfigurator\]/);
+    expect(buildEmail(schnellanfrage).subject).toMatch(
+      /^\[Wärmepumpen-Schnellanfrage\]/,
+    );
     expect(buildEmail(badplaner).subject).toMatch(/^\[Badplaner\]/);
     expect(buildEmail(kundendienst).subject).toMatch(/^\[Kundendienst\]/);
   });
 
   it("nutzt die Absender-E-Mail als replyTo", () => {
     expect(buildEmail(waermepumpe).replyTo).toBe("max@example.de");
+  });
+
+  it("lässt replyTo weg, wenn keine E-Mail angegeben ist (Telefon-only)", () => {
+    expect(buildEmail(schnellanfrage).replyTo).toBeUndefined();
+  });
+
+  it("rendert die Schnellanfrage-Felder mit deutschen Labels", () => {
+    const text = buildEmail(schnellanfrage).text;
+    expect(text).toContain("Gasheizung");
+    expect(text).toContain("vor 1979");
+    expect(text).toContain("24536");
+    expect(text).toContain("Vormittags (8–12 Uhr)");
+    expect(text).toContain("Petra Probe");
+    expect(text).toContain("04321 777");
+    // Leere E-Mail darf keine Zeile erzeugen.
+    expect(text).not.toContain("E-Mail:");
   });
 
   it("übersetzt Werte in deutsche Labels", () => {

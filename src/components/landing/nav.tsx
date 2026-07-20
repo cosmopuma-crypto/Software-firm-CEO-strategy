@@ -70,14 +70,14 @@ export function Nav() {
 
           <div className="hidden shrink-0 items-center xl:flex">
             <Link
-              href="/#waermepumpen-check"
+              href="/#schnellanfrage"
               className={cn(
                 buttonVariants({ variant: "gold" }),
                 "whitespace-nowrap transition-all duration-300",
                 scrolled ? "opacity-100" : "pointer-events-none -translate-x-2 opacity-0",
               )}
             >
-              Wärmepumpen-Check starten
+              Ersteinschätzung anfordern
             </Link>
           </div>
 
@@ -110,11 +110,11 @@ export function Nav() {
               <Phone className="size-4" /> {SITE.phone}
             </a>
             <Link
-              href="/#waermepumpen-check"
+              href="/#schnellanfrage"
               onClick={() => setOpen(false)}
               className={cn(buttonVariants({ variant: "gold" }), "mt-2")}
             >
-              Wärmepumpen-Check starten
+              Ersteinschätzung anfordern
             </Link>
           </nav>
         </div>
