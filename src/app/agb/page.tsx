@@ -126,7 +126,7 @@ export default function AgbPage() {
         <p>
           (2) Über einen Online-Terminplaner oder auf anderem Weg vereinbarte
           Kundendienst- und Wartungstermine sind verbindlich. Kann der
-          Auftraggeber einen Termin nicht wahrnehmen, ist dieser mindestens 48
+          Auftraggeber einen Termin nicht wahrnehmen, ist dieser mindestens 12
           Stunden vor dem vereinbarten Beginn abzusagen oder zu verlegen. Für die
           Absage genügt die Textform (z. B. E-Mail an {SITE.email} oder
           telefonisch unter {SITE.phone}).
