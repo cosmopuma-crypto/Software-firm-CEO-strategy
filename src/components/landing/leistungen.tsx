@@ -30,7 +30,7 @@ const SERVICES = [
     title: "Kundendienst",
     text: "Heizung streikt? Wir lassen Sie nicht im Kalten stehen – schnelle Hilfe vom eigenen Serviceteam aus der Region.",
     img: "/brand/photos/foto-01.jpg",
-    href: "#kundendienst",
+    href: "/kundendienst",
   },
 ];
 
