@@ -1,97 +1,88 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Phone } from "lucide-react";
 import { FormPage } from "@/components/landing/form-page";
-import { KundendienstForm } from "@/components/forms/kundendienst-form";
 import { BookingEmbed } from "@/components/landing/booking-embed";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Kundendienst & Wartung",
   description:
-    "Wartungstermin direkt online buchen oder eine Störung melden – schnelle Hilfe vom Serviceteam.",
+    "Wartungs- und Kundendiensttermin direkt online buchen – Sie wählen selbst einen freien Termin, die Bestätigung kommt sofort per E-Mail.",
 };
 
 export default function KundendienstPage() {
   return (
     <FormPage
       eyebrow="Kundendienst & Wartung"
-      title="Termin buchen oder Störung melden"
-      description="Für Wartung und Service buchen Sie unten direkt einen freien Termin. Bei einer akuten Störung schildern Sie uns kurz das Problem – unser Serviceteam meldet sich zur Terminabstimmung."
+      title="Wartungstermin online buchen"
+      description="Wählen Sie selbst einen freien Termin für Kundendienst oder Wartung – die Bestätigung kommt sofort per E-Mail in Ihren Kalender."
     >
-      <div className="flex flex-col gap-10">
-        {SITE.bookingUrl && (
-          <>
-            <section className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <h2 className="text-xl font-semibold tracking-tight">
-                  Wartungstermin online buchen
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Freien Termin auswählen – die Bestätigung kommt sofort per
-                  E-Mail in Ihren Kalender.
-                </p>
-              </div>
-              <BookingEmbed
-                url={SITE.bookingUrl}
-                title="Kundendienst- und Wartungstermin buchen"
-                notice={
-                  <>
-                    <span className="font-semibold">
-                      Kundendienst- und Wartungseinsätze sind kostenpflichtig.
-                    </span>{" "}
-                    Berechnet werden Anfahrt und Arbeitszeit nach Aufwand (zzgl.
-                    Material und gesetzl. USt.). Die genauen Konditionen nennen
-                    wir Ihnen bei der Terminbestätigung. Bitte sagen Sie einen
-                    Termin, den Sie nicht wahrnehmen können, mindestens 12 Stunden
-                    vorher ab. Bei nicht rechtzeitiger Absage berechnen wir zur
-                    Kompensation pauschal eine Stunde Kundendienst – Details
-                    regelt{" "}
-                    <Link
-                      href="/agb#kundendienst-wartung"
-                      className="font-medium text-brand underline underline-offset-2"
-                    >
-                      § 5a unserer AGB
-                    </Link>
-                    .
-                  </>
-                }
-                terms={
-                  <>
-                    Ich habe die{" "}
-                    <Link
-                      href="/agb"
-                      target="_blank"
-                      className="font-medium text-brand underline underline-offset-2"
-                    >
-                      AGB
-                    </Link>{" "}
-                    gelesen und akzeptiere sie – insbesondere die Regelungen zu
-                    Kosten und Terminabsagen (§ 5a).
-                  </>
-                }
-              />
-            </section>
-
-            <div className="flex items-center gap-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              <span className="h-px flex-1 bg-border" />
-              oder
-              <span className="h-px flex-1 bg-border" />
-            </div>
-          </>
+      <div className="flex flex-col gap-6">
+        {SITE.bookingUrl ? (
+          <BookingEmbed
+            url={SITE.bookingUrl}
+            title="Kundendienst- und Wartungstermin buchen"
+            notice={
+              <>
+                <span className="font-semibold">
+                  Kundendienst- und Wartungseinsätze sind kostenpflichtig.
+                </span>{" "}
+                Berechnet werden Anfahrt und Arbeitszeit nach Aufwand (zzgl.
+                Material und gesetzl. USt.). Die genauen Konditionen nennen wir
+                Ihnen bei der Terminbestätigung. Bitte sagen Sie einen Termin,
+                den Sie nicht wahrnehmen können, mindestens 12 Stunden vorher ab.
+                Bei nicht rechtzeitiger Absage berechnen wir zur Kompensation
+                pauschal eine Stunde Kundendienst – Details regelt{" "}
+                <Link
+                  href="/agb#kundendienst-wartung"
+                  className="font-medium text-brand underline underline-offset-2"
+                >
+                  § 5a unserer AGB
+                </Link>
+                .
+              </>
+            }
+            terms={
+              <>
+                Ich habe die{" "}
+                <Link
+                  href="/agb"
+                  target="_blank"
+                  className="font-medium text-brand underline underline-offset-2"
+                >
+                  AGB
+                </Link>{" "}
+                gelesen und akzeptiere sie – insbesondere die Regelungen zu
+                Kosten und Terminabsagen (§ 5a).
+              </>
+            }
+          />
+        ) : (
+          <p className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
+            Die Online-Terminbuchung ist gerade nicht verfügbar. Bitte rufen Sie
+            uns an:{" "}
+            <a
+              href={SITE.phoneHref}
+              className="font-medium text-brand underline underline-offset-2"
+            >
+              {SITE.phone}
+            </a>
+            .
+          </p>
         )}
 
-        <section className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <h2 className="text-xl font-semibold tracking-tight">
-              Akute Störung melden
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Heizung kalt, Wasser läuft nicht, Fehlermeldung? Schildern Sie uns
-              kurz das Problem.
-            </p>
-          </div>
-          <KundendienstForm />
-        </section>
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Phone className="size-4 shrink-0 text-brand" />
+          Akuter Notfall (z. B. Heizungsausfall)? Rufen Sie uns direkt an:{" "}
+          <a
+            href={SITE.phoneHref}
+            className="font-medium text-brand underline underline-offset-2"
+          >
+            {SITE.phone}
+          </a>
+          .
+        </p>
       </div>
     </FormPage>
   );
