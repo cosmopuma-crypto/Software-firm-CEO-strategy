@@ -29,6 +29,11 @@ export interface SiteProfile {
   readonly mobileHref: string;
   /** WhatsApp-Link (wa.me, Nummer im Format 49… ohne führende 0/+). */
   readonly whatsapp: string;
+  /**
+   * Google-Kalender-Terminplanung (Kurz-Link `calendar.app.google/…`) für
+   * Kundendienst-/Wartungstermine. Leer = keine Online-Buchung (Demo).
+   */
+  readonly bookingUrl: string;
   readonly hours: string;
   readonly url: string;
   readonly geo: { readonly lat: number; readonly lng: number };
@@ -59,6 +64,7 @@ const ST_HAUSTECHNIK: SiteProfile = {
   mobile: "0157 39596636",
   mobileHref: "tel:+4915739596636",
   whatsapp: "https://wa.me/4915739596636",
+  bookingUrl: "https://calendar.app.google/EC3DjE2AzjS9KtoM6",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   // TODO: finale Domain bestätigen (Platzhalter = bestehende Domain)
   url: "https://www.st-haustechnik.de",
@@ -102,6 +108,7 @@ const MUSTERBETRIEB: SiteProfile = {
   mobile: "0123 4567890",
   mobileHref: "tel:+491234567890",
   whatsapp: "https://wa.me/491234567890",
+  bookingUrl: "",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   url:
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://musterbetrieb-demo.vercel.app",
