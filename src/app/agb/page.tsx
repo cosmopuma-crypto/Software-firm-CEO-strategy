@@ -110,6 +110,46 @@ export default function AgbPage() {
         </p>
       </LegalSection>
 
+      <LegalSection
+        id="kundendienst-wartung"
+        heading="§ 5a Kundendienst- und Wartungseinsätze (Vergütung und Terminabsage)"
+      >
+        <p>
+          (1) Kundendienst-, Service- und Wartungseinsätze sind – soweit nicht
+          ausdrücklich etwas anderes vereinbart ist – kostenpflichtig. Vergütet
+          werden die Anfahrt sowie die aufgewendete Arbeitszeit nach Aufwand
+          bzw. nach der jeweils gültigen Preisliste des Auftragnehmers, zuzüglich
+          verwendeten Materials und der gesetzlichen Umsatzsteuer. Auf Wunsch
+          nennt der Auftragnehmer die maßgeblichen Stunden- und Anfahrtssätze vor
+          der Terminbestätigung.
+        </p>
+        <p>
+          (2) Über einen Online-Terminplaner oder auf anderem Weg vereinbarte
+          Kundendienst- und Wartungstermine sind verbindlich. Kann der
+          Auftraggeber einen Termin nicht wahrnehmen, ist dieser mindestens 48
+          Stunden vor dem vereinbarten Beginn abzusagen oder zu verlegen. Für die
+          Absage genügt die Textform (z. B. E-Mail an {SITE.email} oder
+          telefonisch unter {SITE.phone}).
+        </p>
+        <p>
+          (3) Sagt der Auftraggeber einen Termin nicht rechtzeitig im Sinne von
+          Absatz 2 ab oder ist die Leistung aus Gründen, die der Auftraggeber zu
+          vertreten hat, am vereinbarten Termin nicht möglich (insbesondere
+          vergebliche Anfahrt, weil niemand angetroffen wird oder der Zugang
+          nicht gewährt wird), ist der Auftragnehmer berechtigt, ein angemessenes
+          Ausfallentgelt für die Anfahrt und die reservierte, anderweitig nicht
+          nutzbare Arbeitszeit zu berechnen. Dem Auftraggeber bleibt der Nachweis
+          vorbehalten, dass dem Auftragnehmer kein oder ein wesentlich geringerer
+          Schaden entstanden ist.
+        </p>
+        <p>
+          (4) Bei einer akuten Störungsmeldung wird kein fester Termin über den
+          Terminplaner gebucht; hier meldet sich das Serviceteam zur individuellen
+          Terminabstimmung. Die Absätze 1 und 3 gelten für den so abgestimmten
+          Einsatz entsprechend.
+        </p>
+      </LegalSection>
+
       <LegalSection heading="§ 6 Abnahme und Inbetriebnahme">
         <p>
           (1) Nach Fertigstellung der Montage und erfolgreicher Inbetriebnahme der
