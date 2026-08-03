@@ -64,7 +64,7 @@ const ST_HAUSTECHNIK: SiteProfile = {
   mobile: "0157 39596636",
   mobileHref: "tel:+4915739596636",
   whatsapp: "https://wa.me/4915739596636",
-  bookingUrl: "https://calendar.app.google/EC3DjE2AzjS9KtoM6",
+  bookingUrl: "https://calendar.app.google/FYeLpZJjpV48gYU29",
   hours: "Mo–Fr 08:00–17:00 Uhr",
   // TODO: finale Domain bestätigen (Platzhalter = bestehende Domain)
   url: "https://www.st-haustechnik.de",
