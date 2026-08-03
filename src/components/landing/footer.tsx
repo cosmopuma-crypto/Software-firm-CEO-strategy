@@ -9,7 +9,7 @@ const NAV = [
   { href: "/waermepumpe", label: "Wärmepumpe" },
   { href: "/#bad", label: "Bad" },
   { href: "/#referenzen", label: "Referenzen" },
-  { href: "/#kundendienst", label: "Kundendienst" },
+  { href: "/kundendienst", label: "Kundendienst" },
   { href: "/ratgeber", label: "Ratgeber" },
 ];
 
