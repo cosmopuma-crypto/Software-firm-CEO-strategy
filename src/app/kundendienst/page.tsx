@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FormPage } from "@/components/landing/form-page";
 import { KundendienstForm } from "@/components/forms/kundendienst-form";
 import { BookingEmbed } from "@/components/landing/booking-embed";
@@ -33,6 +34,41 @@ export default function KundendienstPage() {
               <BookingEmbed
                 url={SITE.bookingUrl}
                 title="Kundendienst- und Wartungstermin buchen"
+                notice={
+                  <>
+                    <span className="font-semibold">
+                      Kundendienst- und Wartungseinsätze sind kostenpflichtig.
+                    </span>{" "}
+                    Berechnet werden Anfahrt und Arbeitszeit nach Aufwand (zzgl.
+                    Material und gesetzl. USt.). Die genauen Konditionen nennen
+                    wir Ihnen bei der Terminbestätigung. Bitte sagen Sie einen
+                    Termin, den Sie nicht wahrnehmen können, mindestens 12 Stunden
+                    vorher ab. Bei nicht rechtzeitiger Absage berechnen wir zur
+                    Kompensation pauschal eine Stunde Kundendienst – Details
+                    regelt{" "}
+                    <Link
+                      href="/agb#kundendienst-wartung"
+                      className="font-medium text-brand underline underline-offset-2"
+                    >
+                      § 5a unserer AGB
+                    </Link>
+                    .
+                  </>
+                }
+                terms={
+                  <>
+                    Ich habe die{" "}
+                    <Link
+                      href="/agb"
+                      target="_blank"
+                      className="font-medium text-brand underline underline-offset-2"
+                    >
+                      AGB
+                    </Link>{" "}
+                    gelesen und akzeptiere sie – insbesondere die Regelungen zu
+                    Kosten und Terminabsagen (§ 5a).
+                  </>
+                }
               />
             </section>
 
