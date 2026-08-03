@@ -136,11 +136,12 @@ export default function AgbPage() {
           Absatz 2 ab oder ist die Leistung aus Gründen, die der Auftraggeber zu
           vertreten hat, am vereinbarten Termin nicht möglich (insbesondere
           vergebliche Anfahrt, weil niemand angetroffen wird oder der Zugang
-          nicht gewährt wird), ist der Auftragnehmer berechtigt, ein angemessenes
-          Ausfallentgelt für die Anfahrt und die reservierte, anderweitig nicht
-          nutzbare Arbeitszeit zu berechnen. Dem Auftraggeber bleibt der Nachweis
-          vorbehalten, dass dem Auftragnehmer kein oder ein wesentlich geringerer
-          Schaden entstanden ist.
+          nicht gewährt wird), berechnet der Auftragnehmer zur Kompensation des
+          Ausfalls pauschal eine Stunde Kundendienst nach dem jeweils gültigen
+          Stundensatz zuzüglich der gesetzlichen Umsatzsteuer. Dem Auftraggeber
+          bleibt der Nachweis vorbehalten, dass dem Auftragnehmer kein oder ein
+          wesentlich geringerer Schaden entstanden ist; dem Auftragnehmer bleibt
+          der Nachweis eines höheren Schadens vorbehalten.
         </p>
         <p>
           (4) Bei einer akuten Störungsmeldung wird kein fester Termin über den

@@ -42,8 +42,10 @@ export default function KundendienstPage() {
                     Berechnet werden Anfahrt und Arbeitszeit nach Aufwand (zzgl.
                     Material und gesetzl. USt.). Die genauen Konditionen nennen
                     wir Ihnen bei der Terminbestätigung. Bitte sagen Sie einen
-                    Termin, den Sie nicht wahrnehmen können, rechtzeitig ab –
-                    Details regelt{" "}
+                    Termin, den Sie nicht wahrnehmen können, mindestens 12 Stunden
+                    vorher ab. Bei nicht rechtzeitiger Absage berechnen wir zur
+                    Kompensation pauschal eine Stunde Kundendienst – Details
+                    regelt{" "}
                     <Link
                       href="/agb#kundendienst-wartung"
                       className="font-medium text-brand underline underline-offset-2"
