@@ -88,20 +88,22 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
     case "klimaanlage": {
-      const total = p.roomAreas.reduce((sum, a) => sum + a, 0);
-      const perRoom = p.roomAreas
-        .map((a, i) => `Raum ${i + 1}: ${a} m²`)
-        .join(", ");
-      return [
+      const total = p.rooms.reduce((sum, r) => sum + r.areaM2, 0);
+      const rows: Row[] = [
         ["Nutzung", labelOf(AC_PURPOSES, p.purpose)],
         ["Objekttyp", labelOf(AC_PROPERTY_TYPES, p.propertyType)],
-        ["Anzahl Räume", String(p.roomAreas.length)],
-        ["Flächen je Raum", perRoom],
-        ["Gesamtfläche", `${total} m²`],
-        ["Montageart", labelOf(AC_MOUNT_TYPES, p.mountType)],
-        ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
-        ["Ort", `${p.addressZip} ${p.addressCity}`],
+        ["Anzahl Räume", String(p.rooms.length)],
       ];
+      p.rooms.forEach((r, i) => {
+        rows.push([
+          `Raum ${i + 1}`,
+          `${r.areaM2} m² · ${labelOf(AC_MOUNT_TYPES, r.mountType)}`,
+        ]);
+      });
+      rows.push(["Gesamtfläche", `${total} m²`]);
+      rows.push(["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)]);
+      rows.push(["Ort", `${p.addressZip} ${p.addressCity}`]);
+      return rows;
     }
     case "kundendienst": {
       const rows: Row[] = [

@@ -24,10 +24,10 @@ import {
   type Timeframe,
 } from "@/domain/forms";
 
-const STEPS = ["Nutzung", "Objekt", "Technik", "Zeitrahmen", "Kontakt"];
+const STEPS = ["Nutzung", "Objekt", "Räume", "Zeitrahmen", "Kontakt"];
 
-// Startanzahl der Flächenfelder je Raumauswahl. Bei "4 oder mehr" lassen sich
-// weitere Räume dynamisch hinzufügen.
+// Startanzahl der Raumzeilen je Auswahl. Bei "4 oder mehr" lassen sich weitere
+// Räume dynamisch hinzufügen.
 const MIN_ROOMS: Record<AcRoomCount, number> = {
   eins: 1,
   zwei: 2,
@@ -36,12 +36,16 @@ const MIN_ROOMS: Record<AcRoomCount, number> = {
 };
 const MAX_ROOMS = 12;
 
+interface Room {
+  area: string;
+  mount?: AcMountType;
+}
+
 interface State {
   purpose?: AcPurpose;
   propertyType?: AcPropertyType;
   roomCount?: AcRoomCount;
-  roomAreas: string[];
-  mountType?: AcMountType;
+  rooms: Room[];
   timeframe?: Timeframe;
   addressZip: string;
   addressCity: string;
@@ -54,7 +58,7 @@ interface State {
 }
 
 const INITIAL: State = {
-  roomAreas: [],
+  rooms: [],
   addressZip: "",
   addressCity: "",
   name: "",
@@ -64,6 +68,8 @@ const INITIAL: State = {
   consent: false,
   website: "",
 };
+
+const emptyRoom = (): Room => ({ area: "", mount: undefined });
 
 export function Klimaanlage() {
   const [s, setS] = useState<State>(INITIAL);
@@ -78,35 +84,30 @@ export function Klimaanlage() {
 
   const single = s.roomCount === "eins";
 
-  // Raumauswahl → passende Anzahl Flächenfelder anlegen (Eingaben erhalten).
+  // Raumauswahl → passende Anzahl Raumzeilen anlegen (Eingaben erhalten).
   function selectRoomCount(v: AcRoomCount) {
     setStepError(null);
     setS((p) => {
       const base = MIN_ROOMS[v];
-      const target = v === "vier_plus" ? Math.max(base, p.roomAreas.length) : base;
-      const roomAreas = Array.from({ length: target }, (_, i) => p.roomAreas[i] ?? "");
-      return { ...p, roomCount: v, roomAreas };
+      const target = v === "vier_plus" ? Math.max(base, p.rooms.length) : base;
+      const rooms = Array.from({ length: target }, (_, i) => p.rooms[i] ?? emptyRoom());
+      return { ...p, roomCount: v, rooms };
     });
   }
 
-  const setArea = (index: number, value: string) =>
+  const setRoom = (index: number, patch: Partial<Room>) =>
     setS((p) => ({
       ...p,
-      roomAreas: p.roomAreas.map((a, i) => (i === index ? value : a)),
+      rooms: p.rooms.map((r, i) => (i === index ? { ...r, ...patch } : r)),
     }));
 
   const addRoom = () =>
     setS((p) =>
-      p.roomAreas.length >= MAX_ROOMS
-        ? p
-        : { ...p, roomAreas: [...p.roomAreas, ""] },
+      p.rooms.length >= MAX_ROOMS ? p : { ...p, rooms: [...p.rooms, emptyRoom()] },
     );
 
   const removeRoom = (index: number) =>
-    setS((p) => ({
-      ...p,
-      roomAreas: p.roomAreas.filter((_, i) => i !== index),
-    }));
+    setS((p) => ({ ...p, rooms: p.rooms.filter((_, i) => i !== index) }));
 
   const fail = (msg: string) => {
     setStepError(msg);
@@ -124,17 +125,16 @@ export function Klimaanlage() {
         if (!s.roomCount) return fail("Bitte wählen Sie die Anzahl der Räume.");
         break;
       case 2:
-        if (s.roomAreas.length === 0) return fail("Bitte geben Sie die Fläche an.");
-        for (let i = 0; i < s.roomAreas.length; i++) {
-          if (!s.roomAreas[i] || Number(s.roomAreas[i]) < 5) {
-            return fail(
-              single
-                ? "Bitte geben Sie die Fläche des Raums an."
-                : `Bitte geben Sie die Fläche für Raum ${i + 1} an.`,
-            );
+        if (s.rooms.length === 0) return fail("Bitte geben Sie die Räume an.");
+        for (let i = 0; i < s.rooms.length; i++) {
+          const label = single ? "den Raum" : `Raum ${i + 1}`;
+          if (!s.rooms[i].area || Number(s.rooms[i].area) < 5) {
+            return fail(`Bitte geben Sie die Fläche für ${label} an.`);
+          }
+          if (!s.rooms[i].mount) {
+            return fail(`Bitte wählen Sie das gewünschte Gerät für ${label}.`);
           }
         }
-        if (!s.mountType) return fail("Bitte wählen Sie die Montageart.");
         break;
       case 3:
         if (!s.timeframe) return fail("Bitte wählen Sie einen Zeitrahmen.");
@@ -159,8 +159,7 @@ export function Klimaanlage() {
       purpose: s.purpose,
       propertyType: s.propertyType,
       roomCount: s.roomCount,
-      roomAreas: s.roomAreas.map((a) => Number(a)),
-      mountType: s.mountType,
+      rooms: s.rooms.map((r) => ({ areaM2: Number(r.area), mountType: r.mount })),
       timeframe: s.timeframe,
       addressZip: s.addressZip.trim(),
       addressCity: s.addressCity.trim(),
@@ -198,6 +197,8 @@ export function Klimaanlage() {
       />
     );
   }
+
+  const canRemove = !single && s.rooms.length > MIN_ROOMS[s.roomCount ?? "zwei"];
 
   return (
     <div className="flex flex-col gap-6">
@@ -242,69 +243,68 @@ export function Klimaanlage() {
 
         {step === 2 && (
           <div className="flex flex-col gap-4">
-            <Field
-              label={
-                single
-                  ? "Wie groß ist der Raum (ca. m²)?"
-                  : "Wie groß ist jeder Raum (ca. m²)?"
-              }
-              hint={
-                single
-                  ? undefined
-                  : "Bitte pro Raum die Fläche einzeln angeben – nicht die Gesamtfläche."
-              }
-              required
-              error={stepError ?? undefined}
-            >
-              <div className="flex flex-col gap-2.5">
-                {s.roomAreas.map((val, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <label
-                      htmlFor={`ac-room-${i}`}
-                      className="w-20 shrink-0 text-sm text-muted-foreground"
-                    >
-                      {single ? "Fläche" : `Raum ${i + 1}`}
-                    </label>
-                    <Input
-                      id={`ac-room-${i}`}
-                      type="number"
-                      inputMode="numeric"
-                      min={5}
-                      placeholder="z. B. 20"
-                      value={val}
-                      onChange={(e) => setArea(i, e.target.value)}
-                    />
-                    <span className="text-sm text-muted-foreground">m²</span>
-                    {!single && s.roomAreas.length > MIN_ROOMS[s.roomCount ?? "zwei"] && (
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Raum ${i + 1} entfernen`}
-                        onClick={() => removeRoom(i)}
-                      >
-                        <X className="size-4" />
-                      </Button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </Field>
+            <p className="text-sm text-muted-foreground">
+              {single
+                ? "Bitte geben Sie Fläche und gewünschtes Gerät für Ihren Raum an."
+                : "Bitte geben Sie pro Raum die Fläche und das gewünschte Gerät an – jeder Raum kann ein anderes Gerät bekommen."}
+            </p>
+            {stepError && <ErrorBanner message={stepError} />}
 
-            {s.roomCount === "vier_plus" && s.roomAreas.length < MAX_ROOMS && (
+            {s.rooms.map((room, i) => (
+              <div key={i} className="flex flex-col gap-3 rounded-xl border bg-card/50 p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <h4 className="text-sm font-semibold">
+                    {single ? "Ihr Raum" : `Raum ${i + 1}`}
+                  </h4>
+                  {canRemove && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      aria-label={`Raum ${i + 1} entfernen`}
+                      onClick={() => removeRoom(i)}
+                    >
+                      <X className="size-4" /> Entfernen
+                    </Button>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor={`ac-room-area-${i}`}
+                    className="w-20 shrink-0 text-sm text-muted-foreground"
+                  >
+                    Fläche
+                  </label>
+                  <Input
+                    id={`ac-room-area-${i}`}
+                    type="number"
+                    inputMode="numeric"
+                    min={5}
+                    placeholder="z. B. 20"
+                    value={room.area}
+                    onChange={(e) => setRoom(i, { area: e.target.value })}
+                  />
+                  <span className="text-sm text-muted-foreground">m²</span>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <span className="text-sm text-muted-foreground">Gewünschtes Gerät</span>
+                  <OptionCards
+                    options={AC_MOUNT_TYPES}
+                    value={room.mount}
+                    onChange={(v) => setRoom(i, { mount: v })}
+                    columns={2}
+                  />
+                </div>
+              </div>
+            ))}
+
+            {s.roomCount === "vier_plus" && s.rooms.length < MAX_ROOMS && (
               <Button type="button" variant="outline" size="sm" className="w-fit" onClick={addRoom}>
                 <Plus className="size-4" /> Weiteren Raum hinzufügen
               </Button>
             )}
-
-            <Field label="Welche Montageart bevorzugen Sie?" required>
-              <OptionCards
-                options={AC_MOUNT_TYPES}
-                value={s.mountType}
-                onChange={(v) => set("mountType", v)}
-                columns={2}
-              />
-            </Field>
           </div>
         )}
 

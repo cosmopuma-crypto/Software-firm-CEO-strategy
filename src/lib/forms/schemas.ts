@@ -189,17 +189,19 @@ export const klimaanlageSchema = z.object({
   purpose: enumOf<AcPurpose>(acPurposeValues),
   propertyType: enumOf<AcPropertyType>(acPropertyTypeValues),
   roomCount: enumOf<AcRoomCount>(acRoomCountValues),
-  // Fläche je Raum einzeln (nicht als Summe) – bei 2+ Räumen ein Wert pro Raum.
-  roomAreas: z
+  // Fläche UND Wunschgerät je Raum einzeln (nicht als Summe / nicht global).
+  rooms: z
     .array(
-      z.coerce
-        .number({ error: "Bitte gib die Fläche je Raum an." })
-        .min(5, "Mindestens 5 m² pro Raum.")
-        .max(2000, "Bitte prüfe die Fläche."),
+      z.object({
+        areaM2: z.coerce
+          .number({ error: "Bitte gib die Fläche je Raum an." })
+          .min(5, "Mindestens 5 m² pro Raum.")
+          .max(2000, "Bitte prüfe die Fläche."),
+        mountType: enumOf<AcMountType>(acMountTypeValues),
+      }),
     )
-    .min(1, "Bitte gib mindestens einen Raum mit Fläche an.")
+    .min(1, "Bitte gib mindestens einen Raum an.")
     .max(20, "Bitte prüfe die Anzahl der Räume."),
-  mountType: enumOf<AcMountType>(acMountTypeValues),
   timeframe: enumOf<Timeframe>(timeframeValues),
   addressZip: zipField,
   addressCity: cityField,

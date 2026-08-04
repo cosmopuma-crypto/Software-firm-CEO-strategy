@@ -69,8 +69,10 @@ const validKlimaanlage = {
   purpose: "heizen_kuehlen",
   propertyType: "einfamilienhaus",
   roomCount: "zwei",
-  roomAreas: [25, 20],
-  mountType: "wand",
+  rooms: [
+    { areaM2: 25, mountType: "wand" },
+    { areaM2: 20, mountType: "decke" },
+  ],
   timeframe: "3_monate",
   addressZip: "24536",
   addressCity: "Neumünster",
@@ -223,30 +225,51 @@ describe("klimaanlageSchema", () => {
   it("wandelt numerische Strings je Raum um (coerce)", () => {
     const r = klimaanlageSchema.safeParse({
       ...validKlimaanlage,
-      roomAreas: ["25", "20"],
+      rooms: [
+        { areaM2: "25", mountType: "wand" },
+        { areaM2: "20", mountType: "decke" },
+      ],
     });
     expect(r.success).toBe(true);
   });
 
-  it("erfasst die Fläche je Raum einzeln", () => {
+  it("erfasst Fläche und Wunschgerät je Raum einzeln", () => {
     const r = klimaanlageSchema.safeParse({
       ...validKlimaanlage,
-      roomAreas: [18, 22, 14],
+      rooms: [
+        { areaM2: 18, mountType: "wand" },
+        { areaM2: 22, mountType: "decke" },
+        { areaM2: 14, mountType: "truhe" },
+      ],
     });
     expect(r.success).toBe(true);
-    if (r.success) expect(r.data.roomAreas).toHaveLength(3);
+    if (r.success) {
+      expect(r.data.rooms).toHaveLength(3);
+      expect(r.data.rooms[1].mountType).toBe("decke");
+    }
   });
 
   it("lehnt eine zu kleine Fläche in einem Raum ab", () => {
     const r = klimaanlageSchema.safeParse({
       ...validKlimaanlage,
-      roomAreas: [25, 2],
+      rooms: [
+        { areaM2: 25, mountType: "wand" },
+        { areaM2: 2, mountType: "decke" },
+      ],
     });
     expect(r.success).toBe(false);
   });
 
-  it("verlangt mindestens einen Raum mit Fläche", () => {
-    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, roomAreas: [] });
+  it("verlangt ein Wunschgerät je Raum", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      rooms: [{ areaM2: 25 }, { areaM2: 20, mountType: "decke" }],
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt mindestens einen Raum", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, rooms: [] });
     expect(r.success).toBe(false);
   });
 
