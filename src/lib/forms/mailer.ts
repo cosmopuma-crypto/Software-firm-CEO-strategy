@@ -15,6 +15,8 @@ export interface SendMailInput {
   readonly text: string;
   readonly html: string;
   readonly replyTo?: string;
+  /** Empfänger-Override (z. B. Kunden-Bestätigung). Standard: Firmenpostfach. */
+  readonly to?: string;
   readonly attachments?: readonly MailAttachment[];
 }
 
@@ -40,7 +42,7 @@ async function sendViaResend(input: SendMailInput): Promise<SendMailResult> {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const { error } = await resend.emails.send({
     from: sender(),
-    to: recipient(),
+    to: input.to?.trim() || recipient(),
     subject: input.subject,
     text: input.text,
     html: input.html,
@@ -68,7 +70,7 @@ async function sendViaSmtp(input: SendMailInput): Promise<SendMailResult> {
   });
   await transporter.sendMail({
     from: sender(),
-    to: recipient(),
+    to: input.to?.trim() || recipient(),
     subject: input.subject,
     text: input.text,
     html: input.html,
@@ -86,7 +88,7 @@ function sendViaLog(input: SendMailInput): SendMailResult {
   // Entwicklung ohne Secrets: E-Mail in der Konsole protokollieren.
   console.info(
     "\n──────── [Mailer: LOG-Fallback] ────────\n" +
-      `An:       ${recipient()}\n` +
+      `An:       ${input.to?.trim() || recipient()}\n` +
       `Von:      ${sender()}\n` +
       `Reply-To: ${input.replyTo ?? "-"}\n` +
       `Betreff:  ${input.subject}\n` +

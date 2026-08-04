@@ -21,6 +21,7 @@ import {
 } from "@/domain/forms";
 import type { ContactFormPayload } from "./schemas";
 import type { Attribution } from "@/lib/tracking/attribution";
+import { SITE } from "@/lib/site";
 
 export interface BuiltEmail {
   readonly subject: string;
@@ -182,4 +183,66 @@ export function buildEmail(
   const replyTo =
     p.email && p.email.trim().length > 0 ? p.email.trim() : undefined;
   return { subject, text, html, replyTo };
+}
+
+/**
+ * Baut die Eingangsbestätigung an den Kunden (Double-Confirmation).
+ * Enthält eine Zusammenfassung der Angaben und die Kontaktdaten des Betriebs.
+ * Wird nur versendet, wenn der Kunde eine E-Mail-Adresse angegeben hat.
+ * `replyTo` zeigt auf das Firmenpostfach, damit Kundenantworten dort ankommen.
+ */
+export function buildCustomerConfirmation(p: ContactFormPayload): BuiltEmail {
+  const formLabel = FORM_LABELS[p.formType];
+  const safeName = p.name.replace(/[\r\n]+/g, " ").trim();
+  const subject = `Ihre Anfrage bei ${SITE.name} ist eingegangen`;
+
+  const rows = specificRows(p);
+  const intro =
+    `vielen Dank für Ihre Anfrage über unser ${formLabel}. Wir haben Ihre ` +
+    "Anfrage erhalten und melden uns so schnell wie möglich bei Ihnen – " +
+    "in der Regel innerhalb eines Werktags.";
+
+  const text = [
+    `Hallo ${safeName},`,
+    "",
+    intro,
+    "",
+    "Ihre Angaben im Überblick:",
+    ...rows.map(([label, value]) => `- ${label}: ${value}`),
+    "",
+    `Bei dringenden Anliegen erreichen Sie uns telefonisch unter ${SITE.phone}.`,
+    "",
+    "Freundliche Grüße",
+    SITE.name,
+    `${SITE.street}, ${SITE.zip} ${SITE.city}`,
+    `${SITE.phone} · ${SITE.email}`,
+  ].join("\n");
+
+  const htmlRows = rows
+    .map(
+      ([label, value]) =>
+        `<tr>` +
+        `<td style="padding:6px 12px;font-weight:600;vertical-align:top;white-space:nowrap;">${escapeHtml(
+          label,
+        )}</td>` +
+        `<td style="padding:6px 12px;">${escapeHtml(value).replace(/\n/g, "<br>")}</td>` +
+        `</tr>`,
+    )
+    .join("");
+
+  const html =
+    `<div style="font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">` +
+    `<p>Hallo ${escapeHtml(safeName)},</p>` +
+    `<p>${escapeHtml(intro)}</p>` +
+    `<p style="font-weight:600;margin-bottom:4px;">Ihre Angaben im Überblick:</p>` +
+    `<table style="border-collapse:collapse;border:1px solid #e5e7eb;">${htmlRows}</table>` +
+    `<p>Bei dringenden Anliegen erreichen Sie uns telefonisch unter ` +
+    `${escapeHtml(SITE.phone)}.</p>` +
+    `<p style="margin-top:16px;">Freundliche Grüße<br>` +
+    `<strong>${escapeHtml(SITE.name)}</strong><br>` +
+    `${escapeHtml(`${SITE.street}, ${SITE.zip} ${SITE.city}`)}<br>` +
+    `${escapeHtml(`${SITE.phone} · ${SITE.email}`)}</p>` +
+    `</div>`;
+
+  return { subject, text, html, replyTo: SITE.email };
 }

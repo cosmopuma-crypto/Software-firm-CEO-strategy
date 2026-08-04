@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { contactFormSchema, flattenErrors, HONEYPOT_FIELD } from "@/lib/forms/schemas";
-import { buildEmail } from "@/lib/forms/email-template";
+import { buildEmail, buildCustomerConfirmation } from "@/lib/forms/email-template";
 import { sendContactEmail, type MailAttachment } from "@/lib/forms/mailer";
 import { parseAttribution } from "@/lib/tracking/attribution";
 import { logLeadEvent } from "@/lib/tracking/lead-log";
@@ -157,7 +157,22 @@ export async function POST(request: Request) {
     );
   }
 
-  // 5) Lead-Log (wirft nie — ein Log-Fehler lässt die Anfrage nicht scheitern)
+  // 5) Eingangsbestätigung an den Kunden (nur mit E-Mail; Best-Effort).
+  //    Ein Fehler hier darf die erfolgreiche Anfrage nicht scheitern lassen –
+  //    die Lead-Mail an den Betrieb ist bereits raus.
+  const customerEmail = result.data.email?.trim();
+  if (customerEmail) {
+    const confirmation = buildCustomerConfirmation(result.data);
+    await sendContactEmail({
+      to: customerEmail,
+      subject: confirmation.subject,
+      text: confirmation.text,
+      html: confirmation.html,
+      replyTo: confirmation.replyTo,
+    });
+  }
+
+  // 6) Lead-Log (wirft nie — ein Log-Fehler lässt die Anfrage nicht scheitern)
   await logLeadEvent({ formType: result.data.formType, attribution });
 
   return NextResponse.json({ ok: true });
