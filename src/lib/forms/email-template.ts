@@ -17,7 +17,6 @@ import {
   URGENCIES,
   AC_PURPOSES,
   AC_PROPERTY_TYPES,
-  AC_ROOM_COUNTS,
   AC_MOUNT_TYPES,
 } from "@/domain/forms";
 import type { ContactFormPayload } from "./schemas";
@@ -88,16 +87,22 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
         ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
-    case "klimaanlage":
+    case "klimaanlage": {
+      const total = p.roomAreas.reduce((sum, a) => sum + a, 0);
+      const perRoom = p.roomAreas
+        .map((a, i) => `Raum ${i + 1}: ${a} m²`)
+        .join(", ");
       return [
         ["Nutzung", labelOf(AC_PURPOSES, p.purpose)],
         ["Objekttyp", labelOf(AC_PROPERTY_TYPES, p.propertyType)],
-        ["Anzahl Räume", labelOf(AC_ROOM_COUNTS, p.roomCount)],
-        ["Fläche", `${p.areaM2} m²`],
+        ["Anzahl Räume", String(p.roomAreas.length)],
+        ["Flächen je Raum", perRoom],
+        ["Gesamtfläche", `${total} m²`],
         ["Montageart", labelOf(AC_MOUNT_TYPES, p.mountType)],
         ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
         ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
+    }
     case "kundendienst": {
       const rows: Row[] = [
         ["Adresse", `${p.addressStreet}, ${p.addressZip} ${p.addressCity}`],

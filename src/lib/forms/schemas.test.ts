@@ -69,7 +69,7 @@ const validKlimaanlage = {
   purpose: "heizen_kuehlen",
   propertyType: "einfamilienhaus",
   roomCount: "zwei",
-  areaM2: 45,
+  roomAreas: [25, 20],
   mountType: "wand",
   timeframe: "3_monate",
   addressZip: "24536",
@@ -220,13 +220,33 @@ describe("klimaanlageSchema", () => {
     expect(klimaanlageSchema.safeParse(validKlimaanlage).success).toBe(true);
   });
 
-  it("wandelt numerische Strings für die Fläche um (coerce)", () => {
-    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, areaM2: "45" });
+  it("wandelt numerische Strings je Raum um (coerce)", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      roomAreas: ["25", "20"],
+    });
     expect(r.success).toBe(true);
   });
 
-  it("lehnt eine zu kleine Fläche ab", () => {
-    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, areaM2: 2 });
+  it("erfasst die Fläche je Raum einzeln", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      roomAreas: [18, 22, 14],
+    });
+    expect(r.success).toBe(true);
+    if (r.success) expect(r.data.roomAreas).toHaveLength(3);
+  });
+
+  it("lehnt eine zu kleine Fläche in einem Raum ab", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      roomAreas: [25, 2],
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt mindestens einen Raum mit Fläche", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, roomAreas: [] });
     expect(r.success).toBe(false);
   });
 

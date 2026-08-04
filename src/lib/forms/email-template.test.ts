@@ -72,7 +72,7 @@ const klimaanlage: KlimaanlagePayload = {
   purpose: "heizen_kuehlen",
   propertyType: "einfamilienhaus",
   roomCount: "zwei",
-  areaM2: 45,
+  roomAreas: [25, 20],
   mountType: "wand",
   timeframe: "3_monate",
   addressZip: "24536",
@@ -94,12 +94,14 @@ describe("buildEmail", () => {
     expect(buildEmail(klimaanlage).subject).toMatch(/^\[Klimaanlagen-Konfigurator\]/);
   });
 
-  it("rendert die Klimaanlagen-Felder mit deutschen Labels", () => {
+  it("rendert die Klimaanlagen-Felder mit Fläche je Raum und Gesamtsumme", () => {
     const text = buildEmail(klimaanlage).text;
     expect(text).toContain("Heizen & kühlen (Luft-Luft-Wärmepumpe)");
     expect(text).toContain("Einfamilienhaus");
-    expect(text).toContain("2 Räume");
-    expect(text).toContain("45 m²");
+    expect(text).toContain("Anzahl Räume: 2");
+    expect(text).toContain("Raum 1: 25 m²");
+    expect(text).toContain("Raum 2: 20 m²");
+    expect(text).toContain("Gesamtfläche: 45 m²");
     expect(text).toContain("Wandgerät");
     expect(text).toContain("24536 Neumünster");
   });
