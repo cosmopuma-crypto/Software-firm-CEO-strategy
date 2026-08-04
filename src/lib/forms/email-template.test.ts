@@ -4,6 +4,7 @@ import type {
   SchnellanfragePayload,
   BadplanerPayload,
   KundendienstPayload,
+  KlimaanlagePayload,
 } from "./schemas";
 
 const waermepumpe: WaermepumpePayload = {
@@ -66,6 +67,24 @@ const kundendienst: KundendienstPayload = {
   consent: true,
 };
 
+const klimaanlage: KlimaanlagePayload = {
+  formType: "klimaanlage",
+  purpose: "heizen_kuehlen",
+  propertyType: "einfamilienhaus",
+  roomCount: "zwei",
+  rooms: [
+    { areaM2: 25, mountType: "wand" },
+    { areaM2: 20, mountType: "decke" },
+  ],
+  timeframe: "3_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
+  name: "Carla Kühl",
+  email: "carla@example.de",
+  phone: "04321 444",
+  consent: true,
+};
+
 describe("buildEmail", () => {
   it("setzt den Betreff-Präfix je Formulartyp", () => {
     expect(buildEmail(waermepumpe).subject).toMatch(/^\[Wärmepumpenkonfigurator\]/);
@@ -74,6 +93,18 @@ describe("buildEmail", () => {
     );
     expect(buildEmail(badplaner).subject).toMatch(/^\[Badplaner\]/);
     expect(buildEmail(kundendienst).subject).toMatch(/^\[Kundendienst\]/);
+    expect(buildEmail(klimaanlage).subject).toMatch(/^\[Klimaanlagen-Konfigurator\]/);
+  });
+
+  it("rendert je Raum Fläche und Wunschgerät plus Gesamtsumme", () => {
+    const text = buildEmail(klimaanlage).text;
+    expect(text).toContain("Heizen & kühlen (Luft-Luft-Wärmepumpe)");
+    expect(text).toContain("Einfamilienhaus");
+    expect(text).toContain("Anzahl Räume: 2");
+    expect(text).toContain("Raum 1: 25 m² · Wandgerät");
+    expect(text).toContain("Raum 2: 20 m² · Deckenkassette");
+    expect(text).toContain("Gesamtfläche: 45 m²");
+    expect(text).toContain("24536 Neumünster");
   });
 
   it("nutzt die Absender-E-Mail als replyTo", () => {

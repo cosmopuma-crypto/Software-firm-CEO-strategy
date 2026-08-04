@@ -4,6 +4,7 @@ import {
   schnellanfrageSchema,
   badplanerSchema,
   kundendienstSchema,
+  klimaanlageSchema,
   flattenErrors,
 } from "./schemas";
 
@@ -60,6 +61,21 @@ const validKundendienst = {
   deviceType: "heizung",
   problem: "Die Heizung wird nicht mehr warm.",
   urgency: "dringend",
+  ...validContact,
+};
+
+const validKlimaanlage = {
+  formType: "klimaanlage",
+  purpose: "heizen_kuehlen",
+  propertyType: "einfamilienhaus",
+  roomCount: "zwei",
+  rooms: [
+    { areaM2: 25, mountType: "wand" },
+    { areaM2: 20, mountType: "decke" },
+  ],
+  timeframe: "3_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
   ...validContact,
 };
 
@@ -201,6 +217,76 @@ describe("kundendienstSchema", () => {
   });
 });
 
+describe("klimaanlageSchema", () => {
+  it("akzeptiert eine gültige Anfrage", () => {
+    expect(klimaanlageSchema.safeParse(validKlimaanlage).success).toBe(true);
+  });
+
+  it("wandelt numerische Strings je Raum um (coerce)", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      rooms: [
+        { areaM2: "25", mountType: "wand" },
+        { areaM2: "20", mountType: "decke" },
+      ],
+    });
+    expect(r.success).toBe(true);
+  });
+
+  it("erfasst Fläche und Wunschgerät je Raum einzeln", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      rooms: [
+        { areaM2: 18, mountType: "wand" },
+        { areaM2: 22, mountType: "decke" },
+        { areaM2: 14, mountType: "truhe" },
+      ],
+    });
+    expect(r.success).toBe(true);
+    if (r.success) {
+      expect(r.data.rooms).toHaveLength(3);
+      expect(r.data.rooms[1].mountType).toBe("decke");
+    }
+  });
+
+  it("lehnt eine zu kleine Fläche in einem Raum ab", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      rooms: [
+        { areaM2: 25, mountType: "wand" },
+        { areaM2: 2, mountType: "decke" },
+      ],
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt ein Wunschgerät je Raum", () => {
+    const r = klimaanlageSchema.safeParse({
+      ...validKlimaanlage,
+      rooms: [{ areaM2: 25 }, { areaM2: 20, mountType: "decke" }],
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt mindestens einen Raum", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, rooms: [] });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt eine gültige Nutzung", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, purpose: "unbekannt" });
+    expect(r.success).toBe(false);
+  });
+
+  it("lehnt ungültige PLZ ab", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, addressZip: "245" });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).addressZip).toMatch(/Postleitzahl/);
+    }
+  });
+});
+
 describe("gemeinsame Kontaktfelder", () => {
   it("verlangt consent === true", () => {
     const r = waermepumpeSchema.safeParse({
@@ -228,6 +314,7 @@ describe("contactFormSchema (diskriminierte Union)", () => {
     expect(contactFormSchema.safeParse(validSchnellanfrage).success).toBe(true);
     expect(contactFormSchema.safeParse(validBadplaner).success).toBe(true);
     expect(contactFormSchema.safeParse(validKundendienst).success).toBe(true);
+    expect(contactFormSchema.safeParse(validKlimaanlage).success).toBe(true);
   });
 
   it("wendet die Erreichbarkeits-Prüfung auch auf Union-Ebene an", () => {

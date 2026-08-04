@@ -13,6 +13,10 @@ import {
   timeframeValues,
   deviceTypeValues,
   urgencyValues,
+  acPurposeValues,
+  acPropertyTypeValues,
+  acRoomCountValues,
+  acMountTypeValues,
   type BuildingType,
   type YearBand,
   type HeatingSystem,
@@ -26,6 +30,10 @@ import {
   type Timeframe,
   type DeviceType,
   type Urgency,
+  type AcPurpose,
+  type AcPropertyType,
+  type AcRoomCount,
+  type AcMountType,
 } from "@/domain/forms";
 
 // Kleiner Helfer: zod-Enum aus einer (readonly) Werteliste bauen.
@@ -175,6 +183,31 @@ export const badplanerSchema = z.object({
   ...contactShape,
 });
 
+/* ---------------- Klimaanlage / Luft-Luft-Wärmepumpe ---------------- */
+export const klimaanlageSchema = z.object({
+  formType: z.literal("klimaanlage"),
+  purpose: enumOf<AcPurpose>(acPurposeValues),
+  propertyType: enumOf<AcPropertyType>(acPropertyTypeValues),
+  roomCount: enumOf<AcRoomCount>(acRoomCountValues),
+  // Fläche UND Wunschgerät je Raum einzeln (nicht als Summe / nicht global).
+  rooms: z
+    .array(
+      z.object({
+        areaM2: z.coerce
+          .number({ error: "Bitte gib die Fläche je Raum an." })
+          .min(5, "Mindestens 5 m² pro Raum.")
+          .max(2000, "Bitte prüfe die Fläche."),
+        mountType: enumOf<AcMountType>(acMountTypeValues),
+      }),
+    )
+    .min(1, "Bitte gib mindestens einen Raum an.")
+    .max(20, "Bitte prüfe die Anzahl der Räume."),
+  timeframe: enumOf<Timeframe>(timeframeValues),
+  addressZip: zipField,
+  addressCity: cityField,
+  ...contactShape,
+});
+
 /* ---------------- Kundendienst ---------------- */
 export const kundendienstSchema = z.object({
   formType: z.literal("kundendienst"),
@@ -214,6 +247,7 @@ export const contactFormSchema = z
     schnellanfrageObjectSchema,
     badplanerSchema,
     kundendienstSchema,
+    klimaanlageSchema,
   ])
   .superRefine((d, ctx) => {
     if (d.formType === "schnellanfrage") checkReachability(d, ctx);
@@ -223,6 +257,7 @@ export type WaermepumpePayload = z.infer<typeof waermepumpeSchema>;
 export type SchnellanfragePayload = z.infer<typeof schnellanfrageSchema>;
 export type BadplanerPayload = z.infer<typeof badplanerSchema>;
 export type KundendienstPayload = z.infer<typeof kundendienstSchema>;
+export type KlimaanlagePayload = z.infer<typeof klimaanlageSchema>;
 export type ContactFormPayload = z.infer<typeof contactFormSchema>;
 
 /** Name des versteckten Honeypot-Feldes (nicht im Schema – im Route-Handler geprüft). */

@@ -30,6 +30,7 @@ export const FORM_TYPES = [
   "schnellanfrage",
   "badplaner",
   "kundendienst",
+  "klimaanlage",
 ] as const;
 export type FormType = (typeof FORM_TYPES)[number];
 
@@ -141,6 +142,38 @@ export const TIMEFRAMES = [
 ] as const;
 export type Timeframe = (typeof TIMEFRAMES)[number]["value"];
 
+/* ---------------- Klimaanlage / Luft-Luft-Wärmepumpe ---------------- */
+
+export const AC_PURPOSES = [
+  { value: "kuehlen", label: "Nur kühlen" },
+  { value: "heizen_kuehlen", label: "Heizen & kühlen (Luft-Luft-Wärmepumpe)" },
+] as const;
+export type AcPurpose = (typeof AC_PURPOSES)[number]["value"];
+
+export const AC_PROPERTY_TYPES = [
+  { value: "wohnung", label: "Wohnung" },
+  { value: "einfamilienhaus", label: "Einfamilienhaus" },
+  { value: "doppel_reihenhaus", label: "Doppel-/Reihenhaus" },
+  { value: "gewerbe", label: "Gewerbe / Büro" },
+] as const;
+export type AcPropertyType = (typeof AC_PROPERTY_TYPES)[number]["value"];
+
+export const AC_ROOM_COUNTS = [
+  { value: "eins", label: "1 Raum" },
+  { value: "zwei", label: "2 Räume" },
+  { value: "drei", label: "3 Räume" },
+  { value: "vier_plus", label: "4 Räume oder mehr" },
+] as const;
+export type AcRoomCount = (typeof AC_ROOM_COUNTS)[number]["value"];
+
+export const AC_MOUNT_TYPES = [
+  { value: "wand", label: "Wandgerät" },
+  { value: "decke", label: "Deckenkassette" },
+  { value: "truhe", label: "Truhen-/Standgerät" },
+  { value: "offen", label: "Noch offen / Beratung gewünscht" },
+] as const;
+export type AcMountType = (typeof AC_MOUNT_TYPES)[number]["value"];
+
 /* ---------------- Kundendienst ---------------- */
 
 export const DEVICE_TYPES = [
@@ -174,6 +207,10 @@ export const bathBudgetValues = values(BATH_BUDGETS);
 export const timeframeValues = values(TIMEFRAMES);
 export const deviceTypeValues = values(DEVICE_TYPES);
 export const urgencyValues = values(URGENCIES);
+export const acPurposeValues = values(AC_PURPOSES);
+export const acPropertyTypeValues = values(AC_PROPERTY_TYPES);
+export const acRoomCountValues = values(AC_ROOM_COUNTS);
+export const acMountTypeValues = values(AC_MOUNT_TYPES);
 
 // E-Mail-Betreff-Präfixe je Formulartyp.
 export const FORM_LABELS: Record<FormType, string> = {
@@ -181,4 +218,5 @@ export const FORM_LABELS: Record<FormType, string> = {
   schnellanfrage: "Wärmepumpen-Schnellanfrage",
   badplaner: "Badplaner",
   kundendienst: "Kundendienst",
+  klimaanlage: "Klimaanlagen-Konfigurator",
 };
