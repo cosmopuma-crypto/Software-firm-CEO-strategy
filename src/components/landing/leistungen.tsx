@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Leaf, Flame, Bath, Wrench, ArrowRight } from "lucide-react";
+import { Leaf, Snowflake, Flame, Bath, Wrench, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "./section";
 
@@ -10,6 +10,13 @@ const SERVICES = [
     text: "Zukunftssicher heizen und kräftig Heizkosten sparen: Als zertifizierter Fachbetrieb planen wir Ihre Wärmepumpe, sichern die Förderung und montieren herstellerunabhängig.",
     img: "/brand/photos/foto-20.jpg",
     href: "/waermepumpe",
+  },
+  {
+    icon: Snowflake,
+    title: "Klimaanlage",
+    text: "Angenehm kühl im Sommer, effizient heizen im Übergang: Wir planen und montieren Split-Klimageräte und Luft-Luft-Wärmepumpen – leise, sauber und wartungsarm.",
+    img: "/brand/photos/wp-daikin-aussen.jpg",
+    href: "/klimaanlage",
   },
   {
     icon: Flame,

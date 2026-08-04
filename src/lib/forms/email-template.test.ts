@@ -4,6 +4,7 @@ import type {
   SchnellanfragePayload,
   BadplanerPayload,
   KundendienstPayload,
+  KlimaanlagePayload,
 } from "./schemas";
 
 const waermepumpe: WaermepumpePayload = {
@@ -66,6 +67,22 @@ const kundendienst: KundendienstPayload = {
   consent: true,
 };
 
+const klimaanlage: KlimaanlagePayload = {
+  formType: "klimaanlage",
+  purpose: "heizen_kuehlen",
+  propertyType: "einfamilienhaus",
+  roomCount: "zwei",
+  areaM2: 45,
+  mountType: "wand",
+  timeframe: "3_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
+  name: "Carla Kühl",
+  email: "carla@example.de",
+  phone: "04321 444",
+  consent: true,
+};
+
 describe("buildEmail", () => {
   it("setzt den Betreff-Präfix je Formulartyp", () => {
     expect(buildEmail(waermepumpe).subject).toMatch(/^\[Wärmepumpenkonfigurator\]/);
@@ -74,6 +91,17 @@ describe("buildEmail", () => {
     );
     expect(buildEmail(badplaner).subject).toMatch(/^\[Badplaner\]/);
     expect(buildEmail(kundendienst).subject).toMatch(/^\[Kundendienst\]/);
+    expect(buildEmail(klimaanlage).subject).toMatch(/^\[Klimaanlagen-Konfigurator\]/);
+  });
+
+  it("rendert die Klimaanlagen-Felder mit deutschen Labels", () => {
+    const text = buildEmail(klimaanlage).text;
+    expect(text).toContain("Heizen & kühlen (Luft-Luft-Wärmepumpe)");
+    expect(text).toContain("Einfamilienhaus");
+    expect(text).toContain("2 Räume");
+    expect(text).toContain("45 m²");
+    expect(text).toContain("Wandgerät");
+    expect(text).toContain("24536 Neumünster");
   });
 
   it("nutzt die Absender-E-Mail als replyTo", () => {

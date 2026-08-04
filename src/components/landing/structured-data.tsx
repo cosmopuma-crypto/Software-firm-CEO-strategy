@@ -58,6 +58,10 @@ export function StructuredData() {
     ],
     knowsAbout: [
       "Wärmepumpe",
+      "Klimaanlage",
+      "Klimatechnik",
+      "Split-Klimagerät",
+      "Luft-Luft-Wärmepumpe",
       "Heizung",
       "Sanitär",
       "Badsanierung",

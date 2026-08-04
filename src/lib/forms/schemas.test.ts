@@ -4,6 +4,7 @@ import {
   schnellanfrageSchema,
   badplanerSchema,
   kundendienstSchema,
+  klimaanlageSchema,
   flattenErrors,
 } from "./schemas";
 
@@ -60,6 +61,19 @@ const validKundendienst = {
   deviceType: "heizung",
   problem: "Die Heizung wird nicht mehr warm.",
   urgency: "dringend",
+  ...validContact,
+};
+
+const validKlimaanlage = {
+  formType: "klimaanlage",
+  purpose: "heizen_kuehlen",
+  propertyType: "einfamilienhaus",
+  roomCount: "zwei",
+  areaM2: 45,
+  mountType: "wand",
+  timeframe: "3_monate",
+  addressZip: "24536",
+  addressCity: "Neumünster",
   ...validContact,
 };
 
@@ -201,6 +215,35 @@ describe("kundendienstSchema", () => {
   });
 });
 
+describe("klimaanlageSchema", () => {
+  it("akzeptiert eine gültige Anfrage", () => {
+    expect(klimaanlageSchema.safeParse(validKlimaanlage).success).toBe(true);
+  });
+
+  it("wandelt numerische Strings für die Fläche um (coerce)", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, areaM2: "45" });
+    expect(r.success).toBe(true);
+  });
+
+  it("lehnt eine zu kleine Fläche ab", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, areaM2: 2 });
+    expect(r.success).toBe(false);
+  });
+
+  it("verlangt eine gültige Nutzung", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, purpose: "unbekannt" });
+    expect(r.success).toBe(false);
+  });
+
+  it("lehnt ungültige PLZ ab", () => {
+    const r = klimaanlageSchema.safeParse({ ...validKlimaanlage, addressZip: "245" });
+    expect(r.success).toBe(false);
+    if (!r.success) {
+      expect(flattenErrors(r.error).addressZip).toMatch(/Postleitzahl/);
+    }
+  });
+});
+
 describe("gemeinsame Kontaktfelder", () => {
   it("verlangt consent === true", () => {
     const r = waermepumpeSchema.safeParse({
@@ -228,6 +271,7 @@ describe("contactFormSchema (diskriminierte Union)", () => {
     expect(contactFormSchema.safeParse(validSchnellanfrage).success).toBe(true);
     expect(contactFormSchema.safeParse(validBadplaner).success).toBe(true);
     expect(contactFormSchema.safeParse(validKundendienst).success).toBe(true);
+    expect(contactFormSchema.safeParse(validKlimaanlage).success).toBe(true);
   });
 
   it("wendet die Erreichbarkeits-Prüfung auch auf Union-Ebene an", () => {

@@ -7,6 +7,7 @@ import { Logo } from "./logo";
 const NAV = [
   { href: "/#leistungen", label: "Leistungen" },
   { href: "/waermepumpe", label: "Wärmepumpe" },
+  { href: "/klimaanlage", label: "Klimaanlage" },
   { href: "/#bad", label: "Bad" },
   { href: "/#referenzen", label: "Referenzen" },
   { href: "/kundendienst", label: "Kundendienst" },

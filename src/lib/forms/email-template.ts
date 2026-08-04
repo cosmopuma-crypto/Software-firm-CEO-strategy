@@ -15,6 +15,10 @@ import {
   TIMEFRAMES,
   DEVICE_TYPES,
   URGENCIES,
+  AC_PURPOSES,
+  AC_PROPERTY_TYPES,
+  AC_ROOM_COUNTS,
+  AC_MOUNT_TYPES,
 } from "@/domain/forms";
 import type { ContactFormPayload } from "./schemas";
 import type { Attribution } from "@/lib/tracking/attribution";
@@ -81,6 +85,16 @@ function specificRows(p: ContactFormPayload): Row[] {
         ["Gewünschte Elemente", labelsOf(BATH_ELEMENTS, p.elements)],
         ["Stil", labelOf(BATH_STYLES, p.style)],
         ["Budget", labelOf(BATH_BUDGETS, p.budget)],
+        ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
+        ["Ort", `${p.addressZip} ${p.addressCity}`],
+      ];
+    case "klimaanlage":
+      return [
+        ["Nutzung", labelOf(AC_PURPOSES, p.purpose)],
+        ["Objekttyp", labelOf(AC_PROPERTY_TYPES, p.propertyType)],
+        ["Anzahl Räume", labelOf(AC_ROOM_COUNTS, p.roomCount)],
+        ["Fläche", `${p.areaM2} m²`],
+        ["Montageart", labelOf(AC_MOUNT_TYPES, p.mountType)],
         ["Zeitrahmen", labelOf(TIMEFRAMES, p.timeframe)],
         ["Ort", `${p.addressZip} ${p.addressCity}`],
       ];
