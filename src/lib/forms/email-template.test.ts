@@ -1,4 +1,5 @@
-import { buildEmail } from "./email-template";
+import { buildEmail, buildCustomerConfirmation } from "./email-template";
+import { SITE } from "@/lib/site";
 import type {
   WaermepumpePayload,
   SchnellanfragePayload,
@@ -154,5 +155,38 @@ describe("buildEmail", () => {
     });
     expect(mail.html).not.toContain("<script>alert(1)</script>");
     expect(mail.html).toContain("&lt;script&gt;");
+  });
+});
+
+describe("buildCustomerConfirmation", () => {
+  it("bestätigt dem Kunden den Eingang mit Zusammenfassung", () => {
+    const mail = buildCustomerConfirmation(klimaanlage);
+    expect(mail.subject).toBe(`Ihre Anfrage bei ${SITE.name} ist eingegangen`);
+    expect(mail.text).toContain("Hallo Carla Kühl,");
+    expect(mail.text).toContain("Ihre Angaben im Überblick:");
+    expect(mail.text).toContain("Raum 1: 25 m² · Wandgerät");
+    expect(mail.text).toContain(SITE.phone);
+    expect(mail.text).toContain(SITE.name);
+  });
+
+  it("setzt das Firmenpostfach als Antwortadresse", () => {
+    expect(buildCustomerConfirmation(badplaner).replyTo).toBe(SITE.email);
+  });
+
+  it("funktioniert für jeden Formulartyp", () => {
+    for (const p of [waermepumpe, badplaner, kundendienst, klimaanlage]) {
+      const mail = buildCustomerConfirmation(p);
+      expect(mail.subject).toContain(SITE.name);
+      expect(mail.html).toContain("Freundliche Grüße");
+    }
+  });
+
+  it("escaped HTML-Sonderzeichen im Namen", () => {
+    const mail = buildCustomerConfirmation({
+      ...badplaner,
+      name: "<b>Böse</b>",
+    });
+    expect(mail.html).not.toContain("<b>Böse</b>");
+    expect(mail.html).toContain("&lt;b&gt;");
   });
 });
