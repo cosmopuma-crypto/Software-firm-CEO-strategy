@@ -112,36 +112,50 @@ export default function AgbPage() {
 
       <LegalSection
         id="kundendienst-wartung"
-        heading="§ 5a Kundendienst- und Wartungseinsätze (Vergütung und Terminabsage)"
+        heading="§ 5a Kundendienst-, Wartungs- und Beratungstermine (Vergütung und Terminabsage)"
       >
         <p>
-          (1) Kundendienst-, Service- und Wartungseinsätze sind – soweit nicht
-          ausdrücklich etwas anderes vereinbart ist – kostenpflichtig. Vergütet
-          werden die Anfahrt sowie die aufgewendete Arbeitszeit nach Aufwand
-          bzw. nach der jeweils gültigen Preisliste des Auftragnehmers, zuzüglich
-          verwendeten Materials und der gesetzlichen Umsatzsteuer. Auf Wunsch
-          nennt der Auftragnehmer die maßgeblichen Stunden- und Anfahrtssätze vor
-          der Terminbestätigung.
+          (1) Kundendienst-, Service-, Reparatur- und Wartungseinsätze
+          (einschließlich der Wartung von Wärmepumpen, Heizungs-, Warmwasser-,
+          Sanitär- und Lüftungsanlagen) sind – soweit nicht ausdrücklich etwas
+          anderes vereinbart ist – kostenpflichtig. Vergütet werden die Anfahrt
+          sowie die aufgewendete Arbeitszeit nach Aufwand bzw. nach der jeweils
+          gültigen Preisliste des Auftragnehmers, zuzüglich verwendeten Materials
+          und der gesetzlichen Umsatzsteuer. Auf Wunsch nennt der Auftragnehmer
+          die maßgeblichen Stunden- und Anfahrtssätze vor der Terminbestätigung.
+        </p>
+        <p>
+          (1a) Ein unverbindliches Erstberatungsgespräch, das der Ermittlung des
+          Bedarfs und der Vorbereitung eines Angebots dient (z. B. zu einer neuen
+          Wärmepumpe, einer Badsanierung oder einer Heizungsmodernisierung), ist
+          kostenfrei. Dies gilt nicht für gesondert vereinbarte, über eine reine
+          Angebotsberatung hinausgehende Leistungen (insbesondere technische
+          Vor-Ort-Analysen, Messungen, Berechnungen oder Gutachten); diese werden
+          nach Absatz 1 vergütet, worauf der Auftragnehmer vor Beauftragung
+          hinweist.
         </p>
         <p>
           (2) Über einen Online-Terminplaner oder auf anderem Weg vereinbarte
-          Kundendienst- und Wartungstermine sind verbindlich. Kann der
-          Auftraggeber einen Termin nicht wahrnehmen, ist dieser mindestens 12
-          Stunden vor dem vereinbarten Beginn abzusagen oder zu verlegen. Für die
-          Absage genügt die Textform (z. B. E-Mail an {SITE.email} oder
+          Kundendienst-, Wartungs- und Beratungstermine sind verbindlich. Kann
+          der Auftraggeber einen Termin nicht wahrnehmen, ist dieser mindestens
+          12 Stunden vor dem vereinbarten Beginn abzusagen oder zu verlegen. Für
+          die Absage genügt die Textform (z. B. E-Mail an {SITE.email} oder
           telefonisch unter {SITE.phone}).
         </p>
         <p>
-          (3) Sagt der Auftraggeber einen Termin nicht rechtzeitig im Sinne von
-          Absatz 2 ab oder ist die Leistung aus Gründen, die der Auftraggeber zu
-          vertreten hat, am vereinbarten Termin nicht möglich (insbesondere
-          vergebliche Anfahrt, weil niemand angetroffen wird oder der Zugang
-          nicht gewährt wird), berechnet der Auftragnehmer zur Kompensation des
-          Ausfalls pauschal eine Stunde Kundendienst nach dem jeweils gültigen
-          Stundensatz zuzüglich der gesetzlichen Umsatzsteuer. Dem Auftraggeber
-          bleibt der Nachweis vorbehalten, dass dem Auftragnehmer kein oder ein
-          wesentlich geringerer Schaden entstanden ist; dem Auftragnehmer bleibt
-          der Nachweis eines höheren Schadens vorbehalten.
+          (3) Sagt der Auftraggeber einen kostenpflichtigen Einsatz nach Absatz 1
+          nicht rechtzeitig im Sinne von Absatz 2 ab oder ist die Leistung aus
+          Gründen, die der Auftraggeber zu vertreten hat, am vereinbarten Termin
+          nicht möglich (insbesondere vergebliche Anfahrt, weil niemand
+          angetroffen wird oder der Zugang nicht gewährt wird), berechnet der
+          Auftragnehmer zur Kompensation des Ausfalls pauschal eine Stunde
+          Kundendienst nach dem jeweils gültigen Stundensatz zuzüglich der
+          gesetzlichen Umsatzsteuer. Dem Auftraggeber bleibt der Nachweis
+          vorbehalten, dass dem Auftragnehmer kein oder ein wesentlich geringerer
+          Schaden entstanden ist; dem Auftragnehmer bleibt der Nachweis eines
+          höheren Schadens vorbehalten. Für das kostenfreie Erstberatungsgespräch
+          (Absatz 1a) fällt bei nicht rechtzeitiger Absage keine Vergütung an;
+          der Auftraggeber wird gleichwohl um eine rechtzeitige Absage gebeten.
         </p>
         <p>
           (4) Bei einer akuten Störungsmeldung wird kein fester Termin über den
